@@ -1,3 +1,4 @@
+# https://discord.gg/WSQ2DK
 # Chatbot
 version 1.0
 .py
