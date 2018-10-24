@@ -1,5 +1,6 @@
 #Get user input
 import discord
+import asyncio
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrISJw.jP8hJ23eycSshKKa7ur-w0ylkwc'
 
