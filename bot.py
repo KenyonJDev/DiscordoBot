@@ -2,7 +2,7 @@
 import discord
 import asyncio
 
-TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrISJw.jP8hJ23eycSshKKa7ur-w0ylkwc'
+TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 client = discord.Client()
 
