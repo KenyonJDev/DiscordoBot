@@ -2,7 +2,7 @@
 import discord
 import asyncio
 
-TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrISJw.jP8hJ23eycSshKKa7ur-w0ylkwc'
+TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 client = discord.Client()
 
@@ -21,6 +21,7 @@ async def on_message(message):
     if message.author == client.user:
         return
     
+    """
     stringArr = message.content.split(" ") #Split the input into an array
     
     #Loop through array, currently outputs back to user one by one
@@ -28,15 +29,16 @@ async def on_message(message):
     
     for i in range(0,len(stringArr)):
         await client.send_message(message.channel, stringArr[i])
-
     #Tells the user how many messages are in the chat log between them and the bot
+    """
+    
     if message.content.startswith('!test'):
         counter = 0
         tmp = await client.send_message(message.channel, 'Calculating messages...')
         async for log in client.logs_from(message.channel, limit=100):
             if log.author == message.author:
                 counter += 1
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+        await client.edit_message(tmp, 'You have {} messages. Update'.format(counter))
         
     #After 5 seconds the bot 'wakes up'
     elif message.content.startswith('!sleep'):
