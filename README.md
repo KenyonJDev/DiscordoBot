@@ -22,6 +22,7 @@ on the discord platform as part of an assignment.
 - [ ] **Armandas** Currency conversion
 - [ ] **Jake** One more task!!!: is main code part which connects DISCORD client and redirect a sentance to a module
 - [ ] **Armandas** Another task!!!: user input simulator - testing program
+
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
 Every module is a class which is made to answer questions about 1 topic.
