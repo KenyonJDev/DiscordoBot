@@ -26,7 +26,7 @@ on the discord platform as part of an assignment.
 
 Every module is a class which is made to answer questions about 1 topic.
 ** Every module _must implement_ 3 functions: **
-1. \__init\__() - constructor
+1. \_\_init\_\_() - constructor
 2. getKeywords() - must return list of words or words combinations
 3. genAnswer() - module starting function. It analyzes user input and gives answer
 genAnswer() function must **return TUPLE(boolean, string)** - (success?, str_answer_to_user)
