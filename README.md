@@ -20,12 +20,13 @@ on the discord platform as part of an assignment.
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **---** Bus timetables at Coventry
 - [ ] **Armandas** Currency conversion
-** If a module cannot answer the question, as default, answer eg. "Sorry ..." **
 - [ ] **Jake** One more task!!!: is main code part which connects DISCORD client and redirect a sentance to a module
 - [ ] **Armandas** Another task!!!: user input simulator - testing program
+**If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
 Every module is a class which is made to answer questions about 1 topic.
-** Every module _must implement_ 3 functions: **
+
+**Every module _must implement_ 3 functions:**
 1. \_\_init\_\_() - constructor
 2. getKeywords() - must return list of words or words combinations
 3. genAnswer() - module starting function. It analyzes user input and gives answer
