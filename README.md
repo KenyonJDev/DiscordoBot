@@ -1,4 +1,4 @@
-# https://discord.gg/WSQ2DK
+# https://discord.gg/GA6bG2g
 Link for discord server
 # Chatbot
 version 1.0
