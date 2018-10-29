@@ -1,7 +1,6 @@
 #Get user input
 import discord
 import asyncio
-
 import mathBot
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
@@ -30,16 +29,18 @@ async def on_message(message):
         #Flags to decide if the question is a math one
         numCheck = False
         opCheck = False
-        
-        #Loop through string, check if both and operator and number are included using mathBot
+        rootCheck = False
+        #Loop through string, check if both and operator and number are included or there is a square root using mathBot
         for i in range(len(stringInp)):
             if (mathBot.isNum(stringInp[i])):
                 numCheck = True
             elif (mathBot.checkOperator(stringInp[i])):
                 opCheck = True
+            elif (mathBot.checkRoot(stringInp)):
+                rootCheck = True
                 
-        #If both operator and number are included then run calculate from mathBot
-        if (numCheck == True and opCheck == True):
+        #If both operator and number are included or there is a square root then run calculate from mathBot
+        if (numCheck == True and opCheck == True) or rootCheck:
             strToAns = mathBot.isMath(stringInp)
             ans = strToAns.currentEval
             await client.send_message(message.channel, 'The answer is {}'.format(ans))
