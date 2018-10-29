@@ -12,17 +12,29 @@ def checkOperator(operator):
     else:
         return False
     
-def calculate(stringArr):
-    start = 0
-    calc = ""
+class isMath():
     
-    for i in range(0,len(stringArr)):
-        if (isNum(stringArr[i])):
-            start = i
-            break;
-
-    for j in range(start + 1, len(stringArr)):
-        if (isNum(stringArr[j]) == False and checkOperator(stringArr[j])) == False or (j == len(stringArr)):
-            calc = calc.join(stringArr[start:j + 1])
-
-    return(eval(calc))
+    num = ""
+    start = 0
+    currentEval = 0
+    eval = False
+    
+    def __init__(self, stringInp):
+        
+        for i in range(len(stringInp)):
+            
+            current = stringInp[i]
+            if current == "(":
+                self.eval = False
+                continue                
+            
+            if current in "0123456789.":
+                self.num = self.num + str(current)
+                if (i != len(stringInp)-1 and stringInp[i+1] == ")") or i == len(stringInp)-1:
+                    self.eval = True                   
+            elif current in  "+-/*":
+                self.num = self.num + str(current)
+                
+            if self.eval == True:
+                self.currentEval = eval(self.num)
+                self.eval = False      
