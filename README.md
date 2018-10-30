@@ -9,19 +9,19 @@ on the discord platform as part of an assignment.
 
 
 # Program modules
+- [ ] **Jake** One more task!!!: is main code part which connects DISCORD client and redirect a sentence to a module
+- [ ] **Armandas** Another task!!!: user input simulator - testing program
+- [ ] **Brad** Basic chat(Personal questions) and greetings
+- [ ] **Armandas** Reminder function (android notification or discord message)
 - [ ] **Brad** Math - number operations
+- [ ] **Phillip** Basic game-(s)
 - [ ] **Josh** Weather
 - [ ] **Armandas** Live sport results
-- [ ] **Brad** Basic chat(Personal questions) and greetings
-- [ ] **Phillip** Basic game-(s)
 - [ ] **Jake** Recipes
 - [ ] **Phillip** Music and Films
-- [ ] **Armandas** Reminder function (android notification or discord message)
+- [ ] **Armandas** Currency conversion
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **---** Bus timetables at Coventry
-- [ ] **Armandas** Currency conversion
-- [ ] **Jake** One more task!!!: is main code part which connects DISCORD client and redirect a sentance to a module
-- [ ] **Armandas** Another task!!!: user input simulator - testing program
 
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
