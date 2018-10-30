@@ -72,6 +72,11 @@ def hangman(secretWord):
         print("-----------")
         print("Sorry, you ran out of guesses. The word was "+secretWord+".")
         
+
+
+list1=['phillip', 'armandas', 'josh', 'testing', 'test', 'letter', 'help', 'school']
+b=random.randint(0,7)
+
         
-secretWord="help"
+secretWord=(list1[b])
 hangman(secretWord)
