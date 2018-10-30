@@ -45,9 +45,6 @@ async def on_message(message):
             ans = strToAns.currentEval
             await client.send_message(message.channel, 'The answer is {}'.format(ans))
             
+           
+            
 client.run(TOKEN)
-
-#For example:
-#User enters "What is 2 x 2?"
-#getKeyword("What is 2 x 2?")
-#getKeyword return that math.py should be used
