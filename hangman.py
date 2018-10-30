@@ -1,5 +1,5 @@
 import random
-
+from colorama import Fore, Back, Style  #Colors
 
 def chooseWord(wordlist):
     return random.choice(wordlist)
@@ -58,11 +58,11 @@ def hangman(secretWord):
                 print("Oops! You've already guessed that letter: ",getGuessedWord(secretWord, lettersGuessed))
             
             elif guessInLowerCase not in secretWord: 
-                print("Oops! That letter is not in my word:",getGuessedWord(secretWord, lettersGuessed))
+                print(Fore.RED + "Oops! That letter is not in my word:",getGuessedWord(secretWord, lettersGuessed))
                 chances-=1
             else:
                 lettersGuessed.append(guessInLowerCase)
-                print("Good guess: ",getGuessedWord(secretWord, lettersGuessed))
+                print(Fore.GREEN + "Good guess: ",getGuessedWord(secretWord, lettersGuessed))
                 #chances+=1
             lettersGuessed.append(guessInLowerCase)
         elif secretWord==getGuessedWord(secretWord, lettersGuessed):
