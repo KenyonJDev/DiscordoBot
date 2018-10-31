@@ -1,5 +1,5 @@
 import discord
-import hangBot
+import hangman
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
