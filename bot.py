@@ -32,7 +32,7 @@ async def on_message(message):
     stringInp = mathBot.checkDict(stringInp)
  
     
-    if message.content.startswith('!what'):
+    if message.content.startswith('!calculate'):
         #Flags to decide if the question is a math one
         numCheck = False
         opCheck = False
