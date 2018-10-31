@@ -1,10 +1,6 @@
 import random
 from colorama import Fore, Back, Style  #Colors
 
-def chooseWord(wordlist):
-    return random.choice(wordlist)
-
-
 def isWordGuessed(secretWord, lettersGuessed):
     count=0
     for letters in secretWord:
@@ -41,7 +37,7 @@ def getAvailableLetters(lettersGuessed):
 
 def hangman(secretWord):
     length=len(secretWord)
-    print("Welcome to the game Hangman!")
+    print("Welcome to Hangman!")
     print("The word has",length, "letters.")
     chances=2*len(secretWord)
     i=0
@@ -74,9 +70,9 @@ def hangman(secretWord):
         
 
 
-list1=['phillip', 'armandas', 'josh', 'testing', 'test', 'letter', 'help', 'school']
-b=random.randint(0,7)
+list=['phillip', 'armandas', 'josh', 'testing', 'test', 'letter', 'help', 'school']
+r=random.randint(0,7)
 
         
-secretWord=(list1[b])
+secretWord=(list[r])
 hangman(secretWord)
