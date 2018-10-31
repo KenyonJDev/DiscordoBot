@@ -3,6 +3,7 @@ import discord
 import asyncio
 # module imports
 import mathBot
+import weather
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
@@ -48,5 +49,5 @@ async def on_message(message):
             await client.send_message(message.channel, ans)
             
            
-            
+
 client.run(TOKEN)
