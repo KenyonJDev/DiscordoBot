@@ -2,7 +2,6 @@ import urllib.parse
 import urllib.request
 import json
 import datetime
-
 ### key = 7a82ee6f4ab290329464c1a55194b4ab
 
 def time_converter(time):
@@ -38,15 +37,9 @@ def data_organizer(raw_data):
         city=raw_data.get('name'),
         country=sys.get('country'),
         temp=main.get('temp'),
-        temp_max=main.get('temp_max'),
-        temp_min=main.get('temp_min'),
-        humidity=main.get('humidity'),
-        pressure=main.get('pressure'),
+        humidity=main.get('humidity'),      
         sky=raw_data['weather'][0]['main'],
-        sunrise=time_converter(sys.get('sunrise')),
-        sunset=time_converter(sys.get('sunset')),
         wind=raw_data.get('wind').get('speed'),
-        wind_deg=raw_data.get('deg'),
         dt=time_converter(raw_data.get('dt')),
         cloudiness=raw_data.get('clouds').get('all')
     )
@@ -54,20 +47,16 @@ def data_organizer(raw_data):
 
 def data_output(data):
     data['m_symbol'] = '\xb0' + 'C'
-    s = '''---------------------------------------
-Current weather in: {city}, {country}:
+    s = '''-----------------------------------
+Current weather in {city}, {country}:
 {temp}{m_symbol} {sky}
-Max: {temp_max}, Min: {temp_min}
 
-Wind Speed: {wind}, Degree: {wind_deg}
+Wind Speed: {wind}km/h
 Humidity: {humidity}
 Cloud: {cloudiness}
-Pressure: {pressure}
-Sunrise at: {sunrise}
-Sunset at: {sunset}
 
-Last update from the server: {dt}
----------------------------------------'''
+Updated: {dt}
+-----------------------------------'''
     print(s.format(**data))
 
 
