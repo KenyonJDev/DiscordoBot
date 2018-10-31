@@ -26,14 +26,9 @@ async def on_message(message):
    
     stringInp = message.content
     stringInp = mathBot.checkDict(stringInp)
-    
-<<<<<<< HEAD
-    if message.content.lower().startswith('what'):
-=======
-    messageInp = message.content
+ 
     
     if message.content.startswith('what'):
->>>>>>> 65f6e2f4acefe1006926413aabfb06e39f33f609
         #Flags to decide if the question is a math one
         numCheck = False
         opCheck = False
@@ -56,7 +51,7 @@ async def on_message(message):
     
     if message.content.startswith('`dog'):
         #passes to the shibBot.py module
-        dogRequest = messageInp
+        dogRequest = stringInp
         
         shibBot.dogCall(dogRequest)
         
