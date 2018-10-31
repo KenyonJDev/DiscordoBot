@@ -54,7 +54,6 @@ class isMath():
     eval = False
     
     def __init__(self, stringInp):
-        print(stringInp)
         for i in range(len(stringInp)):
             
             current = stringInp[i]
