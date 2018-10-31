@@ -40,6 +40,7 @@ java -mx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -timeout 1000
 - [ ] **Jake** Recipes
 - [ ] **Phillip** Music and Films
 - [ ] **Armandas** Currency conversion
+- [ ] **Sam** Maths Quiz
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **---** Bus timetables at Coventry
 
