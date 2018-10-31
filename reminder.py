@@ -13,22 +13,4 @@ def print_some_times():
     print(time.time())
     
 print_some_times()
-    
-    
-class Reminder:
-    
-    def __init__(self, userString):
-        self.userStr = userString
-        self.isSet = False
-        
-    def setNotification():
-        pass
-    
-    def getStatus():
-        return self.isSet
-    
-    def getKeywords():
-        # returns all associatedWords
-        mKeywords = ['set', 'reminder', 'message me', 'notification', 
-                     'notify me', 'send notification']
-        return mKeywords
+   
