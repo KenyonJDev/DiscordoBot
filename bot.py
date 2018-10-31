@@ -1,6 +1,7 @@
 #Get user input
 import discord
 import asyncio
+# module imports
 import mathBot
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
@@ -23,13 +24,14 @@ async def on_message(message):
         return
    
     stringInp = message.content
-    isMath = False;   
+    stringInp = mathBot.checkDict(stringInp)
     
     if message.content.startswith('what'):
         #Flags to decide if the question is a math one
         numCheck = False
         opCheck = False
         rootCheck = False
+        #Change english to operators
         #Loop through string, check if both and operator and number are included or there is a square root using mathBot
         for i in range(len(stringInp)):
             if (mathBot.isNum(stringInp[i])):
@@ -43,11 +45,8 @@ async def on_message(message):
         if (numCheck == True and opCheck == True) or rootCheck:
             strToAns = mathBot.isMath(stringInp)
             ans = strToAns.currentEval
-            await client.send_message(message.channel, 'The answer is {}'.format(ans))
+            await client.send_message(message.channel, ans)
+            
+           
             
 client.run(TOKEN)
-
-#For example:
-#User enters "What is 2 x 2?"
-#getKeyword("What is 2 x 2?")
-#getKeyword return that math.py should be used
