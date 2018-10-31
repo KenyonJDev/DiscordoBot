@@ -1,5 +1,5 @@
 import random
-from colorama import Fore, Back, Style  #Colors
+from colorama import Fore  #Colors
 
 def isWordGuessed(secretWord, lettersGuessed):
     count=0
