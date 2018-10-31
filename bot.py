@@ -4,7 +4,7 @@ import asyncio
 # module imports
 import mathBot
 import weather
-
+import shibBot
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 client = discord.Client()
