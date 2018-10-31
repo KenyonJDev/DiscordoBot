@@ -20,6 +20,7 @@ on the discord platform as part of an assignment.
 - [ ] **Jake** Recipes
 - [ ] **Phillip** Music and Films
 - [ ] **Armandas** Currency conversion
+- [ ] **Sam** Maths Quiz
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **---** Bus timetables at Coventry
 
