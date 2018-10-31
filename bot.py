@@ -28,7 +28,7 @@ async def on_message(message):
     stringInp = mathBot.checkDict(stringInp)
  
     
-    if message.content.startswith('what'):
+    if message.content.startswith('!what'):
         #Flags to decide if the question is a math one
         numCheck = False
         opCheck = False
@@ -49,7 +49,7 @@ async def on_message(message):
             ans = strToAns.currentEval
             await client.send_message(message.channel, ans)
     
-    if message.content.startswith('`dog'):
+    if message.content.startswith('!dog'):
         #passes to the shibBot.py module
         dogRequest = stringInp
         
