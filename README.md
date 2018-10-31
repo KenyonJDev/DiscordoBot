@@ -15,6 +15,19 @@ To run bot in discord:
 3) cd ChatBot/
 4) python bot.py
 
+# Running the Stanford CoreNLP server
+
+Make sure you've installed the jdk: 
+sudo apt install openjdk-8-jdk
+
+Install stanford coreNPL:
+wget http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
+unzip stanford-corenlp-full-2018-10-05.zip
+
+Run the server:
+cd stanford-corenlp-full-2018-10-05
+java -mx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -timeout 10000
+
 # Program modules
 - [ ] **Jake** One more task!!!: is main code part which connects DISCORD client and redirect a sentence to a module
 - [ ] input_simulator**Armandas** Another task!!!: user input simulator - testing program
@@ -27,6 +40,7 @@ To run bot in discord:
 - [ ] **Jake** Recipes
 - [ ] **Phillip** Music and Films
 - [ ] **Armandas** Currency conversion
+- [ ] **Sam** Maths Quiz
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **---** Bus timetables at Coventry
 
