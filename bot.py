@@ -5,8 +5,8 @@ import asyncio
 import mathBot
 import weather
 import shibBot
-import hangman
-import hangBot
+#import hangman
+#import hangBot
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
@@ -59,5 +59,5 @@ async def on_message(message):
         shibBot.dogCall(dogRequest)
         
            
-    if message.content.startswith('!weather')
+    #if message.content.startswith('!weather'):
 client.run(TOKEN)
