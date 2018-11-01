@@ -5,6 +5,9 @@ import asyncio
 import mathBot
 import weather
 import shibBot
+import hangman
+import hangBot
+
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 client = discord.Client()
@@ -28,7 +31,7 @@ async def on_message(message):
     stringInp = mathBot.checkDict(stringInp)
  
     
-    if message.content.startswith('what'):
+    if message.content.startswith('!calculate'):
         #Flags to decide if the question is a math one
         numCheck = False
         opCheck = False
@@ -49,12 +52,12 @@ async def on_message(message):
             ans = strToAns.currentEval
             await client.send_message(message.channel, ans)
     
-    if message.content.startswith('`dog'):
+    if message.content.startswith('!dog'):
         #passes to the shibBot.py module
         dogRequest = stringInp
         
         shibBot.dogCall(dogRequest)
         
            
-
+    if message.content.startswith('!weather')
 client.run(TOKEN)
