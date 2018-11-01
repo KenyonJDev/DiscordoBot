@@ -27,9 +27,10 @@ async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
-   
+
     stringInp = message.content
     stringInp = mathBot.checkDict(stringInp)
+
  
     
     if message.content.startswith('!calculate'):
@@ -60,5 +61,7 @@ async def on_message(message):
         shibBot.dogCall(dogRequest)
         
            
-    if message.content.startswith('!weather')
+    if message.content.startswith('!weather'):
+        pass
 client.run(TOKEN)
+asyncio.run(main())
