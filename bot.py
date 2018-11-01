@@ -1,5 +1,4 @@
 # module imports
-# 
 from rivescript import RiveScript
 import discord
 import asyncio
@@ -30,10 +29,10 @@ async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
-   
+
     stringInp = message.content
     stringInp = mathBot.checkDict(stringInp)
-
+    
     if message.content.startswith('!calculate'):
         #Flags to decide if the question is a math one
         numCheck = False
@@ -60,7 +59,6 @@ async def on_message(message):
         dogRequest = stringInp
 
         shibBot.dogCall(dogRequest)
-        
     elif message.content.startswith('!weather'):
         pass
     
@@ -68,3 +66,4 @@ async def on_message(message):
         reply = rs.reply("localuser", stringInp)
         await client.send_message(message.channel, reply)
 client.run(TOKEN)
+asyncio.run(main())
