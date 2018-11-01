@@ -42,7 +42,7 @@ java -mx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -timeout 1000
 - [ ] **Armandas** Currency conversion
 - [ ] **Sam** Maths Quiz
 - [ ] **---** University rankings (worldwide or UK)
-- [ ] **---** Bus timetables at Coventry
+- [ ] **Josh** Bus timetables at Coventry
 
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
