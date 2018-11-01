@@ -1,16 +1,21 @@
-#Get user input
+# module imports
+# 
+from rivescript import RiveScript
 import discord
 import asyncio
-# module imports
 import mathBot
 import weather
-import shibBot
+#import shibBot
 #import hangman
 #import hangBot
+
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 client = discord.Client()
+rs = RiveScript()
+rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
+rs.sort_replies()
 
 @client.event
 async def on_ready():
@@ -18,7 +23,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    
     
 @client.event
 async def on_message(message):
@@ -29,8 +33,7 @@ async def on_message(message):
    
     stringInp = message.content
     stringInp = mathBot.checkDict(stringInp)
- 
-    
+
     if message.content.startswith('!calculate'):
         #Flags to decide if the question is a math one
         numCheck = False
@@ -45,19 +48,23 @@ async def on_message(message):
                 opCheck = True
             elif (mathBot.checkRoot(stringInp)):
                 rootCheck = True
-                
+
         #If both operator and number are included or there is a square root then run calculate from mathBot
         if (numCheck == True and opCheck == True) or rootCheck:
             strToAns = mathBot.isMath(stringInp)
             ans = strToAns.currentEval
             await client.send_message(message.channel, ans)
-    
-    if message.content.startswith('!dog'):
+
+    elif message.content.startswith('!dog'):
         #passes to the shibBot.py module
         dogRequest = stringInp
-        
+
         shibBot.dogCall(dogRequest)
         
-           
-    #if message.content.startswith('!weather'):
+    elif message.content.startswith('!weather'):
+        pass
+    
+    else:
+        reply = rs.reply("localuser", stringInp)
+        await client.send_message(message.channel, reply)
 client.run(TOKEN)
