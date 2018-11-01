@@ -1,6 +1,8 @@
 #Get user input
 import discord
 import asyncio
+from discord.ext.commands import Bot
+from discord.ext.commands import command
 # module imports
 import mathBot
 import weather
