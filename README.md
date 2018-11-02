@@ -20,7 +20,7 @@ To run bot in discord:
 - [ ] input_simulator**Armandas** Another task!!!: user input simulator - testing program
 - [ ] **Brad** Basic chat(Personal questions) and greetings
 - [ ] **Armandas** Reminder function (android notification or discord message)
-- [x] **Brad** Math - number operations - I think this is comlpete to an acceptable level, feel free to tell me if anything is missing or broken.
+- [x] **Brad** Math - number operations - I think this is complete to an acceptable level, feel free to tell me if anything is missing or broken.
 - [ ] **Phillip** Basic game-(s)
 - [ ] **Josh** Weather
 - [ ] **Armandas** Live sport results
