@@ -27,7 +27,6 @@
 > object getname python
     uid   = rs.current_user()
     uName = rs.get_uservar(uid,"name")
-    
     return uName
 < object
 
@@ -82,6 +81,12 @@
 
 + where is *
 - It is somewhere in the universe
+
++ *(math|maths)*
+- Maybe you should try !calculate and then ask me your math question
+
++ *calculate*
+- Sorry, I am unable to answer that. Please ask me another.
 
 + *
 - Ask me something else!
