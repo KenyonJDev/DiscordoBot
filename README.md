@@ -17,7 +17,7 @@ To run bot in discord:
 
 # Program modules
 - [ ] **Jake** One more task!!!: is main code part which connects DISCORD client and redirect a sentence to a module
-- [ ] input_simulator**Armandas** Another task!!!: user input simulator - testing program
+- [x] **Armandas** Another task!!!: user input simulator - testing program
 - [ ] **Brad** Basic chat(Personal questions) and greetings
 - [ ] **Armandas** Reminder function (android notification or discord message)
 - [x] **Brad** Math - number operations - I think this is complete to an acceptable level, feel free to tell me if anything is missing or broken.
