@@ -31,10 +31,10 @@ To run bot in discord:
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **Josh** Bus timetables at Coventry
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| Status | Task | file name | Developer |
+| --- | --- | --- | --- |
+| - [ ] | main code part which connects DISCORD client and modules | bot.py | Jake
+| = [x] | user input simulator | inputTests.py | Armandas
 
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
