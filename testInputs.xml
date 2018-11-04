@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE root [
+    <!ELEMENT root test>
+    <!ATTLIST test module CDATA #REQUIRED>
+    <!ATTLIST test input CDATA #REQUIRED>
+]>-->
+
+<root>
+    <test module="Reminder" input="Make me a message after 8 minutes and 5 seconds"/>
+    <test module="Reminder" input="Remind me in 6 hours to make homework"/>
+    <test module="Reminder" input="Make a note to call dad after 10 minutes"/>
+    <test module="Reminder" input="Set a notification at 15:05 with the message of go shoping"/>
+    
+</root>
