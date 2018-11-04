@@ -26,7 +26,7 @@ c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 | --- | --- | --- | --- |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | user input simulator | inputTests.py | Armandas |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | basic chat(Personal questions) and greetings | - | Brad |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | basic chat(Personal questions) and greetings | - | Brad |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Reminder function | reminder.py | Armandas |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Math - number operations | mathBot.py | Brad |
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Basic game-(s) | - | Phillip |
