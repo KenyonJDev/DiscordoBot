@@ -26,11 +26,11 @@ c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 | --- | --- | --- | --- |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | user input simulator | inputTests.py | Armandas |
-| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | basic chat(Personal questions) and greetings | - | Brad |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | basic chat(Personal questions) and greetings | dbQueries.py brain.py | Brad |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Reminder function | reminder.py | Armandas |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Math - number operations | mathBot.py | Brad |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Basic game-(s) | - | Phillip |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Weather | - | Josh |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Basic game-(s) | hangBot.py hangman.py | Phillip |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Weather | weather.py | Josh |
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Live sport results | - | Armandas |
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Recipes | - | Jake |
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Music and Films | - | Phillip |
