@@ -18,17 +18,17 @@ To run bot in discord:
 # Program modules
 
 **Status list**:
-a) Not started
-b) In progress
-c) Done
+a) ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started
+b) ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) In progress
+c) ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) Done
 
 | Status | Task | file name | Developer |
 | --- | --- | --- | --- |
-| In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
-| Done | user input simulator | inputTests.py | Armandas |
+| ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
+| ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) Done | user input simulator | inputTests.py | Armandas |
 | - | basic chat(Personal questions) and greetings | - | Brad |
-| In progress | Reminder function | reminder.py | Armandas |
-| Done | Math - number operations | mathBot.py | Brad |
+| ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) In progress | Reminder function | reminder.py | Armandas |
+| ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) Done | Math - number operations | mathBot.py | Brad |
 | - | Basic game-(s) | - | Phillip |
 | - | Weather | - | Josh |
 | - | Live sport results | - | Armandas |
