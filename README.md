@@ -31,6 +31,11 @@ To run bot in discord:
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **Josh** Bus timetables at Coventry
 
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
 Every module is a class which is made to answer questions about 1 topic.
