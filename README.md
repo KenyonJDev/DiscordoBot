@@ -24,20 +24,20 @@ c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 
 | Status | Task | file name | Developer |
 | --- | --- | --- | --- |
-| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
-| ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | user input simulator | inputTests.py | Armandas |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | basic chat(Personal questions) and greetings | - | Brad |
-| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Reminder function | reminder.py | Armandas |
-| ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Math - number operations | mathBot.py | Brad |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Basic game-(s) | - | Phillip |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Weather | - | Josh |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Live sport results | - | Armandas |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Recipes | - | Jake |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Music and Films | - | Phillip |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Currency conversion | - | Armandas |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Maths Quiz | - | Sam |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Bus timetables at Coventry | - | Josh |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | University rankings | - | - |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) | main code part which connects DISCORD client and modules | bot.py | Jake |
+| ![#378c32](https://placehold.it/15/378c32/000000?text=+) | user input simulator | inputTests.py | Armandas |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | basic chat(Personal questions) and greetings | - | Brad |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) | Reminder function | reminder.py | Armandas |
+| ![#378c32](https://placehold.it/15/378c32/000000?text=+) | Math - number operations | mathBot.py | Brad |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Basic game-(s) | - | Phillip |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Weather | - | Josh |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Live sport results | - | Armandas |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Recipes | - | Jake |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Music and Films | - | Phillip |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Currency conversion | - | Armandas |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Maths Quiz | - | Sam |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | Bus timetables at Coventry | - | Josh |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) | University rankings | - | - |
 
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
