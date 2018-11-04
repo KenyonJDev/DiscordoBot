@@ -5,7 +5,6 @@
 	- {ok}    // An {ok} in the response means it's okay to get a real reply
 < begin
 
-// The Botmaster's Name
 ! var master = localuser
 
 // Bot Variables
@@ -24,11 +23,20 @@
 ! var job       = Professional Chatbot
 ! var happiness = 5
 
-> object getname python
-    uid   = rs.current_user()
-    uName = rs.get_uservar(uid,"name")
-    return uName
-< object
+> object getdetails python
+
+    uid  = rs.current_user()
+    name = rs.get_uservar(uid,"name")
+    age = rs.get_uservar(uid,"age") 
+    favcolour = rs.get_uservar(uid,"favcolour")
+    gender = rs.get_uservar(uid,"gender")
+    city = rs.get_uservar(uid,"city")
+    relationship = rs.get_uservar(uid,"relationship")
+    
+    detailsArr = name + " " + age + " " + favcolour + " " + gender + " " + city + " " + relationship
+    return detailsArr
+    
+< object 
 
 + (hello|hi|hey) [*]
 * <get name> == undefined => Hi, can I help you?
@@ -57,6 +65,9 @@
 - I like <bot color>
 - my favourite color is <bot color>
 - I love the color <bot color>
+
++ * my favourite colour *
+- Your favourite colour is <get favcolour>
 
 + what is your favourite band
 - I love <bot band>
@@ -87,6 +98,17 @@
 
 + *calculate*
 - Sorry, I am unable to answer that. Please ask me another.
+
++ sorry
+
++ get database data
+- <call>getdetails</call>
+
++ set database data * * * * * *
+- <set name=<star1>> <set age=<star2>> <set favcolour=<star3>> <set gender=<star4>> <set city=<star5>> <set relationship=<star6>>
+
++ setting polarity *
+- <bot happiness=<star1>>
 
 + *
 - Ask me something else!

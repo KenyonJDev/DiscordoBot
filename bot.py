@@ -1,4 +1,5 @@
 # module imports
+from textblob import TextBlob
 from rivescript import RiveScript
 import discord
 import asyncio
@@ -7,7 +8,7 @@ import weather
 #import shibBot
 #import hangman
 #import hangBot
-import mysql.connector
+import dbQueries
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
@@ -16,12 +17,6 @@ rs = RiveScript()
 rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
 rs.sort_replies()
 
-chatbotDB = mysql.connector.connect(
-  host   = "localhost",
-  user   = "root",
-  passwd = "chatbot2018"
-)
-
 @client.event
 async def on_ready():
     print('Logged in as')
@@ -29,19 +24,25 @@ async def on_ready():
     print(client.user.id)
     print('------')
     
-    
-    
 @client.event
 async def on_message(message):
+    userID = message.author.id
     
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
-
     
     #Select userID from database and compare to discordID of user talking, 
     #if they are equivalent then load previous 'conversation'
     
+    if dbQueries.checkUser(userID) == 0:
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        dbQueries.insertDB(userID,reply)
+    else:
+        details = dbQueries.getDetails(userID)
+        details = " ".join(str(item) for item in details)
+        rs.reply("localuser","set database data "+ str(details))
+        
     stringInp = message.content
     
     if message.content.startswith('!calculate'):
@@ -78,11 +79,27 @@ async def on_message(message):
 
         shibBot.dogCall(dogRequest)
     elif message.content.startswith('!weather'):
-        pass
-    
+        pass        
     else:
-        reply = rs.reply("localuser", stringInp)
-        await client.send_message(message.channel, reply
-                                  
+        blob = TextBlob(stringInp)
+        print(blob.sentiment.polarity)
+#         reply = rs.reply("localuser", stringInp)
+#         await client.send_message(message.channel, reply)
+    
+    
+    
+    async def updateCycle(userID):
+        await client.wait_until_ready()
+        counter = 0    
+        while not client.is_closed:
+            counter += 1
+            reply = (rs.reply("localuser", "get database data")).split(" ")
+            dbQueries.updateDB(userID,reply)
+            await asyncio.sleep(5)
+            
+    client.loop.create_task(updateCycle(userID))
+
+
 client.run(TOKEN)
 asyncio.run(main())
+
