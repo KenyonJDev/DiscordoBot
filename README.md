@@ -31,10 +31,27 @@ To run bot in discord:
 - [ ] **---** University rankings (worldwide or UK)
 - [ ] **Josh** Bus timetables at Coventry
 
+Status list:
+a) Not started
+b) In progress
+c) Done
+
 | Status | Task | file name | Developer |
 | --- | --- | --- | --- |
-| - [ ] | main code part which connects DISCORD client and modules | bot.py | Jake
-| = [x] | user input simulator | inputTests.py | Armandas
+| In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
+| Done | user input simulator | inputTests.py | Armandas |
+| - | basic chat(Personal questions) and greetings | - | Brad |
+| In progress | Reminder function | reminder.py | Armandas |
+| Done | Math - number operations | mathBot.py | Brad |
+| - | Basic game-(s) | - | Phillip |
+| - | Weather | - | Josh |
+| - | Live sport results | - | Armandas |
+| - | Recipes | - | Jake |
+| - | Music and Films | - | Phillip |
+| - | Currency conversion | - | Armandas |
+| - | Maths Quiz | - | Sam |
+| - | Bus timetables at Coventry | - | Josh |
+| - | University rankings | - | - |
 
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
@@ -43,7 +60,7 @@ Every module is a class which is made to answer questions about 1 topic.
 **Every module _must implement_ 3 functions:**
 1. \_\_init\_\_() - constructor
 2. getKeywords() - must return list of words or words combinations
-3. genAnswer() - module starting function. It analyzes user input and gives answer
-genAnswer() function must **return TUPLE(boolean, string)** - (success?, str_answer_to_user)
-if success == False, str_answer can be "" (empty string)
+3. getAnswer(userInput) - module starting function. It analyzes user input and gives answer
+
+genAnswer() function must **return None(if fail) or Answer string**
 
