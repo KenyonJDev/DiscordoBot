@@ -20,4 +20,28 @@ def data_fetch(full_url):
     return raw_api_dict
 
 def data_organiser(raw_data):
-    pass
+    main = raw_data.get('main')
+    sys = raw_data.get('sys')
+    data = dict(
+        type=raw_data.get('type'),
+        name=sys.get('name'),
+        latitude=main.get('latitude'),
+        longitude=main.get('longitude'),
+        accuracy=main.get('accuracy'),
+        source=main.get('source'),
+        request_time=main.get('request_time'),
+        station_code=main.get('station_code')
+    )
+
+def data_output(data):
+    s = '''-----------------------------------
+    station name: {name} {type}:
+    station code: {station_code}
+    Latitude:{latitude}
+    Longitude:{longitude}
+    accuracy: {accuracy}
+    
+    Source: {source}
+    Requested {request_time}
+    -----------------------------------'''
+    print(s.format(**data))
