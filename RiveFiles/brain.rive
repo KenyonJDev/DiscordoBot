@@ -21,7 +21,6 @@
 ! var color     = green
 ! var band      = test
 ! var job       = Professional Chatbot
-! var happiness = 5
 
 > object getdetails python
 
@@ -38,13 +37,38 @@
     
 < object 
 
+> object setpolarity python
+    import math
+    uid  = rs.current_user()
+    
+    currentRelationship = rs.get_uservar(uid,"relationship")
+    
+    if args[1] == 0:
+        return currentRelationship
+    elif args[0] == "true":
+        polarity = float("0." + str(args[1]))
+    else:
+        polarity = float("1." + str(args[1]))
+        
+    newRelationship = int(currentRelationship) * polarity
+    
+    if newRelationship > 100:
+        newRelationship = 100
+    elif newRelationship == 0 and args[0] == "false":
+        newRelationship = polarity
+        
+    newRelationship = math.ceil(newRelationship)
+    rs.set_uservar(uid, "relationship", str(newRelationship))
+    return(rs.get_uservar(uid,"relationship"))
+< object
+
 + (hello|hi|hey) [*]
 * <get name> == undefined => Hi, can I help you?
 - Hi <get name>, can I help you with anything?
 
 + my name is *
 - <set name=<star>>Nice to meet you, <get name>.
-- <set name=<star>><get name>, nice to meet you.
+- <set name=<star>>Hi, <get name>, nice to meet you.
 - <set name=<star>>Hey <get name>, how are you?
 
 + what is your name
@@ -93,6 +117,9 @@
 + where is *
 - It is somewhere in the universe
 
++ do you like me
+- I like you <get relationship>
+
 + *(math|maths)*
 - Maybe you should try !calculate and then ask me your math question
 
@@ -107,8 +134,10 @@
 + set database data * * * * * *
 - <set name=<star1>> <set age=<star2>> <set favcolour=<star3>> <set gender=<star4>> <set city=<star5>> <set relationship=<star6>>
 
-+ setting polarity *
-- <bot happiness=<star1>>
++ setting polarity * *
+* <get relationship> == undefined => 50
+* <star2> == 0 => <get relationship>
+- <call>setpolarity <star1> <star2></call>
 
 + *
 - Ask me something else!
