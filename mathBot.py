@@ -92,7 +92,11 @@ class isMath():
                     
             if self.eval == True:
                 if "square root" in stringInp or "sqrt" in stringInp:
-                    self.currentEval = math.sqrt(float(self.num))
+                    if int(self.num) < 0:
+                        self.currentEval = "Cannot perform that calculation!"
+                        break;
+                    else:
+                        self.currentEval = math.sqrt(float(self.num))
                 else:
                     self.currentEval = eval(self.num)
                 self.num = self.currentEval

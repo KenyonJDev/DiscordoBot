@@ -6,7 +6,7 @@ import asyncio
 import mathBot
 import weather
 #import shibBot
-import hangman
+#import hangman
 #import hangBot
 import dbQueries
 
@@ -39,7 +39,6 @@ async def on_message(message):
         dbQueries.insertDB(userID,reply)
     else:
         details = dbQueries.getDetails(userID)
-        print(details)
         details = " ".join(str(item) for item in details)
         rs.reply("localuser","set database data "+ str(details))
         
@@ -78,14 +77,15 @@ async def on_message(message):
         shibBot.dogCall(dogRequest)
 
     elif message.content.startswith('!weather'):
-        city_id = stringInp
+        weather.url_builder(stringInp)
     else:
         reply = (rs.reply("localuser", "get database data")).split(" ")
         dbQueries.updateDB(userID,reply)
         
         blob = TextBlob(stringInp)
         polarity = blob.sentiment.polarity
-        
+
+        print(polarity)
         pre = int(polarity)
         post = abs(polarity - pre)
         

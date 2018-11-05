@@ -22,6 +22,12 @@
 ! var band      = test
 ! var job       = Professional Chatbot
 
+!sub color = colour
+!sub favorite = favourite
+
+! array yes        = yes yeah yep yea 
+! array no         = no nah nope 
+
 > object getdetails python
 
     uid  = rs.current_user()
@@ -46,7 +52,8 @@
     if args[1] == 0:
         return currentRelationship
     elif args[0] == "true":
-        polarity = float("0." + str(args[1]))
+        temp = 1 - int(args[1])/10
+        polarity = float(str(temp))
     else:
         polarity = float("1." + str(args[1]))
         
@@ -63,17 +70,31 @@
 < object
 
 + (hello|hi|hey) [*]
-* <get name> == undefined => Hi, can I help you?
+* <get name> == none => Hi, can I help you?
 - Hi <get name>, can I help you with anything?
 
 + my name is *
-- <set name=<star>>Nice to meet you, <get name>.
-- <set name=<star>>Hi, <get name>, nice to meet you.
-- <set name=<star>>Hey <get name>, how are you?
+* <get name> == <star> => Do you think I don't remember you <get name>, how could I forget
+- <set name=<formal>>Nice to meet you, <get name>.
+- <set name=<formal>>Hi <get name>, nice to meet you.
+- <set name=<formal>>Hey <get name>, how are you?
+
++ call me *
+- <set name=<formal>>Sure I'll call you <get name>
 
 + what is your name
-* <get name> == undefined => My name is <bot fullname>
+* <get name> == none => My name is <bot fullname>
 - My name is <bot name>, I am dissapointed in you <get name>, I thought you would have known me well enough by now :joy:
+
++ i am * years old
+* <star> <= <bot age> => i would call you old but then i would be insulting myself too <set age=<star>>
+- <set age=<star>> wow you are <get age> i am <bot age> myself
+
++ i am *
+- Wow really, I've never met anyone who is <star> before
+- That's really cool, tell me more
+- How long have you been a <star> for?
+- Is it fun being a <star>
 
 + when is your birthday
 - I was born on <bot birthday>
@@ -85,48 +106,94 @@
 + how long is your hair
 - my hair is <bot hairlen>
 
-+ what is your favourite color
++ what is your favourite colour
 - I like <bot color>
-- my favourite color is <bot color>
-- I love the color <bot color>
+- My favourite colour is <bot color>
+- I love the colour <bot color>
 
 + * my favourite colour *
-- Your favourite colour is <get favcolour>
+* <get favcolour> == none => i don't know what your favourite colour is, tell me
+* <get favcolour> == <bot color> => you like <get favcolour> i love that colour too
+- <get favcolour> is okay but i prefer <bot color>
+
++ (my favourite colour is|i love the colour) *
+- <set favcolour=<star2>> That is a nice colour
 
 + what is your favourite band
 - I love <bot band>
 - <bot band> are my favourite, I love them
 
-+ what is my name
-* <get name> == undefined => I do not know your name, please tell me.
++ [*](what is my name|do you remember me|can you remember my name|do you know my name|who am i)[*]
+* <get name> == none => I do not know your name, please tell me.
 - Your name is <get name>
+- I remember you telling me that your name is Brad
 
 + where are you from
 - I was created in a warehouse somewhere
+- I cannot remember, it was a long time ago now
 
 + where do you live
 - Currently I live in <bot location> but I move around a lot
 
-+ which city do you come from
++ [*](which city do you come from|which city are you from)[*]
 - I come from <bot city>
+- I am from <bot city>
+- I was born in <bot city>
 
 + who is *
-- I have not heard of <star> before
-- <star> is such a cool person
+- Sorry, I have not heard of <star> before
 
 + where is *
-- It is somewhere in the universe
+- Im afraid I dont know where <star> is
 
-+ do you like me
-- I like you <get relationship>
++ do you like *
+- I dont mind <star>, what about you
+- I really like <star>, do you like <star>
+- I dont think I've heard of <star> before
+- What is <star>?
 
-+ *(math|maths)*
++ do you [*](love|like|admire|appreciate|adore|cherish|fancy)[*] me
+* <get relationship> <= 30 => As if I could ever <star> you
+* <get relationship> > 65 => Like? You're my best friend
+- You're not too bad
+
++ i [*](love|like|admire|appreciate|adore|cherish|fancy)[*] you
+* <get relationship> <= 30 => i am flattered you feel that way it is a shame i don't feel the same about you
+* <get relationship> > 65 => you are making me blush :relaxed:
+- That is very kind of you
+
++ i [*](hate|dislike|abhor|despise|detest|loathe)[*] you
+* <get relationship> <= 30 => Well you've hardly been too kind to me, i didn't expect any less of you
+* <get relationship> > 65 => Really, I did not expect you to be so meant to me, I thought we were friends
+- That is a bit mean
+
++ [*](how are you|are you okay|do you fell okay|do you feel alright|are you okay)[*]
+* <get relationship> <= 30 => I would be a lot better if you were kind to me, but you are horrible
+* <get relationship> > 65 => I feel amazing, thank you for being so kind to me
+- I'm not too bad, neither happy or sad thank you
+
++ [*](math|maths|calculate)[*]
 - Maybe you should try !calculate and then ask me your math question
 
-+ *calculate*
-- Sorry, I am unable to answer that. Please ask me another.
++ [*](weather|climate|temperature)[*]
+- Use !weather to get the answer
 
-+ sorry
++ [*](i am bored|bored|games|games|play|hangman)[*]
+- try !play, maybe that will entertain you for a while
+
++ [*](shiba inu|shiba|dog|puppy)[*]
+- !dog is the answer to everything
+
++ [*](sorry|apologize|apology)[*]
+* <get name> == none => It's okay I forgive you
+- There's no need to be sorry, <get name>
+- Dont apologize <get name>, its okay
+
++ [*](because)[*]
+- Could there be another reason why?
+- What else could have been the cause
+- Why do you think that is the reason though?
+- Could you explain why you think that?
 
 + get database data
 - <call>getdetails</call>
@@ -139,5 +206,13 @@
 * <star2> == 0 => <get relationship>
 - <call>setpolarity <star1> <star2></call>
 
++ (@yes)
+- Me too, please continue
+- Go on
+- Keep going
+
++ (@no)
+- Neither do I
+
 + *
-- Ask me something else!
+- Shall we talk about something else
