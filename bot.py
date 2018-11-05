@@ -6,8 +6,8 @@ import asyncio
 import mathBot
 import weather
 #import shibBot
-# import hangman
-# import hangBot
+import hangman
+#import hangBot
 import dbQueries
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
@@ -76,8 +76,9 @@ async def on_message(message):
         dogRequest = stringInp
 
         shibBot.dogCall(dogRequest)
+
     elif message.content.startswith('!weather'):
-        pass        
+        city_id = stringInp
     else:
         reply = (rs.reply("localuser", "get database data")).split(" ")
         dbQueries.updateDB(userID,reply)
@@ -106,4 +107,3 @@ async def on_message(message):
 
 client.run(TOKEN)
 asyncio.run(main())
-
