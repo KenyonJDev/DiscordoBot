@@ -79,7 +79,7 @@ async def on_message(message):
 
         shibBot.dogCall(dogRequest)
     elif message.content.startswith('!weather'):
-        pass        
+        city_id = stringInp
     else:
         blob = TextBlob(stringInp)
         print(blob.sentiment.polarity)
