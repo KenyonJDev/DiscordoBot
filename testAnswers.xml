@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<root>
+   <!--Test time: 2018-11-04 22:15:57.188641-->
+   <test>
+      <input>Make me a message after 8 minutes and 5 seconds</input>
+      <answer>I set a reminder after 8 minutes and 5 seconds with a message: make me a message</answer>
+   </test>
+   <test>
+      <input>Remind me in 6 hours to make homework</input>
+      <answer>I set a reminder in 6 hours with a message: make homework</answer>
+   </test>
+   <test>
+      <input>Make a note to call dad after 10 minutes</input>
+      <answer>I set a reminder after 10 minutes with a message: call dad</answer>
+   </test>
+   <test>
+      <input>Set a notification at 15:05 with the message of go shoping</input>
+      <answer>I set a reminder at 15:05 with a message: go shoping</answer>
+   </test>
+</root>
