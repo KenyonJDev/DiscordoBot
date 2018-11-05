@@ -1,5 +1,8 @@
 import math
 def isNum(item):
+    
+    """Check if the argument passed is a number"""
+    
     try:
         int(item)
         return True
@@ -7,6 +10,10 @@ def isNum(item):
         return False
 
 def checkOperator(operator):
+    
+    """Check if the argument is an operator by comparing
+    to a list of valid operators"""
+    
     validOperators = ["+","-","*","/","%","**","//"]
     if operator in validOperators:
         return True
@@ -14,6 +21,10 @@ def checkOperator(operator):
         return False
 
 def checkRoot(userInp):
+    
+    """Check if any English variations of asking for 
+    the square root have been entered"""
+    
     validArgs = ["square root","squareroot","sqrt"]
     for x in validArgs:
         if x in userInp:
@@ -22,6 +33,9 @@ def checkRoot(userInp):
             return False
         
 def checkDict(userInp):
+    
+        """Replace any English words for operators with the python
+        symbol for that given operator using the dictionary mathDict"""
         
         mathDict = {
             "to the power of":"**",
@@ -49,15 +63,22 @@ def checkDict(userInp):
     
 class isMath():
     
+    """A class to instatiate an object of the message 
+    input by the user if is it a math question"""
+    
     num = ""
     currentEval = 0
     eval = False
     
     def __init__(self, stringInp):
-        for i in range(len(stringInp)):
-            
+        
+        """Goes through the string input and checking for open and closed brackets,
+        when the bracket is open the characters are appened to a variable until a closed
+        bracket or the end of the sequence. Anything appended is evaluated."""
+        
+        for i in range(len(stringInp)):    
             current = stringInp[i]
-
+            #Checks if the current character is a number or operator
             if current == "(":
                 self.eval = False
                 continue  
@@ -68,7 +89,7 @@ class isMath():
                     break;
                 elif (i == len(stringInp)-1 or i != len(stringInp)-1 and stringInp[i+1] == ")"):
                     self.eval = True            
-            
+                    
             if self.eval == True:
                 if "square root" in stringInp or "sqrt" in stringInp:
                     self.currentEval = math.sqrt(float(self.num))

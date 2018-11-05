@@ -15,43 +15,38 @@ To run bot in discord:
 3) cd ChatBot/
 4) python bot.py
 
-# Running the Stanford CoreNLP server
-
-Make sure you've installed the jdk: 
-sudo apt install openjdk-8-jdk
-
-Install stanford coreNPL:
-wget http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
-unzip stanford-corenlp-full-2018-10-05.zip
-
-Run the server:
-cd stanford-corenlp-full-2018-10-05
-java -mx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -timeout 10000
-
 # Program modules
-- [ ] **Jake** One more task!!!: is main code part which connects DISCORD client and redirect a sentence to a module
-- [ ] input_simulator**Armandas** Another task!!!: user input simulator - testing program
-- [ ] **Brad** Basic chat(Personal questions) and greetings
-- [ ] **Armandas** Reminder function (android notification or discord message)
-- [ ] **Brad** Math - number operations
-- [ ] **Phillip** Basic game-(s)
-- [ ] **Josh** Weather
-- [ ] **Armandas** Live sport results
-- [ ] **Jake** Recipes
-- [ ] **Phillip** Music and Films
-- [ ] **Armandas** Currency conversion
-- [ ] **Sam** Maths Quiz
-- [ ] **---** University rankings (worldwide or UK)
-- [ ] **Josh** Bus timetables at Coventry
+
+**Status list**:
+a) ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started
+b) ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress
+c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
+
+| Status | Task | file name | Developer |
+| --- | --- | --- | --- |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
+| ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | user input simulator | inputTests.py | Armandas |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | basic chat(Personal questions) and greetings | dbQueries.py brain.py | Brad |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Reminder function | reminder.py | Armandas |
+| ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Math - number operations | mathBot.py | Brad |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Basic game-(s) | hangBot.py hangman.py | Phillip |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Weather | weather.py | Josh |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Live sport results | - | Armandas |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Recipes | - | Jake |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Music and Films | - | Phillip |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Currency conversion | - | Armandas |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Maths Quiz | - | Sam |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Bus timetables at Coventry | - | Josh |
+| - | University rankings | - | - |
 
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**
 
 Every module is a class which is made to answer questions about 1 topic.
 
-**Every module _must implement_ 3 functions:**
+**Every module(class) _must implement_ 3 functions:**
 1. \_\_init\_\_() - constructor
 2. getKeywords() - must return list of words or words combinations
-3. genAnswer() - module starting function. It analyzes user input and gives answer
-genAnswer() function must **return TUPLE(boolean, string)** - (success?, str_answer_to_user)
-if success == False, str_answer can be "" (empty string)
+3. getAnswer(userInput) - module starting function. It analyzes user input and gives answer
+
+genAnswer() function must **return None(if fail) or Answer string**
 
