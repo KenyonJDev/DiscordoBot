@@ -6,7 +6,7 @@ import asyncio
 import mathBot
 import weather
 #import shibBot
-#import hangman
+import hangman
 #import hangBot
 import dbQueries
 
