@@ -57,5 +57,5 @@ async def on_message(message):
         shibBot.dogCall(dogRequest)
         
            
-    if message.content.startswith('!weather')
+    #if message.content.startswith('!weather')
 client.run(TOKEN)
