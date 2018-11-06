@@ -86,6 +86,7 @@ async def on_message(message):
 
     elif message.content.startswith('!weather'):
         weather.url_builder(stringInp)
+        reply = rs.reply("localuser", stringInp)
         await client.send_message(message.channel, s.format(**data))
     else:
         reply = (rs.reply("localuser", "get database data")).split(" ")

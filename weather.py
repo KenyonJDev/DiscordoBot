@@ -17,7 +17,7 @@ def url_builder(city_id):
     unit = 'metric'
     api = 'http://api.openweathermap.org/data/2.5/weather?q='
 
-    full_api_url = api + str(userinputweather) + '&mode=json&units=' + unit + '&APPID=' + user_api
+    full_api_url = api + str(city_id) + '&mode=json&units=' + unit + '&APPID=' + user_api
     return full_api_url
     
 ### example url = http://api.openweathermap.org/data/2.5/weather?q=London,uk%27&mode=json&units=metric&appid=7a82ee6f4ab290329464c1a55194b4ab
