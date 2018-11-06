@@ -8,6 +8,10 @@ import json
 #  capital city
 #
 
+
+#
+# Block of code copied and modified from josh's code
+#
 def data_fetch(full_api_url):
     url = urllib.request.urlopen(full_api_url)
     output = url.read().decode('utf-8')
