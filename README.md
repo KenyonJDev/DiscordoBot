@@ -26,7 +26,7 @@ c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 | --- | --- | --- | --- |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | user input simulator | inputTests.py | Armandas |
-| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | basic chat(Personal questions) and greetings | dbQueries.py brain.py | Brad |
+| ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | basic chat(Personal questions) and greetings | dbQueries.py brain.py | Brad |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Reminder function | reminder.py | Armandas |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Math - number operations | mathBot.py | Brad |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Basic game-(s) | hangBot.py hangman.py | Phillip |
@@ -45,8 +45,7 @@ Every module is a class which is made to answer questions about 1 topic.
 
 **Every module(class) _must implement_ 3 functions:**
 1. \_\_init\_\_() - constructor
-2. getKeywords() - must return list of words or words combinations
-3. getAnswer(userInput) - module starting function. It analyzes user input and gives answer
+2. getAnswer(userInput) - module starting function. It analyzes user input and gives answer
 
 genAnswer() function must **return None(if fail) or Answer string**
 
