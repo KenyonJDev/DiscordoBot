@@ -25,12 +25,10 @@ def insertDB(userID,details):
     chatbotDB.commit()
     
     details = checkUndefined(details)
-    
     cursor.executemany("UPDATE users SET name=%s, age=%s, favcolour=%s, gender=%s, city=%s, relationship=%s WHERE userID="+str(userID),(details,))
     chatbotDB.commit()
-
-def updateDB(userID,details):
     
+def updateDB(userID,details):
     details = checkUndefined(details)
     cursor.executemany("UPDATE users SET name=%s, age=%s, favcolour=%s, gender=%s, city=%s, relationship=%s WHERE userID="+str(userID),(details,))
     chatbotDB.commit()
@@ -40,3 +38,7 @@ def getDetails(userID):
     cursor.execute(dataQuery,(userID,))
     result = cursor.fetchall()
     return(result[0])
+
+def updatePol(userID,newPolarity):
+    cursor.execute("UPDATE users SET relationship=%s WHERE userID="+str(userID),(newPolarity,))
+    chatbotDB.commit()

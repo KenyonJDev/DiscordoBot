@@ -6,9 +6,10 @@ import asyncio
 import mathBot
 import weather
 #import shibBot
-import hangman
+#import hangman
 #import hangBot
 import dbQueries
+import re
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
@@ -23,7 +24,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    
+
 @client.event
 async def on_message(message):
     userID = message.author.id
@@ -31,9 +32,15 @@ async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
+           
+    stringInp = message.content
+#     if stringInp[0] == '!':
+#         reObj = re.match('!\w* *', stringInp)
+#         if reObj:
+#             stringAction = "{}".format(reObj.group(0))
+#             stringInp = stringInp.replace(stringAction,"")
+#             stringAction = stringAction.replace(" ", "")
     
-    #Select userID from database and compare to discordID of user talking, 
-    #if they are equivalent then load previous 'conversation'
     
     if dbQueries.checkUser(userID) == 0:
         reply = (rs.reply("localuser", "get database data")).split(" ")
@@ -43,8 +50,6 @@ async def on_message(message):
         details = " ".join(str(item) for item in details)
         rs.reply("localuser","set database data "+ str(details))
         
-    stringInp = message.content
-    
     if message.content.startswith('!calculate'):
         #Change english to operators and overwrite the input 
         stringInp = mathBot.checkDict(stringInp)
@@ -80,25 +85,31 @@ async def on_message(message):
         shibBot.dogCall(dogRequest)
 
     elif message.content.startswith('!weather'):
-        city_id = stringInp
+        weather.url_builder(stringInp)
     else:
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        dbQueries.updateDB(userID,reply)
+        
         blob = TextBlob(stringInp)
-        print(blob.sentiment.polarity)
-#         reply = rs.reply("localuser", stringInp)
-#         await client.send_message(message.channel, reply)
-    
-    
-    
-    async def updateCycle(userID):
-        await client.wait_until_ready()
-        counter = 0    
-        while not client.is_closed:
-            counter += 1
-            reply = (rs.reply("localuser", "get database data")).split(" ")
-            dbQueries.updateDB(userID,reply)
-            await asyncio.sleep(5)
+        polarity = blob.sentiment.polarity
+
+        pre = int(polarity)
+        post = abs(polarity - pre)
+        
+        if polarity >= 0:
+            negative = False
+        elif polarity < 0:
+            negative = True
             
-    client.loop.create_task(updateCycle(userID))
+        polarityToPass = str(negative) + " " + str(post)[2:]
+        newPolarity = rs.reply("localuser", "setting polarity " + polarityToPass) #Pass polarity to rivescript to update happiness of both'
+        dbQueries.updatePol(userID,newPolarity)
+        
+        reply = rs.reply("localuser", stringInp)
+        await client.send_message(message.channel, reply)  
+         
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        dbQueries.updateDB(userID,reply)
 
 
 client.run(TOKEN)
