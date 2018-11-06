@@ -83,6 +83,7 @@ async def on_message(message):
         dogRequest = stringInp
 
         shibBot.dogCall(dogRequest)
+        
 
     elif message.content.startswith('!weather'):
         weather.url_builder(stringInp)
