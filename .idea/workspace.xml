@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8f1166d-27c6-40bd-8c0b-98e7ee7f55f1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ChatBot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ChatBot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,12 +68,12 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="306" />
-          <entry key="Python" value="495" />
+          <entry key="Python" value="537" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="495" />
+          <entry key="py" value="537" />
           <entry key="txt" value="306" />
         </counts>
       </usages-collector>
@@ -85,11 +86,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="89" column="62" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+            <state relative-caret-position="408">
+              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
               <folding>
                 <element signature="e#17#46#0" expanded="true" />
               </folding>
@@ -97,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/weather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="59" column="19" lean-forward="true" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
+            <state relative-caret-position="901">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -187,7 +188,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Josh\AppData\Local\Programs\Python\Python37-32\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\Josh\AppData\Local\Programs\Python\Python36-32\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -274,7 +275,21 @@
       <option name="project" value="LOCAL" />
       <updated>1541534834336</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="praying">
+      <created>1541534853712</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1541534853712</updated>
+    </task>
+    <task id="LOCAL-00010" summary="praying">
+      <created>1541535130111</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1541535130111</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -295,15 +310,15 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32938388" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49841937" visible="true" weight="0.19956616" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49932525" weight="0.32938388" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49841937" weight="0.19956616" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49932525" weight="0.3286334" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5006748" side_tool="true" weight="0.32938388" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32938388" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.3286334" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -384,22 +399,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/weather.py">
+    <entry file="file://$PROJECT_DIR$/bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="59" column="19" lean-forward="true" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
+        <state relative-caret-position="408">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#17#46#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bot.py">
+    <entry file="file://$PROJECT_DIR$/weather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="89" column="62" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+        <state relative-caret-position="901">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
           <folding>
-            <element signature="e#17#46#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
