@@ -34,7 +34,7 @@ def data_organiser(raw_data):
     )
 
 def data_output(data):
-    s = '''-----------------------------------
+    e = '''-----------------------------------
     station name: {name} {type}:
     station code: {station_code}
     Latitude:{latitude}
@@ -44,7 +44,7 @@ def data_output(data):
     Source: {source}
     Requested {request_time}
     -----------------------------------'''
-    print(s.format(**data))
+    print(e.format(**data))
     
 if __name__ == '__main__':
     try:
