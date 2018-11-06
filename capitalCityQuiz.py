@@ -19,6 +19,13 @@ def data_fetch(full_api_url):
     url.close()
     return raw_api_dict
 
+def data_organizer(raw_data):
+    main = raw_data.get('main')
+    sys = raw_data.get('sys')
+    data = dict(
+        city=raw_data.get('name'),
+
+    )
 
 #
 #
