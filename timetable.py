@@ -46,3 +46,9 @@ def data_output(data):
     -----------------------------------'''
     print(s.format(**data))
     
+if __name__ == '__main__':
+    try:
+        data_output(data_organiser(data_fetch(url_builder(2172797))))
+    except IOError:
+        print("Sorry, I don't know what you mean")
+    
