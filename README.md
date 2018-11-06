@@ -24,7 +24,7 @@ c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 
 | Status | Task | file name | Developer |
 | --- | --- | --- | --- |
-| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Jake |
+| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | main code part which connects DISCORD client and modules | bot.py | Brad |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | user input simulator | inputTests.py | Armandas |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | basic chat(Personal questions) and greetings | dbQueries.py brain.py | Brad |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Reminder function | reminder.py | Armandas |
@@ -34,7 +34,7 @@ c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Live sport results | - | Armandas |
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Recipes | - | Jake |
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Music and Films | - | Phillip |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Currency conversion | - | Armandas |
+| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Currency conversion | - | Jake |
 | ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Maths Quiz | - | Sam |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Bus timetables at Coventry | timetable.py | Josh |
 | - | University rankings | - | - |
