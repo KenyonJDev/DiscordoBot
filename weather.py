@@ -58,7 +58,9 @@ Cloud: {cloudiness}
 
 Updated: {dt}
 -----------------------------------'''
-s.format(**data)
+  s.format(**data)
+  return s
+
 
 if __name__ == '__main__':
     try:
