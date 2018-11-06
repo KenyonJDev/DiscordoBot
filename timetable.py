@@ -45,3 +45,4 @@ def data_output(data):
     Requested {request_time}
     -----------------------------------'''
     print(s.format(**data))
+    
