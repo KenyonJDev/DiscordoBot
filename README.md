@@ -6,7 +6,7 @@ version 1.0
 This bot has been created to serve as a tool that can be used for useful features
 on the discord platform as part of an assignment.
 
-# TO TEST IN CODIO RUN THE FOLLOWING COMMANDS TO CHANGE THE PYTHON VERSION
+# To test in codio
 1) alias python='/usr/bin/python3.5'
 2) . ~/.bashrc
 

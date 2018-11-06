@@ -9,6 +9,7 @@ import weather
 #import hangman
 #import hangBot
 import dbQueries
+import re
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
@@ -33,7 +34,14 @@ async def on_message(message):
         return
            
     stringInp = message.content
-        
+#     if stringInp[0] == '!':
+#         reObj = re.match('!\w* *', stringInp)
+#         if reObj:
+#             stringAction = "{}".format(reObj.group(0))
+#             stringInp = stringInp.replace(stringAction,"")
+#             stringAction = stringAction.replace(" ", "")
+    
+    
     if dbQueries.checkUser(userID) == 0:
         reply = (rs.reply("localuser", "get database data")).split(" ")
         dbQueries.insertDB(userID,reply)
@@ -85,7 +93,6 @@ async def on_message(message):
         blob = TextBlob(stringInp)
         polarity = blob.sentiment.polarity
 
-        print(polarity)
         pre = int(polarity)
         post = abs(polarity - pre)
         
