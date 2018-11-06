@@ -8,7 +8,7 @@ import weather
 #import shibBot
 #import hangman
 #import hangBot
-import dbQueries
+#import dbQueries
 import re
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
@@ -42,13 +42,13 @@ async def on_message(message):
 #             stringAction = stringAction.replace(" ", "")
     
     
-    if dbQueries.checkUser(userID) == 0:
-        reply = (rs.reply("localuser", "get database data")).split(" ")
-        dbQueries.insertDB(userID,reply)
-    else:
-        details = dbQueries.getDetails(userID)
-        details = " ".join(str(item) for item in details)
-        rs.reply("localuser","set database data "+ str(details))
+   # if dbQueries.checkUser(userID) == 0:
+       # reply = (rs.reply("localuser", "get database data")).split(" ")
+      # dbQueries.insertDB(userID,reply)
+  #  else:
+       # details = dbQueries.getDetails(userID)
+       # details = " ".join(str(item) for item in details)
+        #rs.reply("localuser","set database data "+ str(details))
         
     if message.content.startswith('!calculate'):
         #Change english to operators and overwrite the input 
@@ -83,36 +83,35 @@ async def on_message(message):
         dogRequest = stringInp
 
         shibBot.dogCall(dogRequest)
-        
 
     elif message.content.startswith('!weather'):
         weather.url_builder(stringInp)
         reply = rs.reply("localuser", stringInp)
-        await client.send_message(message.channel, s)
-    else:
-        reply = (rs.reply("localuser", "get database data")).split(" ")
-        dbQueries.updateDB(userID,reply)
+        await client.send_message(message.channel, i dont fucking know )
+    #else:
+        #reply = (rs.reply("localuser", "get database data")).split(" ")
+        #dbQueries.updateDB(userID,reply)
         
-        blob = TextBlob(stringInp)
-        polarity = blob.sentiment.polarity
+        #blob = TextBlob(stringInp)
+       # polarity = blob.sentiment.polarity
 
-        pre = int(polarity)
-        post = abs(polarity - pre)
+       # pre = int(polarity)
+       # post = abs(polarity - pre)
         
-        if polarity >= 0:
-            negative = False
-        elif polarity < 0:
-            negative = True
+       # if polarity >= 0:
+        #    negative = False
+       # elif polarity < 0:
+        #    negative = True
             
-        polarityToPass = str(negative) + " " + str(post)[2:]
-        newPolarity = rs.reply("localuser", "setting polarity " + polarityToPass) #Pass polarity to rivescript to update happiness of both'
-        dbQueries.updatePol(userID,newPolarity)
+      #  polarityToPass = str(negative) + " " + str(post)[2:]
+      #  newPolarity = rs.reply("localuser", "setting polarity " + polarityToPass) #Pass polarity to rivescript to update happiness of both'
+      #  dbQueries.updatePol(userID,newPolarity)
         
-        reply = rs.reply("localuser", stringInp)
-        await client.send_message(message.channel, reply)  
-         
-        reply = (rs.reply("localuser", "get database data")).split(" ")
-        dbQueries.updateDB(userID,reply)
+      #  reply = rs.reply("localuser", stringInp)
+      #  await client.send_message(message.channel, reply)
+      #
+      #  reply = (rs.reply("localuser", "get database data")).split(" ")
+       # dbQueries.updateDB(userID,reply)
 
 
 client.run(TOKEN)
