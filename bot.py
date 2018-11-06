@@ -1,17 +1,21 @@
-#Get user input
+# module imports
+from textblob import TextBlob
+from rivescript import RiveScript
 import discord
 import asyncio
-# module imports
 import mathBot
 import weather
-import shibBot
-import hangman
-import hangBot
-
+#import shibBot
+#import hangman
+#import hangBot
+import dbQueries
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 client = discord.Client()
+rs = RiveScript()
+rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
+rs.sort_replies()
 
 @client.event
 async def on_ready():
@@ -19,25 +23,34 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    
-    
+
 @client.event
 async def on_message(message):
+    userID = message.author.id
     
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
-   
+           
     stringInp = message.content
-    stringInp = mathBot.checkDict(stringInp)
- 
-    
-    if message.content.startswith('!what'):
+        
+    if dbQueries.checkUser(userID) == 0:
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        dbQueries.insertDB(userID,reply)
+    else:
+        details = dbQueries.getDetails(userID)
+        details = " ".join(str(item) for item in details)
+        rs.reply("localuser","set database data "+ str(details))
+        
+    if message.content.startswith('!calculate'):
+        #Change english to operators and overwrite the input 
+        stringInp = mathBot.checkDict(stringInp)
+        
         #Flags to decide if the question is a math one
         numCheck = False
         opCheck = False
         rootCheck = False
-        #Change english to operators
+        
         #Loop through string, check if both and operator and number are included or there is a square root using mathBot
         for i in range(len(stringInp)):
             if (mathBot.isNum(stringInp[i])):
@@ -46,19 +59,51 @@ async def on_message(message):
                 opCheck = True
             elif (mathBot.checkRoot(stringInp)):
                 rootCheck = True
-                
+
         #If both operator and number are included or there is a square root then run calculate from mathBot
         if (numCheck == True and opCheck == True) or rootCheck:
             strToAns = mathBot.isMath(stringInp)
             ans = strToAns.currentEval
             await client.send_message(message.channel, ans)
-    
-    if message.content.startswith('!dog'):
+        else:
+            #Set the reply to what is returned by the RiveScript file
+            reply = rs.reply("localuser", stringInp)
+            await client.send_message(message.channel, reply)
+
+    elif message.content.startswith('!dog'):
         #passes to the shibBot.py module
         dogRequest = stringInp
-        
+
         shibBot.dogCall(dogRequest)
+
+    elif message.content.startswith('!weather'):
+        weather.url_builder(stringInp)
+    else:
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        dbQueries.updateDB(userID,reply)
         
-           
-    if message.content.startswith('!weather')
+        blob = TextBlob(stringInp)
+        polarity = blob.sentiment.polarity
+
+        print(polarity)
+        pre = int(polarity)
+        post = abs(polarity - pre)
+        
+        if polarity >= 0:
+            negative = False
+        elif polarity < 0:
+            negative = True
+            
+        polarityToPass = str(negative) + " " + str(post)[2:]
+        newPolarity = rs.reply("localuser", "setting polarity " + polarityToPass) #Pass polarity to rivescript to update happiness of both'
+        dbQueries.updatePol(userID,newPolarity)
+        
+        reply = rs.reply("localuser", stringInp)
+        await client.send_message(message.channel, reply)  
+         
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        dbQueries.updateDB(userID,reply)
+
+
 client.run(TOKEN)
+asyncio.run(main())
