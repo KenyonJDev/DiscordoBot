@@ -1,4 +1,5 @@
 # module imports
+from discord.ext import commands
 from textblob import TextBlob
 from rivescript import RiveScript
 import discord
