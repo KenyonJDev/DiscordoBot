@@ -5,7 +5,7 @@ import random
 #    https://discordpy.readthedocs.io/en/latest/api.html#discord.Client.send_file
 #    https://docs.python.org/3/library/asyncio-task.html#coroutine
 
-def dogInputValidity(dogCheck)
+def dogInputValidity(dogCheck):
     if dogCheck == "shiba" or dogType == "samoyed" or dogType == "pug" or dogType == "other" or dogType == "cursed" or dogType == "":
         return True #return whether or not the additional content is valid to the module or not
     else:

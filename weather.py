@@ -1,13 +1,8 @@
 import urllib.parse
 import urllib.request
 import json
-import datetime
-<<<<<<< HEAD
-userinput = input("where are you looking for? ")
-=======
+import datetime#
 
-
->>>>>>> 95765044134962eb49dcf6a46b9f7a4b4b77f528
 ### key = 7a82ee6f4ab290329464c1a55194b4ab
 
 def time_converter(time):
@@ -63,13 +58,7 @@ Cloud: {cloudiness}
 
 Updated: {dt}
 -----------------------------------'''
-<<<<<<< HEAD
-    s.format(**data)
-    return s
-=======
     return weatheroutput.format(**data)
-
->>>>>>> 95765044134962eb49dcf6a46b9f7a4b4b77f528
 
 
 if __name__ == '__main__':
