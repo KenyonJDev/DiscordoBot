@@ -5,7 +5,7 @@ import discord
 import asyncio
 import mathBot
 import weather
-#import shibBot
+import shibBot
 #import hangman
 #import hangBot
 #import dbQueries
@@ -80,12 +80,23 @@ async def on_message(message):
 
     elif message.content.startswith('!dog'):
         #passes to the shibBot.py module
+               
+        splitRequest = stringInp.split('!dog ', 1) #strip the request down to the relevent content
+        dogRequest = splitRequest[1].strip(" ")
         
-        dogRequest = stringInp
-        dogImage = shibBot.dogCall(dogRequest)
+        dogCheck = shibBot.dogInputValidity(dogRequest)
         
-        await client.send_file(message.channel, dogImage, :feet:, tts = False)
-
+        if dogCheck == True:
+            dogImage = shibBot.dogCall(dogRequest)
+            await client.send_file(message.channel, dogImage, :feet:, tts = False)
+        else:
+            if dogRequest == "help":
+                await client.send_message(message.channel, "To request a dog please write !dog.")
+                await client.send_message(message.channel, "To specify a dog, add one of the following to your request using the format !dog *chosen type here*;")
+                await client.send_message(message.channel, "shiba, samoyed, pug, cursed, other")
+            else:
+                await client.send_message(message.channel, "Sorry, that isnt a valid dog type!")
+            
     elif message.content.startswith('!weather'):
         weather.url_builder(stringInp)
         reply = rs.reply("localuser", stringInp)
