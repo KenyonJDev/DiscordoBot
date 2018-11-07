@@ -110,7 +110,6 @@ def checkMath(stringInp):
     """Manipulate user input as string to check if it follows the pattern of a math question"""
     #Change english to operators and overwrite the input 
     stringInp = checkDict(stringInp)
-
     #Flags to decide if the question is a math one
     numCheck = False
     opCheck = False
@@ -130,5 +129,8 @@ def checkMath(stringInp):
         strToAns = isMath(stringInp)
         ans = strToAns.currentEval
         return ans
-    
+    else:
+        #Set the reply to what is returned by the RiveScript file
+        reply = rs.reply("localuser", stringInp)
+        return reply
     
