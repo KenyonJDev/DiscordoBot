@@ -82,8 +82,9 @@ async def on_message(message):
         #passes to the shibBot.py module
         dogRequest = stringInp
 
-        shibBot.dogCall(dogRequest)
+        dogImage = shibBot.dogCall(dogRequest)
         
+        await client.send_file(message.channel, dogImage, :feet:, tts = False)
 
     elif message.content.startswith('!weather'):
         weather.url_builder(stringInp)
