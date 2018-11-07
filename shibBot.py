@@ -5,6 +5,28 @@ import random
 #    https://discordpy.readthedocs.io/en/latest/api.html#discord.Client.send_file
 #    https://docs.python.org/3/library/asyncio-task.html#coroutine
 
+
+def checkDog(stringInp):
+    #passes to the shibBot.py module
+
+    splitRequest = stringInp.split('!dog ', 1) #strip the request down to the relevent content
+    dogRequest = splitRequest[1].strip(" ")
+
+    dogCheck = dogInputValidity(dogRequest)
+
+    if dogCheck == True:
+        dogImage = dogCall(dogRequest)
+# #         await client.send_file(message.channel, dogImage, :feet:, tts = False)
+    else:
+        if dogRequest == "help":
+            pass
+#             await client.send_message(message.channel, "To request a dog please write !dog.")
+#             await client.send_message(message.channel, "To specify a dog, add one of the following to your request using the format !dog *chosen type here*;")
+#             await client.send_message(message.channel, "shiba, samoyed, pug, cursed, other")
+        else:
+            pass
+#             await client.send_message(message.channel, "Sorry, that isnt a valid dog type!")
+
 def dogInputValidity(dogCheck):
     if dogCheck == "shiba" or dogType == "samoyed" or dogType == "pug" or dogType == "other" or dogType == "cursed" or dogType == "":
         return True #return whether or not the additional content is valid to the module or not

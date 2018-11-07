@@ -41,7 +41,6 @@ async def on_message(message):
             stringInp = stringInp.replace(stringAction,"")
             stringAction = stringAction.replace(" ", "")
     
-    
     if dbQueries.checkUser(userID) == 0:
         reply = (rs.reply("localuser", "get database data")).split(" ")
         dbQueries.insertDB(userID,reply)
@@ -49,59 +48,23 @@ async def on_message(message):
         details = dbQueries.getDetails(userID)
         details = " ".join(str(item) for item in details)
         rs.reply("localuser","set database data "+ str(details))
-        
-    if message.content.startswith('!calculate'):
-        #Change english to operators and overwrite the input 
-        stringInp = mathBot.checkDict(stringInp)
-        
-        #Flags to decide if the question is a math one
-        numCheck = False
-        opCheck = False
-        rootCheck = False
-        
-        #Loop through string, check if both and operator and number are included or there is a square root using mathBot
-        for i in range(len(stringInp)):
-            if (mathBot.isNum(stringInp[i])):
-                numCheck = True
-            elif (mathBot.checkOperator(stringInp[i])):
-                opCheck = True
-            elif (mathBot.checkRoot(stringInp)):
-                rootCheck = True
-
-        #If both operator and number are included or there is a square root then run calculate from mathBot
-        if (numCheck == True and opCheck == True) or rootCheck:
-            strToAns = mathBot.isMath(stringInp)
-            ans = strToAns.currentEval
-            await client.send_message(message.channel, ans)
+       
+    #Pass string to rivescript - check for keywords
+    #Return function to run to variable in bot
+    
+    moduleName = rs.reply("localuser", stringInp)
+    def keywordToModule(moduleName, stringInp):
+    
+        if moduleName == "math":
+            return mathBot.checkMath(stringInp)
+        elif(moduleName == "dog"):
+            return shibBot.checkDog(stringInp)
+        elif(moduleName == "weather"):
+            return weather.checkWeather(stringInp)
         else:
-            #Set the reply to what is returned by the RiveScript file
-            reply = rs.reply("localuser", stringInp)
-            await client.send_message(message.channel, reply)
-
-    elif message.content.startswith('!dog'):
-        #passes to the shibBot.py module
-               
-        splitRequest = stringInp.split('!dog ', 1) #strip the request down to the relevent content
-        dogRequest = splitRequest[1].strip(" ")
+            return defaultChat(stringInp)
         
-        dogCheck = shibBot.dogInputValidity(dogRequest)
-        
-        if dogCheck == True:
-            dogImage = shibBot.dogCall(dogRequest)
-            await client.send_file(message.channel, dogImage, :feet:, tts = False)
-        else:
-            if dogRequest == "help":
-                await client.send_message(message.channel, "To request a dog please write !dog.")
-                await client.send_message(message.channel, "To specify a dog, add one of the following to your request using the format !dog *chosen type here*;")
-                await client.send_message(message.channel, "shiba, samoyed, pug, cursed, other")
-            else:
-                await client.send_message(message.channel, "Sorry, that isnt a valid dog type!")
-            
-    elif message.content.startswith('!weather'):
-        weather.url_builder(stringInp)
-        reply = rs.reply("localuser", stringInp)
-        await client.send_message(message.channel, "i dont fucking know" )
-    else:
+    def defaultChat(stringInp):
         reply = (rs.reply("localuser", "get database data")).split(" ")
         dbQueries.updateDB(userID,reply)
 
@@ -120,12 +83,14 @@ async def on_message(message):
         newPolarity = rs.reply("localuser", "setting polarity " + polarityToPass) #Pass polarity to rivescript to update happiness of both'
         dbQueries.updatePol(userID,newPolarity)
 
-        reply = rs.reply("localuser", stringInp)
-        await client.send_message(message.channel, reply)
+        return(rs.reply("localuser", stringInp))
 
         reply = (rs.reply("localuser", "get database data")).split(" ")
         dbQueries.updateDB(userID,reply)
-
+        
+    output = keywordToModule(moduleName, stringInp)
+    await client.send_message(message.channel, output)
+    
 
 client.run(TOKEN)
 asyncio.run(main())

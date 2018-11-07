@@ -5,6 +5,11 @@ import datetime#
 
 ### key = 7a82ee6f4ab290329464c1a55194b4ab
 
+def checkWeather(stringInp):
+    url_builder(stringInp)
+    reply = rs.reply("localuser", stringInp)
+    return "i dont know"
+
 def time_converter(time):
     converted_time = datetime.datetime.fromtimestamp(
         int(time)

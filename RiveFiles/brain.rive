@@ -273,22 +273,21 @@
 - I'm not too bad, neither happy or sad thank you
 
 + [*](math|maths|calculate)[*]
-- Maybe you should try !calculate and then ask me your math question
+- math
 
 + [*](weather|climate|temperature)[*]
-- Use !weather to get the answer
+- weather
 
 + [*](i am bored|bored|game|games|play|hangman)[*]
-- try !play, maybe that will entertain you for a while
+- game
 
 + [*](shiba inu|shiba|dog|puppy)[*]
-- !dog is the answer to everything
+- dog
 
 + [*](sorry|apologize|apology)[*]
 * <get name> == none => It's okay I forgive you
 - There's no need to be sorry, <get name>
 - Dont apologize <get name>, its okay
-
 
 + [*](because)[*]
 - Could there be another reason why?
