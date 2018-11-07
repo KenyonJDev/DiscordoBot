@@ -1,16 +1,13 @@
 # module imports
 from discord.ext import commands
-from textblob import TextBlob
 from rivescript import RiveScript
 import discord
 import asyncio
-import mathBot
-import weather
-import shibBot
 #import hangman
 #import hangBot
 import dbQueries
 import re
+import conversation
 
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
@@ -36,12 +33,14 @@ async def on_ready():
 @client.event
 async def on_message(message):
     userID = message.author.id
+    dbQueries.initialise(userID,rs)
     
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
            
-    stringInp = message.content
+    stringInp = message.content   
+    
     if stringInp[0] == '!':
         reObj = re.match('!\w* *', stringInp)
         if reObj:
@@ -49,58 +48,11 @@ async def on_message(message):
             stringInp = stringInp.replace(stringAction,"")
             stringAction = stringAction.replace(" ", "")
     
-    if dbQueries.checkUser(userID) == 0:
-        reply = (rs.reply("localuser", "get database data")).split(" ")
-        dbQueries.insertDB(userID,reply)
-    else:
-        details = dbQueries.getDetails(userID)
-        details = " ".join(str(item) for item in details)
-        rs.reply("localuser","set database data "+ str(details))
-       
     #Pass string to rivescript - check for keywords
     #Return function to run to variable in bot
     
-    moduleName = rs.reply("localuser", stringInp)
-    def keywordToModule(moduleName, stringInp):
-    
-        if moduleName == "math":
-            return mathBot.checkMath(stringInp)
-        elif(moduleName == "dog"):
-            return shibBot.checkDog(stringInp)
-        elif(moduleName == "weather"):
-            return weather.checkWeather(stringInp)
-        else:
-            return defaultChat(stringInp)
-        
-    def defaultChat(stringInp):
-        reply = (rs.reply("localuser", "get database data")).split(" ")
-        dbQueries.updateDB(userID,reply)
-
-        blob = TextBlob(stringInp)
-        polarity = blob.sentiment.polarity
-
-        pre = int(polarity)
-        post = abs(polarity - pre)
-
-        if polarity >= 0:
-            negative = False
-        elif polarity < 0:
-            negative = True
-
-        polarityToPass = str(negative) + " " + str(post)[2:]
-        newPolarity = rs.reply("localuser", "setting polarity " + polarityToPass) #Pass polarity to rivescript to update happiness of both'
-        dbQueries.updatePol(userID,newPolarity)
-
-        return(rs.reply("localuser", stringInp))
-
-        reply = (rs.reply("localuser", "get database data")).split(" ")
-        dbQueries.updateDB(userID,reply)
-        
-    output = keywordToModule(moduleName, stringInp)
+    output = conversation.keywordToModule(rs.reply("localuser", stringInp), stringInp,rs, userID)
     await client.send_message(message.channel, output)
-    
-
-
     
 # @bot.command()
 # async def weather()

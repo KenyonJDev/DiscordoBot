@@ -8,6 +8,14 @@ chatbotDB = mysql.connector.connect(
 )
 
 cursor = chatbotDB.cursor(buffered=True)
+def initialise(userID,rs):
+    if checkUser(userID) == 0:
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        insertDB(userID,reply)
+    else:
+        details = getDetails(userID)
+        details = " ".join(str(item) for item in details)
+        rs.reply("localuser","set database data "+ str(details))
 
 def checkUser(userID):
     cursor.execute("SELECT COUNT(*) FROM users WHERE userID="+str(userID))

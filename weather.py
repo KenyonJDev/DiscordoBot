@@ -6,9 +6,8 @@ import datetime#
 ### key = 7a82ee6f4ab290329464c1a55194b4ab
 
 def checkWeather(stringInp):
-    url_builder(stringInp)
-    reply = rs.reply("localuser", stringInp)
-    return "i dont know"
+    weatherOut = url_builder(stringInp)
+    return weatherOut
 
 def time_converter(time):
     converted_time = datetime.datetime.fromtimestamp(
@@ -22,7 +21,7 @@ def url_builder(city_id):
     unit = 'metric'
     api = 'http://api.openweathermap.org/data/2.5/weather?q='
 
-    full_api_url = api + str(userinput) + '&mode=json&units=' + unit + '&APPID=' + user_api
+    full_api_url = api + str(city_id) + '&mode=json&units=' + unit + '&APPID=' + user_api
     return full_api_url
     
 ### example url = http://api.openweathermap.org/data/2.5/weather?q=London,uk%27&mode=json&units=metric&appid=7a82ee6f4ab290329464c1a55194b4ab
