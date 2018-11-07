@@ -127,5 +127,13 @@ async def on_message(message):
         dbQueries.updateDB(userID,reply)
 
 
+@bot.command()
+async def info(ctx, *, member: discord.Member):
+    fmt = '{0} joined on {0.joined_at} and has {1} roles.'
+    await ctx.send(fmt.format(member, len(member.roles)))
+    
+@bot.command()
+async def weather()
+
 client.run(TOKEN)
 asyncio.run(main())
