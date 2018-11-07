@@ -58,7 +58,8 @@ Cloud: {cloudiness}
 
 Updated: {dt}
 -----------------------------------'''
-    print(s.format(**data))
+    s.format(**data)
+    return s
 
 
 if __name__ == '__main__':
