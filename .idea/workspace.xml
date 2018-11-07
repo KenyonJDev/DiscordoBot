@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="a8f1166d-27c6-40bd-8c0b-98e7ee7f55f1" name="Default Changelist" comment="praying">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather.py" afterDir="false" />
+=======
+    <list default="true" id="a8f1166d-27c6-40bd-8c0b-98e7ee7f55f1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MathsQuiz.py" beforeDir="false" afterPath="$PROJECT_DIR$/MathsQuiz.py" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,10 +22,11 @@
     <session id="-484167461">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -37,14 +44,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="97" />
-          <entry key="py" value="584" />
+          <entry key="py" value="635" />
+          <entry key="txt" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="97" />
-          <entry key="Python" value="584" />
+          <entry key="PLAIN_TEXT" value="18" />
+          <entry key="Python" value="635" />
         </counts>
       </usages-collector>
     </session>
@@ -86,11 +95,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< Updated upstream
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MathsQuiz.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> Stashed changes
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1496">
               <caret line="88" selection-start-line="88" selection-end-line="88" />
+=======
+            <state relative-caret-position="510">
+              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#17#46#0" expanded="true" />
               </folding>
@@ -101,8 +127,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/weather.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="-535">
               <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="15" />
+=======
+            <state relative-caret-position="170">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <marker date="1541539088202" expanded="true" signature="1794:1797" ph="..." />
@@ -111,6 +142,55 @@
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shibBot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reminder.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="663">
+                <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mathBot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1377">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> Stashed changes
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -137,9 +217,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1117" />
-    <option name="width" value="1148" />
-    <option name="height" value="1454" />
+    <option name="x" value="1116" />
+    <option name="width" value="1149" />
+    <option name="height" value="1455" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -241,6 +321,7 @@
       <option name="project" value="LOCAL" />
       <updated>1541497632069</updated>
     </task>
+<<<<<<< Updated upstream
     <task id="LOCAL-00004" summary="updated bot.py to send a message with weather (hopefully)&#10;weather.py no longer prints to console&#10;changed variable names in timetable to avoid clashing">
       <created>1541533755594</created>
       <option name="number" value="00004" />
@@ -298,6 +379,16 @@
       <updated>1541535850224</updated>
     </task>
     <option name="localTasksCounter" value="12" />
+=======
+    <task id="LOCAL-00004" summary="updated maths quiz">
+      <created>1541501071646</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1541501071646</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="TodoView">
@@ -310,7 +401,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+=======
+    <frame x="-7" y="-7" width="1519" height="977" extended-state="6" />
+>>>>>>> Stashed changes
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.087987356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -322,8 +417,13 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32938388" />
+<<<<<<< Updated upstream
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49841937" weight="0.19956616" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49932525" weight="0.3286334" />
+=======
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.3329384" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49932525" weight="0.32938388" />
+>>>>>>> Stashed changes
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5006748" side_tool="true" weight="0.32938388" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3286334" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -337,10 +437,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="importing discord.ext commands" />
     <MESSAGE value="Merge branch 'master' of https://github.coventry.ac.uk/kenyonJ/ChatBot&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+<<<<<<< Updated upstream
     <MESSAGE value="updated bot.py to send a message with weather (hopefully)&#10;weather.py no longer prints to console&#10;changed variable names in timetable to avoid clashing" />
     <MESSAGE value="removed input command on weather.py (this will break it temporarily)" />
     <MESSAGE value="praying" />
     <option name="LAST_COMMIT_MESSAGE" value="praying" />
+=======
+    <MESSAGE value="updated maths quiz" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated maths quiz" />
+>>>>>>> Stashed changes
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/oldCode.py">
@@ -359,6 +464,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
@@ -366,11 +472,24 @@
             <caret line="40" column="35" lean-forward="true" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
           </first_editor>
           <second_editor />
+=======
+    <entry file="file://$PROJECT_DIR$/timetable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="28" column="23" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reminder.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/weather.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+>>>>>>> Stashed changes
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shibBot.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -382,6 +501,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/mathBot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1377">
@@ -403,6 +523,25 @@
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/reminder.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="663">
+            <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -413,6 +552,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/bot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1496">
@@ -430,7 +570,22 @@
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <marker date="1541539088202" expanded="true" signature="1794:1797" ph="..." />
+=======
+    <entry file="file://$PROJECT_DIR$/capitalCityQuiz.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MathsQuiz.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>

@@ -43,11 +43,12 @@ class Queue:
       return self.queue
 
 
+#
 #  /\
 #
 
 difficulty = int()
-difficultyQueue = Queue()
+difficultyQueue = Queue(5)
 
 
 
@@ -73,12 +74,12 @@ def getQuestion():
     if randnum == 0:
         operator = ("+")
         num1 = random.randint(1, 100 + difficulty)
-        num2 = random.randint(1, 100)
+        num2 = random.randint(1, 100 + difficulty)
 
     elif randnum == 1:
         operator = ("-")
-        num1 = random.randint(1, 100)
-        num2 = random.randint(1, 100)
+        num1 = random.randint(1, 100 + difficulty)
+        num2 = random.randint(1, 100 + difficulty)
         if num1 < num2:
             (num1, num2) = (num2, num1)
         #subtract
@@ -86,17 +87,18 @@ def getQuestion():
     elif randnum == 2:
         #times
         operator = ("*")
-        num1 = random.randint(1, 12)
-        num2 = random.randint(1, 12)
+        num1 = random.randint(1, 12 + round(difficulty /3))
+        num2 = random.randint(1, 12 + round(difficulty /3))
 
     elif randnum == 3:
         #divide
         operator = ("/")
-        num2 = random.randint(1, 12)
-        answer = random.randint(1, 12)
+        num2 = random.randint(1, 12 + round(difficulty /3))
+        answer = random.randint(1, 12 + round(difficulty /3))
         num1 = num2 * answer
-    questionString = string(num1, operator, num2)
+    questionString = str(num1, operator, num2)
     return questionString, answer
+
 
 def runQuiz():
     difficulty = (0)
