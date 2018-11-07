@@ -88,7 +88,7 @@ async def on_message(message):
         
         if dogCheck == True:
             dogImage = shibBot.dogCall(dogRequest)
-            await client.send_file(message.channel, dogImage, :feet:, tts = False)
+            await client.send_file(message.channel, dogImage, ":feet:", tts = False)
         else:
             if dogRequest == "help":
                 await client.send_message(message.channel, "To request a dog please write !dog.")
