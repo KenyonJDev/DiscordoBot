@@ -34,13 +34,21 @@ async def on_ready():
 async def on_message(message):
     userID = message.author.id
     dbQueries.initialise(userID,rs)
+    stringInp = message.content   
+    
+    async def onNotification(sender, text):
+        print(text)
+        await client.send_message(message.channel, "Test %s" % text)
+    
+    
+    
+    if "[notification]" in str(message):
+        await client.send_message(message.channel, message)
     
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
            
-    stringInp = message.content   
-    
     if stringInp[0] == '!':
         reObj = re.match('!\w* *', stringInp)
         if reObj:
@@ -48,10 +56,7 @@ async def on_message(message):
             stringInp = stringInp.replace(stringAction,"")
             stringAction = stringAction.replace(" ", "")
     
-    #Pass string to rivescript - check for keywords
-    #Return function to run to variable in bot
-    
-    output = conversation.keywordToModule(rs.reply("localuser", stringInp), stringInp,rs, userID)
+    output = conversation.keywordToModule(rs.reply("localuser", stringInp), stringInp,rs, userID, client, onNotification)
     await client.send_message(message.channel, output)
     
 # @bot.command()

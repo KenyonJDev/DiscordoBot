@@ -3,6 +3,8 @@ import mathBot
 import weather
 import shibBot
 import dbQueries
+from reminder import Reminder
+import asyncio
 
 def defaultChat(stringInp,rs,userID):
     reply = (rs.reply("localuser", "get database data")).split(" ")
@@ -29,12 +31,21 @@ def defaultChat(stringInp,rs,userID):
     
     return(rs.reply("localuser", stringInp))
 
-def keywordToModule(moduleName, stringInp, rs, userID):
+def keywordToModule(moduleName, stringInp, rs, userID, client, function=None):
+    rmndr = Reminder()
     if moduleName == "math":
         return mathBot.checkMath(stringInp)
+    
     elif(moduleName == "dog"):
         return shibBot.checkDog(stringInp)
+    
     elif(moduleName == "weather"):
         return weather.checkWeather(stringInp)
+    
+    elif(rmndr.check(stringInp)):
+#         rmndr.listener += function
+        rmndr.listener += asyncio.create_task(function).run_until_complete(function)
+        rmndr.setReminder('This is my message', 6)
+        return rmndr.getAnswer(stringInp)
     else:
         return defaultChat(stringInp,rs, userID)
