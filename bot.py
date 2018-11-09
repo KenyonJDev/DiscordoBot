@@ -1,14 +1,14 @@
 # module imports
+import discord
 from discord.ext import commands
 from rivescript import RiveScript
-import discord
 import asyncio
 #import hangman
 #import hangBot
 import dbQueries
 import re
 import conversation
-
+import sys, traceback
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 bot = commands.Bot(command_prefix='!')
