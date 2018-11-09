@@ -11,6 +11,10 @@ import conversation
 import sys, traceback
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
+class MembersCog:
+    def __init__(self, bot):
+        self.bot = bot
+
 bot = commands.Bot(command_prefix='!')
 
 client = discord.Client()
@@ -18,7 +22,8 @@ rs = RiveScript()
 rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
 rs.sort_replies()
 
-@bot.command()
+@commands.command()
+@commands.guild_only()
 async def info(client, *, member: discord.Member):
     fmt = '{0} joined on {0.joined_at} and has {1} roles.'
     await client.send(fmt.format(member, len(member.roles)))
@@ -62,5 +67,5 @@ async def on_message(message):
 # @bot.command()
 # async def weather()
 
-client.run(TOKEN)
+client.run(TOKEN, bot=True, reconnect=True)
 asyncio.run(main())
