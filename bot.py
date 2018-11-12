@@ -1,6 +1,6 @@
 # module imports
 from textblob import TextBlob
-from rivescript import RiveScript
+# from rivescript import RiveScript
 import discord
 import asyncio
 import mathBot
