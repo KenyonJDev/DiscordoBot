@@ -4,6 +4,7 @@ from xml.dom import minidom
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.etree import ElementTree
 import datetime
+import traceback
 
 from reminder import Reminder
 from sport import Sport
@@ -57,12 +58,14 @@ class InputTests():
     def getAnswer(self, userInput=None):        
         for i in range(len(self.tests)): # t is a tuple(module, input)
             try:
+                # eval('from ' + self.tests[i][0].lower() + ' import ' + self.tests[i][0])
                 moduleObj = eval(self.tests[i][0] + '()')
-                answer = moduleObj.getAnswer([1])
+                answer = moduleObj.getAnswer(self.tests[i][1])
                 # making new tuple: (module, user_input, answer)
                 self.tests[i] = (self.tests[i][0], self.tests[i][1], answer)
             except:
                 print('Test failed for:', str(self.tests[i]))
+                traceback.print_exc()
                 self.tests[i] = None
         # popping failed tests using decrementing for loop
         for i in range(len(self.tests) - 1, -1, -1):
@@ -74,3 +77,7 @@ class InputTests():
                 
         self.logToFile()
         return 'Test successfully saved at: ```' + self.testFileAnswers + '```'
+    
+if __name__ == '__main__':
+    obj = InputTests()
+    obj.getAnswer()

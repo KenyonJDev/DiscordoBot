@@ -6,9 +6,17 @@
 ]>-->
 
 <root>
-    <test module="Reminder" input="Make me a message after 8 minutes and 5 seconds"/>
-    <test module="Reminder" input="Remind me in 6 hours to make homework"/>
-    <test module="Reminder" input="Make a note to call dad after 10 minutes"/>
-    <test module="Reminder" input="Set a notification at 15:05 with the message of go shoping"/>
+    <!-- testing different time methods -->
+    <test module="Reminder" input="Make me a message after 8 minutes and 5 seconds with text of hello"/>
+    <test module="Reminder" input="Make me a message with text of hello after 8 minutes and 5 seconds"/>
+    
+    <test module="Reminder" input="Remind me at 6o'clock to make homework"/>
+    <test module="Reminder" input="Set a reminder at 6 o'clock to make homework"/>
+    
+    <test module="Reminder" input="Make a note to call dad at 12:52"/>
+    <test module="Reminder" input="Make a note at 12:52 to call dad"/>
+    
+    <test module="Reminder" input="Send a notification at 11a.m with the message of go shoping"/>
+    <test module="Reminder" input="Set me a reminder with a message of hello at 2:12PM"/>
     
 </root>
