@@ -1,20 +1,36 @@
 <?xml version="1.0" ?>
 <root>
-   <!--Test time: 2018-11-04 22:15:57.188641-->
+   <!--Test time: 2018-11-12 10:14:54.445379-->
    <test>
-      <input>Make me a message after 8 minutes and 5 seconds</input>
-      <answer>I set a reminder after 8 minutes and 5 seconds with a message: make me a message</answer>
+      <input>Make me a message after 8 minutes and 5 seconds with text of hello</input>
+      <answer>No worries ;)! I set you a reminder after 485 secons with note:hello</answer>
    </test>
    <test>
-      <input>Remind me in 6 hours to make homework</input>
-      <answer>I set a reminder in 6 hours with a message: make homework</answer>
+      <input>Make me a message with text of hello after 8 minutes and 5 seconds</input>
+      <answer>No worries ;)! I set you a reminder after 485 secons with note:hello</answer>
    </test>
    <test>
-      <input>Make a note to call dad after 10 minutes</input>
-      <answer>I set a reminder after 10 minutes with a message: call dad</answer>
+      <input>Remind me at 6o'clock to make homework</input>
+      <answer>No worries ;)! I set you a reminder after 27906 secons with note:make homework</answer>
    </test>
    <test>
-      <input>Set a notification at 15:05 with the message of go shoping</input>
-      <answer>I set a reminder at 15:05 with a message: go shoping</answer>
+      <input>Set a reminder at 6 o'clock to make homework</input>
+      <answer>No worries ;)! I set you a reminder after 27906 secons with note:make homework</answer>
+   </test>
+   <test>
+      <input>Make a note to call dad at 12:52</input>
+      <answer>No worries ;)! I set you a reminder after 9426 secons with note:call dad</answer>
+   </test>
+   <test>
+      <input>Make a note at 12:52 to call dad</input>
+      <answer>No worries ;)! I set you a reminder after 9426 secons with note:call dad</answer>
+   </test>
+   <test>
+      <input>Send a notification at 11a.m with the message of go shoping</input>
+      <answer>No worries ;)! I set you a reminder after 2706 secons with note:go shoping</answer>
+   </test>
+   <test>
+      <input>Set me a reminder with a message of hello at 2:12PM</input>
+      <answer>No worries ;)! I set you a reminder after 57426 secons with note:hello</answer>
    </test>
 </root>

@@ -15,20 +15,39 @@ rmndr.getAnswer('User string')
 rmndr.setReminder('This is my message', 8)
 '''
 
-
+import datetime
 import sched, time
 import event
 import _thread
-    
+import re
+
+import traceback
+
 class Reminder():
-    # functions list to be executed on call of invokeListener()
     listener = event.Event()
+    # enum for dictionary in getTags() function
     ACTION_NONE = -1
     ACTION_ADD = 0 # requires: time stamp, message
     ACTION_DEL = 1 
     ACTION_SHOW = 2
     KEYWORDS = 3
-    DEFAULT_STRINGS = ['Hmm, can you give me more details?', 'Sorry, I cannot set you a reminder! Can you be more precise?', 'I missunderstand :(. Can you explain in a different way?']
+    MESSAGE_IDENT = 4 # message identificators
+    TIME_IDENT = 5 # message identificators
+    
+    # time formats enum:
+    AFTER = 0
+    OCLOCK = 1
+    DEFAULT_TIME = 2
+    AMPM_TIME = 3
+    
+    REGEXES = {AFTER: '(\d{1,2} *((seconds?)|(minutes?)|(hours?)))',
+               OCLOCK: '(\d{1,2} *[oO]?(clock))',
+               DEFAULT_TIME: '(([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)',
+               AMPM_TIME: '([0-1]?\d([:.][0-5]\d)? *[aApP]\.?[mM]\.?)',
+               MESSAGE_IDENT: '(( with (a|the)? ?(message|text) (of|to) )|( (to|that|I have) ))'}
+    DEFAULT_STRINGS = ['Hmm, can you give me more details?', 
+                       'Sorry, I cannot set you a reminder! Can you be more precise?', 
+                       'I missunderstand :(. Can you explain in a different way?']
     
     def __init__(self):
         self.sched = sched.scheduler(time.time, time.sleep)
@@ -39,7 +58,12 @@ class Reminder():
         d = {self.ACTION_ADD: ['set', 'create', 'make', 'send', 'message me', 'type', 'write'],
              self.ACTION_DEL: ['remove', 'cancel', 'dont', 'do not', 'stop', 'delete'],
              self.ACTION_SHOW: ['what', 'when', 'show', 'list'],
-             self.KEYWORDS: ['reminder', 'notification', 'write', 'alarm', 'remind', 'notif', 'recall', 'note']}
+             self.KEYWORDS: ['reminder', 'notification', 'write', 'alarm', 
+                             'remind', 'notif', 'recall', 'note'],
+             self.MESSAGE_IDENT: [' with message to ', ' with message of ', 
+                                  ' with the message of ', ' with a message of ', 
+                                  ' with text of ', ' to ', ':', ' that ', ' I have '],
+             self.TIME_IDENT: [' at ', ' after ', ' in '] }
         return d
     
     def check(self, msg):
@@ -72,51 +96,162 @@ class Reminder():
     def getKeywords(self):
         return self.getTags()[self.KEYWORDS]
     
-    def timeStrToMillis(timeStr):
-        pass
+    ''' <summary>extracts time string part from input</summary>
+        <return>str(time part) or in one case list of str, time type</return>'''
+    def detectTime(self, text):
+        for i in range(4):
+            regex = re.findall(self.REGEXES[i], text)
+            if regex: # match found
+                if i == self.AFTER:
+                    # i.e. str(5minutes 6 seconds) gets splited into list of 2 elements
+                    newList = []
+                    for match in regex: 
+                        newList.append(match[0])
+                    return newList, i
+                else:
+                    return regex[0][0], i
+        return None
     
-    ''' <summary>Analyze and add reminder</summary>
-        <return>str(feedback to user)</return> '''
+    ''' <summary>extracts note string part from input</summary>
+        <return>str(user note)</return>'''
+    def detectMessage(self, text):
+        regexTime = re.findall('( (at|after|in) )', text)
+        regexMsg = re.findall(self.REGEXES[self.MESSAGE_IDENT], text)
+        
+        if regexMsg and regexTime: # match found
+            ident_msg = regexMsg[0][0] # message identicative string
+            ident_time = regexTime[0][0] # time identicative string
+#             return ident_time + ':' + ident_msg
+            if text.find(ident_time) > text.find(ident_msg): # message is typed first then time
+                return text[text.find(ident_msg) + len(ident_msg) : text.find(ident_time)]
+            else:
+                return text[text.find(ident_msg) + len(ident_msg) :]
+        else:
+            return None
+    
+    def findIntInString(self, string):
+        regex = re.search(r'\d+', string)
+        if regex != None:
+            return int(regex.group()) 
+        else:
+            return None
+    
+    ''' <summary>convert time string to seconds left for that event to occur</summary>
+        <return>int(delay seconds)</return>'''
+    def calculateDelay(self, timeTuple):
+        # after = constant numer of timeStr
+        # european way: 15.25 or 15:25
+        # UK way: 5am or 5.25pm or 5:25pm
+        # 5 o`clock or 5 oclock
+        # ADVANCED: word typed case: half past two or half <past> ten
+        totalSeconds = 0
+        if timeTuple[1] == self.AFTER:
+            for timePiece in timeTuple[0]:
+                num = self.findIntInString(timePiece)
+                if num == None:
+                    return None
+                if 'hour' in timePiece:                   
+                    totalSeconds += 3600 * num
+                elif 'min' in timePiece:
+                    totalSeconds += 60 * num
+                elif 'sec' in timePiece:
+                    totalSeconds += num
+            return totalSeconds
+        elif timeTuple[1] == self.OCLOCK:
+            num = self.findIntInString(timeTuple[0])
+            if not(num >= 1 and num <= 12): # if non sence time, return Error
+                return None
+            if num == 12:
+                return self.calculateDelay(("12:00", 2)) # recursion. Calls for 24 format time
+            else:
+                now = datetime.datetime.now() # current system time
+                if num > now.hour: # ie. hour: now = 9:00, given = 11:00 then counts as morning 
+                    return self.calculateDelay((str(num) + ':00', 2)) # ie 1oclock - 13:00
+                else:
+                    return self.calculateDelay((str(num + 12) + ':00', 2)) # ie 1oclock - 13:00
+        elif timeTuple[1] == self.DEFAULT_TIME:
+            nums = list(map(int, re.findall(r'\d+', timeTuple[0])))
+            if len(nums) != 2:
+                return None
+            now = datetime.datetime.now() # current system time
+            nowSeconds = now.hour * 3600 + now.minute * 60
+            givenSeconds = nums[0] * 3600 + nums[1] * 60
+            nowSysSec = int(round(time.time()))
+            day = now.day
+            if nowSeconds >= givenSeconds: # ie. now 16:56, given time 13:12. Warps to next day
+                day = now.day + 1
+            givenInSysSec = int(time.mktime(datetime.datetime(now.year, now.month, day, nums[0], nums[1]).timetuple()))
+            return givenInSysSec - nowSysSec
+        elif timeTuple[1] == self.AMPM_TIME:
+            isAM = 'a' in timeTuple[0].lower()
+            num = self.findIntInString(timeTuple[0])
+            if not(num >= 1 and num <= 12):
+                return None
+            if isAM and num == 12:
+                num = 0 # in other am cases num is the same
+            if not isAM and num != 12: # isPM
+                # if num = 12 then it is right so it dont need to be changed
+                num += 12
+            return self.calculateDelay((str(num) + ":00", 2)) # uses default time (2)
+        return None # error
+    
     def actionAdd(self, userInput):
-        # example: Make a reminder to call my mom after 10 seconds
-        # time recognition: at, after
-        # message recognition: to, :
         try:
-            # determine time string
-            timeIdentificator = ""
-            timeIdentificators = [' at ', ' after ', ' in ']
-            for identificator in timeIdentificators:
-                if identificator in userInput:
-                    timeIdentificator = identificator
-                    break
-            if timeIdentificator == "":
-                return "Bro... Repeat one more time with specified time ;)"
+            time = self.detectTime(userInput) # extracts string type time from input
+            message = self.detectMessage(userInput) # extracts reminder message
+            delaySec = self.calculateDelay(time) # calculates DELAY in seconds after which raises reminder
+            if message == None or delaySec == None:
+                return self.pickRandom(self.DEFAULT_STRINGS) 
+            if delaySec != None: # error code
+                self.setReminder(str(message), int(delaySec))
+                return 'No worries ;)! I set you a reminder after {} seconds with note:{}'.format(delaySec, message)
             else:
-                timeStartId = userInput.find(timeIdentificator) + len(timeIdentificator)
-            # determine note message
-            msgIdentificator = ""
-            msgIdentificators = [' with message to ', ' with message of ' ,' with the message of ' ,' with a message of ', ' with text of ', ' to ', ':']
-            for identificator in msgIdentificators:
-                if identificator in userInput:
-                    msgIdentificator = identificator
-                    break            
-            msgStartId = userInput.find(msgIdentificator) + len(msgIdentificator)
-            if msgStartId == -1: # a reminder without text
-                message = "empty"
-                time = userInput[timeStartId:]
-#                 self.setReminder(message, self.timeStrToMillis(time))
-            else:
-                if msgStartId > timeStartId: # time is defined before text
-                    message = userInput[msgStartId:]
-                    userInput = userInput[:int(msgStartId - len(msgIdentificator))]
-                    time = userInput[timeStartId:]
-                elif timeStartId > msgStartId:
-                    time = userInput[timeStartId:]
-                    userInput = userInput[:int(timeStartId - len(timeIdentificator))]
-                    message = userInput[msgStartId:]                  
-            return "I set a reminder{}{} with a message: {}".format(timeIdentificator, time, message)
+                raise Exception('Time string was not converted!')
         except:
+            traceback.print_exc()
             return self.pickRandom(self.DEFAULT_STRINGS)
+#     ''' <summary>Analyze and add reminder</summary>
+#         <return>str(feedback to user)</return> '''
+#     def actionAdd2(self, userInput):
+#         # example: Make a reminder to call my mom after 10 seconds
+#         # time recognition: at, after
+#         # message recognition: to, :
+#         try:
+#             # determine time string
+#             timeIdentificator = ""
+#             timeIdentificators = self.getTags()[self.TIME_IDENT] # identification word list
+#             for identificator in timeIdentificators:
+#                 if identificator in userInput:
+#                     timeIdentificator = identificator
+#                     break
+#             if timeIdentificator == "":
+#                 return "Bro... Repeat one more time with specified time ;)"
+#             else:
+#                 timeStartId = userInput.find(timeIdentificator) + len(timeIdentificator)
+#             # determine note message
+#             msgIdentificator = ""
+#             msgIdentificators = self.getTags()[self.MESSAGE_IDENT] # identification word list
+#             for identificator in msgIdentificators:
+#                 if identificator in userInput:
+#                     msgIdentificator = identificator
+#                     break
+#             msgStartId = userInput.find(msgIdentificator) + len(msgIdentificator)
+#             if msgStartId == -1: # a reminder without text
+#                 message = "empty"
+#                 time = userInput[timeStartId:]
+# #                 self.setReminder(message, self.timeStrToMillis(time))
+#             else:
+#                 if msgStartId > timeStartId: # user input: time is before text
+#                     timeTuple = self.findTimeString(userInput)
+#                     message = userInput[msgStartId:]
+#                 elif timeStartId > msgStartId: # user input: time is after message
+#                     timeTuple = self.findTimeString(userInput)
+#                     croppedInput = userInput[:int(timeStartId - len(timeIdentificator))]
+#                     message = croppedInput[msgStartId:]
+#             return "I set a reminder{}{} with a message: {}".format(timeIdentificator, timeTuple[0], message)
+#         except:
+#             traceback.print_exc()
+#             return self.pickRandom(self.DEFAULT_STRINGS)
         
     ''' <summary>Analyze user input, sets reminder and Returns note for user</summary>
         <return>str</return> '''
@@ -127,7 +262,6 @@ class Reminder():
         
         if userAction == self.ACTION_NONE: # no action was detected, exiting...
             return self.pickRandom(self.DEFAULT_STRINGS)
-        
         if userAction == self.ACTION_ADD:
             return self.actionAdd(userInput)
         elif userAction == self.ACTION_DEL:
@@ -152,6 +286,7 @@ class Reminder():
 ''' <summary>preparing a string for analyses</summary>
     <return>str</return>'''
 def filterUserInput(text):
+    text = text.replace(',', ' ')
     text = " ".join(text.split()) # replace(with space) multiple spaces, tabs and new lines
     text = text.lower()
     text = text.replace('!', '.')
@@ -161,9 +296,12 @@ def filterUserInput(text):
         if not letter in allowedChars:
             text = text.replace(letter, '')
     return text
-    
+
+# Console chat version
 if __name__ == '__main__':
     r = Reminder()
     while True:
         userInput = input("\nEnter reminder text: ")
-        print(r.getAnswer(userInput), '\n')
+#         print(r.getAnswer(userInput), '\n')
+        mInt = r.calculateDelay(("11a.m", 3))
+        print(mInt)

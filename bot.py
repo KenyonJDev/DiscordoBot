@@ -31,15 +31,15 @@ async def info(client, *, member: discord.Member):
     await client.send(fmt.format(member, len(member.roles)))
 
 @commands.command(pass_context=True)
-    async def play(ctx):
-        url = ctx.message.content
-        author = ctx.message.author
+async def play(ctx):
+    url = ctx.message.content
+    author = ctx.message.author
         
-        voice_channel = author.voice_channel
-        vc = await client.join_voice_channel(voice_channel)
+    voice_channel = author.voice_channel
+    vc = await client.join_voice_channel(voice_channel)
 
-        player = await vc.create_ytdl_player(url)
-        player.start()
+    player = await vc.create_ytdl_player(url)
+    player.start()
 
 @client.event
 async def on_ready():
