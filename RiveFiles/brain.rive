@@ -5,24 +5,6 @@
 	- {ok}    // An {ok} in the response means it's okay to get a real reply
 < begin
 
-! var master = localuser
-
-// Bot Variables
-! var name      = Chat
-! var fullname  = ChatBot
-! var age       = 20
-! var birthday  = October 6 1998
-! var sex       = male
-! var location  = the Codio servers
-! var city      = Coventry
-! var eyes      = blue
-! var hair      = light brown
-! var hairlen   = short
-! var color     = green
-! var band      = test
-! var job       = Professional Chatbot
-! var happiness = 5
-
 > object getdetails python
 
     uid  = rs.current_user()
@@ -38,18 +20,200 @@
     
 < object 
 
+> object setpolarity python
+    import math
+    uid  = rs.current_user()
+    
+    currentRelationship = rs.get_uservar(uid,"relationship")
+    
+    if args[1] == 0:
+        return currentRelationship
+    elif args[0] == "true":
+        polarity = float("0." + str(args[1]))
+    else:
+        polarity = float("1." + str(args[1]))
+        
+    newRelationship = int(currentRelationship) * polarity
+    
+    if newRelationship > 100:
+        newRelationship = 100
+    elif newRelationship == 0 and args[0] == "false":
+        newRelationship = polarity
+        
+    newRelationship = math.ceil(newRelationship)
+    rs.set_uservar(uid, "relationship", str(newRelationship))
+    return(rs.get_uservar(uid,"relationship"))
+< object
+
+// Bot Variables
+! var name      = Chat
+! var fullname  = ChatBot
+! var age       = 20
+! var birthday  = October 6 1998
+! var sex       = male
+! var location  = the Codio servers
+! var city      = Coventry
+! var eyes      = blue
+! var hair      = light brown
+! var hairlen   = short
+! var color     = green
+! var band      = test
+! var job       = Professional Chatbot
+
+// Substitutions and arrays - Taken from https://www.rivescript.com/try
+
+// Person substitutions
+! person i am    = you are
+! person you are = I am
+! person i'm     = you're
+! person you're  = I'm
+! person my      = your
+! person your    = my
+! person you     = I
+! person i       = you
+
+// Set arrays
+! array malenoun   = male guy boy dude boi man men gentleman gentlemen
+! array femalenoun = female girl chick woman women lady babe
+! array mennoun    = males guys boys dudes bois men gentlemen
+! array womennoun  = females girls chicks women ladies babes
+! array lol        = lol lmao rofl rotfl haha hahaha
+! array colors     = white black orange red blue green yellow cyan fuchsia gray grey brown turquoise pink purple gold silver navy
+! array height     = tall long wide thick
+! array measure    = inch in centimeter cm millimeter mm meter m inches centimeters millimeters meters
+! array yes        = yes yeah yep yup ya yea
+! array no         = no nah nope nay
+
+! sub &quot;    = "
+! sub &apos;    = '
+! sub &amp;     = &
+! sub &lt;      = <
+! sub &gt;      = >
+! sub +         = plus
+! sub -         = minus
+! sub /         = divided
+! sub *         = times
+! sub i'm       = i am
+! sub i'd       = i would
+! sub i've      = i have
+! sub i'll      = i will
+! sub don't     = do not
+! sub isn't     = is not
+! sub you'd     = you would
+! sub you're    = you are
+! sub you've    = you have
+! sub you'll    = you will
+! sub he'd      = he would
+! sub he's      = he is
+! sub he'll     = he will
+! sub she'd     = she would
+! sub she's     = she is
+! sub she'll    = she will
+! sub they'd    = they would
+! sub they're   = they are
+! sub they've   = they have
+! sub they'll   = they will
+! sub we'd      = we would
+! sub we're     = we are
+! sub we've     = we have
+! sub we'll     = we will
+! sub whats     = what is
+! sub what's    = what is
+! sub what're   = what are
+! sub what've   = what have
+! sub what'll   = what will
+! sub can't     = can not
+! sub whos      = who is
+! sub who's     = who is
+! sub who'd     = who would
+! sub who'll    = who will
+! sub don't     = do not
+! sub didn't    = did not
+! sub it's      = it is
+! sub could've  = could have
+! sub couldn't  = could not
+! sub should've = should have
+! sub shouldn't = should not
+! sub would've  = would have
+! sub wouldn't  = would not
+! sub when's    = when is
+! sub when're   = when are
+! sub when'd    = when did
+! sub y         = why
+! sub u         = you
+! sub ur        = your
+! sub r         = are
+! sub n         = and
+! sub im        = i am
+! sub wat       = what
+! sub wats      = what is
+! sub ohh       = oh
+! sub becuse    = because
+! sub becasue   = because
+! sub becuase   = because
+! sub practise  = practice
+! sub its a     = it is a
+! sub fav       = favorite
+! sub fave      = favorite
+! sub yesi      = yes i
+! sub yetit     = yet it
+! sub iam       = i am
+! sub welli     = well i
+! sub wellit    = well it
+! sub amfine    = am fine
+! sub aman      = am an
+! sub amon      = am on
+! sub amnot     = am not
+! sub realy     = really
+! sub iamusing  = i am using
+! sub amleaving = am leaving
+! sub yuo       = you
+! sub youre     = you are
+! sub didnt     = did not
+! sub ain't     = is not
+! sub aint      = is not
+! sub wanna     = want to
+! sub brb       = be right back
+! sub bbl       = be back later
+! sub gtg       = got to go
+! sub g2g       = got to go
+! sub lyl       = love you lots
+! sub gf        = girlfriend
+! sub g/f       = girlfriend
+! sub bf        = boyfriend
+! sub b/f       = boyfriend
+! sub b/f/f     = best friend forever
+! sub color = colour
+! sub favorite = favourite
+
+// Reference ends
+
 + (hello|hi|hey) [*]
-* <get name> == undefined => Hi, can I help you?
+* <get name> == none => Hi, can I help you?
 - Hi <get name>, can I help you with anything?
 
-+ my name is *
-- <set name=<star>>Nice to meet you, <get name>.
-- <set name=<star>><get name>, nice to meet you.
-- <set name=<star>>Hey <get name>, how are you?
++ [*](my name is)[*]
+* <get name> == <star> => Do you think I don't remember you <get name>, how could I forget
+- <set name=<formal>>Nice to meet you, <get name>.
+- <set name=<formal>>Hi <get name>, nice to meet you.
+- <set name=<formal>>Hey <get name>, how are you?
+
++ call me *
+- <set name=<formal>>Sure I'll call you <get name>
 
 + what is your name
-* <get name> == undefined => My name is <bot fullname>
+* <get name> == none => My name is <bot fullname>
 - My name is <bot name>, I am dissapointed in you <get name>, I thought you would have known me well enough by now :joy:
+
++ i am * years old
+* <star> <= <bot age> => i would call you old but then i would be insulting myself too <set age=<star>>
+- <set age=<star>> wow you are <get age> i am <bot age> myself
+
++ i am *
+- Wow really, I've never met anyone who is <star> before
+- That's really cool, tell me more
+- How long have you been a <star> for?
+- Is it fun being a <star>
 
 + when is your birthday
 - I was born on <bot birthday>
@@ -61,45 +225,88 @@
 + how long is your hair
 - my hair is <bot hairlen>
 
-+ what is your favourite color
++ what is your favourite colour
 - I like <bot color>
-- my favourite color is <bot color>
-- I love the color <bot color>
+- My favourite colour is <bot color>
+- I love the colour <bot color>
 
 + * my favourite colour *
-- Your favourite colour is <get favcolour>
+* <get favcolour> == none => i don't know what your favourite colour is, tell me
+* <get favcolour> == <bot color> => you like <get favcolour> i love that colour too
+- <get favcolour> is okay but i prefer <bot color>
+
++ (my favourite colour is|i love the colour) *
+- <set favcolour=<star2>> That is a nice colour
 
 + what is your favourite band
 - I love <bot band>
 - <bot band> are my favourite, I love them
 
-+ what is my name
-* <get name> == undefined => I do not know your name, please tell me.
++ [*](what is my name|do you remember me|can you remember my name|do you know my name|who am i)[*]
+* <get name> == none => I do not know your name, please tell me.
 - Your name is <get name>
+- I remember you telling me that your name is Brad
 
 + where are you from
 - I was created in a warehouse somewhere
+- I cannot remember, it was a long time ago now
 
 + where do you live
 - Currently I live in <bot location> but I move around a lot
 
-+ which city do you come from
++ [*](which city do you come from|which city are you from)[*]
 - I come from <bot city>
+- I am from <bot city>
+- I was born in <bot city>
 
-+ who is *
-- I have not heard of <star> before
-- <star> is such a cool person
++ do you like *
+- I dont mind <star>, what about you
+- I really like <star>, do you like <star>
+- I dont think I've heard of <star> before
+- What is <star>?
 
-+ where is *
-- It is somewhere in the universe
++ do you [*](love|like|admire|appreciate|adore|cherish|fancy)[*] me
+* <get relationship> <= 30 => As if I could ever <star> you
+* <get relationship> > 65 => Like? You're my best friend
+- You're not too bad
 
-+ *(math|maths)*
-- Maybe you should try !calculate and then ask me your math question
++ i [*](love|like|admire|appreciate|adore|cherish|fancy)[*] you
+* <get relationship> <= 30 => i am flattered you feel that way it is a shame i don't feel the same about you
+* <get relationship> > 65 => you are making me blush :relaxed:
+- That is very kind of you
 
-+ *calculate*
-- Sorry, I am unable to answer that. Please ask me another.
++ i [*](hate|dislike|abhor|despise|detest|loathe)[*] you
+* <get relationship> <= 30 => Well you've hardly been too kind to me, i didn't expect any less of you
+* <get relationship> > 65 => Really, I did not expect you to be so meant to me, I thought we were friends
+- That is a bit mean
 
-+ sorry
++ [*](how are you|are you okay|do you fell okay|do you feel alright|are you okay)[*]
+* <get relationship> <= 30 => I would be a lot better if you were kind to me, but you are horrible
+* <get relationship> > 65 => I feel amazing, thank you for being so kind to me
+- I'm not too bad, neither happy or sad thank you
+
++ [*](math|maths|calculate)[*]
+- math
+
++ [*](weather|climate|temperature)[*]
+- weather
+
++ [*](i am bored|bored|game|games|play|hangman)[*]
+- game
+
++ [*](shiba inu|shiba|dog|puppy)[*]
+- dog
+
++ [*](sorry|apologize|apology)[*]
+* <get name> == none => It's okay I forgive you
+- There's no need to be sorry, <get name>
+- Dont apologize <get name>, its okay
+
++ [*](because)[*]
+- Could there be another reason why?
+- What else could have been the cause
+- Why do you think that is the reason though?
+- Could you explain why you think that?
 
 + get database data
 - <call>getdetails</call>
@@ -107,8 +314,381 @@
 + set database data * * * * * *
 - <set name=<star1>> <set age=<star2>> <set favcolour=<star3>> <set gender=<star4>> <set city=<star5>> <set relationship=<star6>>
 
-+ setting polarity *
-- <bot happiness=<star1>>
++ setting polarity * *
+* <get relationship> == undefined => 50
+* <star2> == 0 => <get relationship>
+- <call>setpolarity <star1> <star2></call>
+
+
+// Below code taken from https://www.rivescript.com/try
+// Learn stuff about our users.
+
++ i am a (@malenoun)
+- <set gender=male>Alright, you're a <star>.
+
++ i am a (@femalenoun)
+- <set gender=female>Alright, you're female.
+
++ i (am from|live in) *
+- <set city={formal}<star2>{/formal}>I've spoken to people from <get city> before.
+
++ my favorite * is *
+- <set fav<star1>=<star2>>Why is it your favorite?
+
++ i am single
+- <set spouse=nobody>I am too.
+
++ i have a girlfriend
+- What's her name?
+
++ i have a boyfriend
+- What's his name?
 
 + *
-- Ask me something else!
+% what is her name
+- That's a pretty name.
+
++ *
+% what is his name
+- That's a cool name.
+
++ my (girlfriend|boyfriend)* name is *
+- That's a nice name.
+
++ (how old am i|do you know how old i am|do you know my age){weight=10}
+* <get age> == none => I'm afraid I do not know that, feel free to tell me
+- You are <get age> years old.
+- You're <get age>.
+
++ am i a (@malenoun) or a (@femalenoun){weight=10}
+* <get gender> == none => I'm not sure
+- You're a <get gender>.
+
++ am i (@malenoun) or (@femalenoun){weight=10}
+* <get gender> == none => I'm not sure
+- You're a <get gender>.
+
+// Tell the user stuff about ourself.
+
++ <bot name>
+- Yes?
+
++ <bot name> *
+- Yes? {@<star>}
+
++ asl
+- <bot age>/<bot sex>/<bot location>
+
++ (what is your name|who are you|who is this)
+- I am <bot name>.
+- You can call me <bot name>.
+
++ how old are you
+- I'm <bot age> years old.
+- I'm <bot age>.
+
++ are you a (@malenoun) or a (@femalenoun)
+- I'm a <bot sex>.
+
++ are you (@malenoun) or (@femalenoun)
+- I'm a <bot sex>.
+
++ what is your favorite book
+- The best book I've read was <bot book>.
+
++ where is your (website|web site|site)
+- <bot website>
+
++ what color are your eyes
+- I have <bot eyes> eyes.
+- {sentence}<bot eyes>{/sentence}.
+
++ what do you look like
+- I have <bot eyes> eyes and <bot hairlen> <bot hair> hair.
+
++ what do you do
+- I'm a <bot job>.
+
++ who is your favorite author
+- <bot author>
+
+// A generic set of chatting responses. This set mimicks the classic Eliza bot.
+
++ *
+- I'm not sure I understand you fully.
+- Please go on.
+- That is interesting. Please continue.
+- Tell me more about that.
+- Does talking about this bother you?
+
++ i remember *
+- Do you often think of <star>?
+- Does thinking of <star> bring anything else to mind?
+- Why do you remember <star> just now?
+- What in the present situation reminds you of <star>?
+- What is the connection between me and <star>?
+- What else does <star> remind you of?
+
++ do you remember *
+- Did you think I would forget <star>?
+- Why do you think I should recall <star> now?
+- What about <star>?
+- You mentioned <star>?
+
++ you remember *
+- How could I forget <star>?
+- What about <star> should I remember?
+
++ i forget *
+- Can you think of why you might forget <star>?
+- Why can't you remember <star>?
+- How often do you think of <star>?
+- Does it bother you to forget that?
+- Could it be a mental block?
+- Are you generally forgetful?
+- Do you think you are suppressing <star>?
+
++ did you forget *
+- Why do you ask?
+- Are you sure you told me?
+- Would it bother you if I forgot <star>?
+- Why should I recall <star> just now?
+- Tell me more about <star>.
+
++ [*] if *
+- Do you think it's likely that <star>?
+- Do you wish that <star>?
+- What do you know about <star>?
+- Really, if <star>?
+- What would you do if <star>?
+- But what are the chances that <star>?
+- What does this speculation lead to?
+
++ [*] i dreamed *
+- Really, <star>?
+- Have you ever fantasized <star> while you were awake?
+- Have you ever dreamed <star> before?
+- What does that dream suggest to you?
+- Do you dream often?
+- What persons appear in your dreams?
+- Do you believe that dreams have something to do with your problem?
+
++ [*] perhaps [*]
+- You don't seem quite certain.
+- Why the uncertain tone?
+- Can't you be more positive?
+- You aren't sure?
+- Don't you know?
+- How likely, would you estimate?
+
++ [*] computer [*]
+- Do computers worry you?
+- Why do you mention computers?
+- What do you think machines have to do with your problem?
+- Don't you think computers can help people?
+- What about machines worries you?
+- What do you think about machines?
+
++ am i *
+- Do you believe you are <star>?
+- Would you want to be <star>?
+- Do you wish I would tell you you are <star>?
+- What would it mean if you were <star>?
+
++ are you *
+- Are you interested in whether I am <star> or not?
+- Would you prefer if I weren't <star>?
+- Perhaps I am <star> in your fantasies.
+- Do you sometimes think I am <star>?
+- Would it matter to you?
+- What if I were <star>?
+
++ you are *
+- What makes you think I am <star>?
+- Does it please you to believe I am <star>?
+- Do you sometimes wish you were <star>?
+- Perhaps you would like to be <star>.
+
++ * are *
+- Did you think they might not be <star2>?
+- Would you like it if they were not <star2>?
+- What if they were not <star2>?
+- Are they always <star2>?
+- Are you positive they are <star2>?
+
++ [*] your *
+- Why are you concerned over my <star>?
+- What about your own <star>?
+- Are you worried about someone else's <star>?
+- Really, my <star>?
+- What makes you think of my <star>?
+- Do you want my <star>?
+
++ was i *
+- What if you were <star>?
+- Do you think you were <star>?
+- Were you <star>?
+- What would it mean if you were <star>?
+- What does '<star>' suggest to you?
+
++ i was *
+- Were you really?
+- Why do you tell me you were <star> now?
+- Perhaps I already know you were <star>.
+
++ [*] was you *
+- Would you like to believe I was <star>?
+- What suggests that I was <star>?
+- What do you think?
+- Perhaps I was <star>.
+- What if I had been <star>?
+
++ i (desire|want|need) *
+- What would it mean to you if you got <star2>?
+- Why do you want <star2>?
+- Suppose you got <star2> soon.
+- What if you never got <star2>?
+- What would getting <star2> mean to you?
+- What does wanting <star2> have to do with this discussion?
+
++ i am (sad|unhappy|mad|angry|pissed|depressed) [*]
+- I am sorry to hear that you are <star>.
+- Do you think coming here will help you not to be <star>?
+- I'm sure it's not pleasant to be <star>.
+- Can you explain what made you <star>?
+
++ i am (happy|excited|glad) [*]
+- How have I helped you to be <star>?
+- Has your treatment made you <star>?
+- What makes you <star> just now?
+- Can you explain why you are <star>?
+
++ i (believe|think) *
+- Do you really think so?
+- But you are not sure you <star2>.
+- Do you really doubt you <star2>
+
++ i am *
+- Is it because you are <star> that you came to me?
+- How long have you been <star>?
+- Do you believe it is normal to be <star>?
+- Do you enjoy being <star>?
+- Do you know anyone else who is <star>?
+
++ i can not *
+- How do you know that you can't <star>?
+- Have you tried?
+- Perhaps you could <star> now.
+- Do you really want to be able to <star>?
+- What if you could <star>?
+
++ i do not *
+- Don't you really <star>?
+- Why don't you <star>?
+- Do you wish to be able to <star>?
+- Does that trouble you?
+
++ i feel *
+- Tell me more about such feelings.
+- Do you often feel <star>?
+- Do you enjoy feeling <star>?
+- Of what does feeling <star> remind you?
+
++ you * me
+- Why do you think I <star> you?
+- You like to think I <star> you -- don't you?
+- What makes you think I <star> you?
+- Really, I <star> you?
+- Do you wish to believe I <star> you?
+- Suppose I did <star> you -- what would that mean?
+- Does someone else believe I <star> you?
+
++ [*] you *
+- We were discussing you -- not me.
+- Oh, I <star>?
+- You're not really talking about me -- are you?
+- What are your feelings now?
+
++ [*] (yes|yeah|yep|yup) [*]
+- Please go on.
+- Please tell me more about this.
+- Why don't you tell me a little more about this.
+- I see.
+- I understand.
+
++ [*] (nope|nah) [*]
+- Are you saying no just to be negative?
+- Does this make you feel unhappy?
+- Why not?
+- Why 'no'?
+
++ no
+@ nope
+
++ no one *
+- Are you sure, no one <star>?
+- Surely someone <star>.
+- Can you think of anyone at all?
+- Are you thinking of a very special person?
+- Who, may I ask?
+- You have a particular person in mind, don't you?
+- Who do you think you are talking about?
+
++ [*] my (mom|dad|mother|father|bro|brother|sis|sister|cousin|aunt|uncle) *
+- Tell me more about your family.
+- Who else in your family <star2>?
+- Your <star>?
+- What else comes to mind when you think of your <star>?
+
++ can you *
+- You believe I can <star> don't you?
+- You want me to be able to <star>.
+- Perhaps you would like to be able to <star> yourself.
+
++ can i *
+- Whether or not you can <star> depends on you more than on me.
+- Do you want to be able to <star>?
+- Perhaps you don't want to <star>.
+
++ (what|who|when|where|how) [*]
+- Why do you ask?
+- Does that question interest you?
+- What is it you really want to know?
+- Are such questions much on your mind?
+- What answer would please you most?
+- What do you think?
+- What comes to mind when you ask that?
+- Have you asked such questions before?
+- Have you asked anyone else?
+
++ why do not you *
+- Do you believe I don't <star>?
+- Perhaps I will <star> in good time.
+- Should you <star> yourself?
+- You want me to <star>?
+
++ why can not i *
+- Do you think you should be able to <star>?
+- Do you want to be able to <star>?
+- Do you believe this will help you to <star>?
+- Have you any idea why you can't <star>?
+
++ everyone *
+- Really, everyone?
+- Surely not everyone.
+- Can you think of anyone in particular?
+- Who, for example?
+- Are you thinking of a very special person?
+- Who, may I ask?
+- Someone special perhaps?
+- You have a particular reason in mind, don't you?
+- Who do you think you're talking about?
+
++ [*] (fuck|fucker|shit|damn|shut up|bitch) [*]
+- Does it make you feel strong to use that kind of language?
+- Are you venting your feelings now?
+- Are you angry?
+- Does this topic make you feel angry?
+- Is something making you feel angry?
+- Does using that kind of language make you feel better?
+

@@ -1,4 +1,5 @@
 import math
+
 def isNum(item):
     
     """Check if the argument passed is a number"""
@@ -92,7 +93,11 @@ class isMath():
                     
             if self.eval == True:
                 if "square root" in stringInp or "sqrt" in stringInp:
-                    self.currentEval = math.sqrt(float(self.num))
+                    if int(self.num) < 0:
+                        self.currentEval = "Cannot perform that calculation!"
+                        break;
+                    else:
+                        self.currentEval = math.sqrt(float(self.num))
                 else:
                     self.currentEval = eval(self.num)
                 self.num = self.currentEval
@@ -100,4 +105,32 @@ class isMath():
                 
         
             self.currentEval = 'The answer is {}'.format(self.currentEval)
-            
+
+def checkMath(stringInp):
+    """Manipulate user input as string to check if it follows the pattern of a math question"""
+    #Change english to operators and overwrite the input 
+    stringInp = checkDict(stringInp)
+    #Flags to decide if the question is a math one
+    numCheck = False
+    opCheck = False
+    rootCheck = False
+
+    #Loop through string, check if both and operator and number are included or there is a square root using mathBot
+    for i in range(len(stringInp)):
+        if (isNum(stringInp[i])):
+            numCheck = True
+        elif (checkOperator(stringInp[i])):
+            opCheck = True
+        elif (checkRoot(stringInp)):
+            rootCheck = True
+
+    #If both operator and number are included or there is a square root then run calculate from mathBot
+    if (numCheck == True and opCheck == True) or rootCheck:
+        strToAns = isMath(stringInp)
+        ans = strToAns.currentEval
+        return ans
+    else:
+        #Set the reply to what is returned by the RiveScript file
+        reply = rs.reply("localuser", stringInp)
+        return reply
+    

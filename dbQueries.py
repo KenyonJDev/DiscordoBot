@@ -8,6 +8,14 @@ chatbotDB = mysql.connector.connect(
 )
 
 cursor = chatbotDB.cursor(buffered=True)
+def initialise(userID,rs):
+    if checkUser(userID) == 0:
+        reply = (rs.reply("localuser", "get database data")).split(" ")
+        insertDB(userID,reply)
+    else:
+        details = getDetails(userID)
+        details = " ".join(str(item) for item in details)
+        rs.reply("localuser","set database data "+ str(details))
 
 def checkUser(userID):
     cursor.execute("SELECT COUNT(*) FROM users WHERE userID="+str(userID))
@@ -25,12 +33,10 @@ def insertDB(userID,details):
     chatbotDB.commit()
     
     details = checkUndefined(details)
-    
     cursor.executemany("UPDATE users SET name=%s, age=%s, favcolour=%s, gender=%s, city=%s, relationship=%s WHERE userID="+str(userID),(details,))
     chatbotDB.commit()
-
-def updateDB(userID,details):
     
+def updateDB(userID,details):
     details = checkUndefined(details)
     cursor.executemany("UPDATE users SET name=%s, age=%s, favcolour=%s, gender=%s, city=%s, relationship=%s WHERE userID="+str(userID),(details,))
     chatbotDB.commit()
@@ -40,3 +46,7 @@ def getDetails(userID):
     cursor.execute(dataQuery,(userID,))
     result = cursor.fetchall()
     return(result[0])
+
+def updatePol(userID,newPolarity):
+    cursor.execute("UPDATE users SET relationship=%s WHERE userID="+str(userID),(newPolarity,))
+    chatbotDB.commit()

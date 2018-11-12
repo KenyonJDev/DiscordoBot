@@ -70,7 +70,7 @@ def hangman(secretWord):
         
 
 
-list=['phillip', 'armandas', 'josh', 'testing', 'test', 'letter', 'help', 'school']
+list=['computer', 'science', 'laptop', 'desktop', 'school', 'screen', 'python', 'coventry university']
 r=random.randint(0,7)
 
         

@@ -1,8 +1,13 @@
 import urllib.parse
 import urllib.request
 import json
-import datetime
+import datetime#
+
 ### key = 7a82ee6f4ab290329464c1a55194b4ab
+
+def checkWeather(stringInp):
+    weatherOut = url_builder(stringInp)
+    return weatherOut
 
 def time_converter(time):
     converted_time = datetime.datetime.fromtimestamp(
@@ -14,7 +19,7 @@ def time_converter(time):
 def url_builder(city_id):
     user_api = '7a82ee6f4ab290329464c1a55194b4ab'
     unit = 'metric'
-    api = 'http://api.openweathermap.org/data/2.5/weather?id='
+    api = 'http://api.openweathermap.org/data/2.5/weather?q='
 
     full_api_url = api + str(city_id) + '&mode=json&units=' + unit + '&APPID=' + user_api
     return full_api_url
@@ -47,7 +52,7 @@ def data_organizer(raw_data):
 
 def data_output(data):
     data['m_symbol'] = '\xb0' + 'C'
-    s = '''-----------------------------------
+    weatheroutput = '''-----------------------------------
 Current weather in {city}, {country}:
 {temp}{m_symbol} {sky}
 
@@ -57,7 +62,7 @@ Cloud: {cloudiness}
 
 Updated: {dt}
 -----------------------------------'''
-    print(s.format(**data))
+    return weatheroutput.format(**data)
 
 
 if __name__ == '__main__':
