@@ -43,6 +43,7 @@ async def info(client, *, member: discord.Member):
 
 @client.event
 async def on_ready():
+    """Runs when the bot is ready, prints to terminal"""
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
@@ -54,17 +55,19 @@ def onNotification(sender, text):
 
 @client.event
 async def on_message(message):
+    """Runs everytime a user sends a message to the server with the bot"""
     userID = message.author.id
-    dbQueries.initialise(userID,rs)
+    dbQueries.initialise(userID,rs)   #Initialises the database and retrieves user information
     stringInp = message.content       
     
     if "[notification]" in str(message):
         await client.send_message(message.channel, message)
     
-    # we do not want the bot to reply to itself
+    # Make sure the bot doesn't reply to itself
     if message.author == client.user:
         return
-           
+    
+    #Check for command words starting with !, strip out the unimportant parts
     if stringInp[0] == '!':
         reObj = re.match('!\w* *', stringInp)
         if reObj:
@@ -72,7 +75,9 @@ async def on_message(message):
             stringInp = stringInp.replace(stringAction,"")
             stringAction = stringAction.replace(" ", "")
     
-    output = conversation.keywordToModule(rs.reply("localuser", stringInp), stringInp,rs, userID, client, message, onNotification)
+    #Get an output for the bot to send via keywordToModule()
+    moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
+    output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
     await client.send_message(message.channel, output)
     
 # @bot.command()

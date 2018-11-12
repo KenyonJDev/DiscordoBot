@@ -6,7 +6,9 @@
 < begin
 
 > object getdetails python
-
+    //Gets the details of the current user having conversation, 
+    //these are returned as a string
+    
     uid  = rs.current_user()
     name = rs.get_uservar(uid,"name")
     age = rs.get_uservar(uid,"age") 
@@ -21,10 +23,15 @@
 < object 
 
 > object setpolarity python
+    //Adjust the current happiness level using the polarity passed from conversation.py
+    
     import math
     uid  = rs.current_user()
     
     currentRelationship = rs.get_uservar(uid,"relationship")
+    
+    //Check whether it is positive or negative and produce a float
+    //to multiply the old happiness by
     
     if args[1] == 0:
         return currentRelationship
@@ -35,14 +42,16 @@
         
     newRelationship = int(currentRelationship) * polarity
     
+    //100 is the max so ensure it doesn't go above
     if newRelationship > 100:
         newRelationship = 100
-    elif newRelationship == 0 and args[0] == "false":
-        newRelationship = polarity
+    elif newRelationship == 0 and args[0] == "false":      //Check if the happieness is currently 0, and if the value should increase,
+        newRelationship = polarity                         //if so then make newRelationship equal to the polarity
         
     newRelationship = math.ceil(newRelationship)
     rs.set_uservar(uid, "relationship", str(newRelationship))
     return(rs.get_uservar(uid,"relationship"))
+    
 < object
 
 // Bot Variables
