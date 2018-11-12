@@ -30,17 +30,15 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
+def onNotification(sender, text):
+    print(text)
+    client.send_message("Direct Message with BradAngliss", "test " + text)
+
 @client.event
 async def on_message(message):
     userID = message.author.id
     dbQueries.initialise(userID,rs)
-    stringInp = message.content   
-    
-    async def onNotification(sender, text):
-        print(text)
-        await client.send_message(message.channel, "Test %s" % text)
-    
-    
+    stringInp = message.content       
     
     if "[notification]" in str(message):
         await client.send_message(message.channel, message)
@@ -56,7 +54,7 @@ async def on_message(message):
             stringInp = stringInp.replace(stringAction,"")
             stringAction = stringAction.replace(" ", "")
     
-    output = conversation.keywordToModule(rs.reply("localuser", stringInp), stringInp,rs, userID, client, onNotification)
+    output = conversation.keywordToModule(rs.reply("localuser", stringInp), stringInp,rs, userID, client, message, onNotification)
     await client.send_message(message.channel, output)
     
 # @bot.command()
