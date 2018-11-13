@@ -20,11 +20,10 @@ import sched, time
 import event
 import _thread
 import re
-
 import traceback
 
 class Reminder():
-    listener = event.Event()
+    listener = event.Event() # functions list to invoke
     # enum for dictionary in getTags() function
     ACTION_NONE = -1
     ACTION_ADD = 0 # requires: time stamp, message
@@ -81,6 +80,7 @@ class Reminder():
     
     ''' <summary>Notifies caller class to pull reminder</summary> '''
     def invokeListener(self, text):
+        print('listener invoked!', text)
         self.listener(text)
     
     ''' <summary>Keywords for finding the right module</summary>
@@ -113,13 +113,15 @@ class Reminder():
         if regexMsg and regexTime: # match found
             ident_msg = regexMsg[0][0] # message identicative string
             ident_time = regexTime[0][0] # time identicative string
-#             return ident_time + ':' + ident_msg
             if text.find(ident_time) > text.find(ident_msg): # message is typed first then time
-                return text[text.find(ident_msg) + len(ident_msg) : text.find(ident_time)]
+                _returnText = text[text.find(ident_msg) + len(ident_msg) : text.find(ident_time)]
+                return _returnText[0].upper() + _returnText[1:] # capitalize first letter
             else:
-                return text[text.find(ident_msg) + len(ident_msg) :]
+                _returnText = text[text.find(ident_msg) + len(ident_msg) :]
+                return _returnText[0].upper() + _returnText[1:] # capitalize first letter
         else:
             return None
+                
     
     def findIntInString(self, string):
         regex = re.search(r'\d+', string)
@@ -195,8 +197,12 @@ class Reminder():
             if message == None or delaySec == None:
                 return self.pickRandom(self.DEFAULT_STRINGS) 
             if delaySec != None: # error code
-                self.setReminder(str(message), int(delaySec))
-                return 'No worries ;)! I set you a reminder after {} seconds with note:{}'.format(delaySec, message)
+                self.setReminder('Reminder: ' + str(message), int(delaySec))
+                prefixStrs = ['Ofcourse', 'No worries', 'Yup buddy', 'Sure mate']
+                if time[1] == self.AFTER:
+                    return '{} ;)! I set you a reminder after {} with note: {}'.format(self.pickRandom(prefixStrs), time[0], message)
+                else:
+                    return '{} ;)! I set you a reminder at {} with note: {}'.format(self.pickRandom(prefixStrs), time[0], message)
             else:
                 raise Exception('Time string was not converted!')
         except:
@@ -287,6 +293,11 @@ def filterUserInput(text):
     for letter in text: # removes not allower chars
         if not letter in allowedChars:
             text = text.replace(letter, '')
+    # exeption with 'I have' -> replaces to 'that I have'
+    iHavePos = text.find('i have')
+    if iHavePos != -1:
+        text = text[:iHavePos] + 'that ' + text[iHavePos:]
+    # ______________________________________
     return text
 
 # Console chat version
@@ -294,6 +305,5 @@ if __name__ == '__main__':
     r = Reminder()
     while True:
         userInput = input("\nEnter reminder text: ")
-#         print(r.getAnswer(userInput), '\n')
-        mInt = r.calculateDelay(("11a.m", 3))
-        print(mInt)
+        print(r.getAnswer(userInput), '\n')
+        
