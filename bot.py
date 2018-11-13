@@ -1,6 +1,6 @@
 # module imports
 from textblob import TextBlob
-# from rivescript import RiveScript
+from rivescript import RiveScript
 import discord
 from discord.ext import commands
 from rivescript import RiveScript
@@ -24,11 +24,11 @@ rs = RiveScript()
 rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
 rs.sort_replies()
 
-@commands.command()
-@commands.guild_only()
-async def info(client, *, member: discord.Member):
-    fmt = '{0} joined on {0.joined_at} and has {1} roles.'
-    await client.send(fmt.format(member, len(member.roles)))
+# @commands.command()
+# @commands.guild_only()
+# async def info(client, *, member: discord.Member):
+#     fmt = '{0} joined on {0.joined_at} and has {1} roles.'
+#     await client.send(fmt.format(member, len(member.roles)))
 
 @commands.command(pass_context=True)
 async def play(ctx):
@@ -49,9 +49,10 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
+reminderText = ' '
+    
 def onNotification(sender, text):
-    print(text)
-    client.send_message("Direct Message with BradAngliss", "test " + text)
+    reminderText = text
 
 @client.event
 async def on_message(message):
@@ -78,7 +79,11 @@ async def on_message(message):
     #Get an output for the bot to send via keywordToModule()
     moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
     output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
-    await client.send_message(message.channel, output)
+    await client.send_message(message.channel, output[0])
+    
+    if output[1].check(stringInp) == True:
+        output[1].listener += onNotification
+        await client.send_message(message.channel, reminderText)
     
 # @bot.command()
 # async def weather()
