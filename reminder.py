@@ -65,6 +65,14 @@ class Reminder():
              self.TIME_IDENT: [' at ', ' after ', ' in '] }
         return d
     
+    def check(self, msg):
+        keywords = self.getTags()[self.KEYWORDS]
+        for keyw in keywords:
+            if keyw in msg:
+                return True
+        return False
+        
+    
     def pickRandom(self, _list):
         import random
         return _list[random.randint(0, len(_list)) - 1]
