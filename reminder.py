@@ -21,6 +21,7 @@ import event
 import _thread
 import re
 import traceback
+from pyfcm import FCMNotification
 
 class Reminder():
     listener = event.Event() # functions list to invoke
@@ -65,14 +66,6 @@ class Reminder():
              self.TIME_IDENT: [' at ', ' after ', ' in '] }
         return d
     
-    def check(self, msg):
-        keywords = self.getTags()[self.KEYWORDS]
-        for keyw in keywords:
-            if keyw in msg:
-                return True
-        return False
-        
-    
     def pickRandom(self, _list):
         import random
         return _list[random.randint(0, len(_list)) - 1]
@@ -88,7 +81,10 @@ class Reminder():
     
     ''' <summary>Notifies caller class to pull reminder</summary> '''
     def invokeListener(self, text):
-        print('listener invoked!', text)
+        device_token = "fQg_YPhiS-c:APA91bGgxjJJvwwSR8r5zFdN-qyerR5gP5aa1g-E0yqLumV56ZOuubAcNyJCIOeF_0rEvk9BCAN2WqgNkB23kxACP6AFD1c5ON0jMaJanV1JXzvgR7gNA0sn3rlW1WQPUmO_cqv7xT76"
+        key = "AAAA-PO7Lds:APA91bEkn-rmOegVXChsx0MAxKy0N9JCy6-S7NtSa3cp6uiPFz150zRMijet-3VrWjw_GKxxHnKuBvJ6D5-j7Krjhb6aWTq9avgaSS-SldbdrNT4WyAMh6AoXWqfg5L-3IV1le8IkMM_"
+        notificationService = FCMNotification(api_key=key)
+        notificationService.notify_single_device(registration_id=device_token, message_title=text, message_body='Discord Reminder')
         self.listener(text)
     
     ''' <summary>Keywords for finding the right module</summary>
