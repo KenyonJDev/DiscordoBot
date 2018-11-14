@@ -95,6 +95,7 @@ class Reminder():
     ''' <summary>Checks if input is associated with module</summary>
         <return>boolean</return> '''
     def check(self, userInput):
+        userInput = userInput.lower()
         kwList = self.getKeywords()
         for kw in kwList: # tries to find at least 1 keyword
             if kw in userInput:
