@@ -89,6 +89,16 @@ class Reminder():
     def getKeywords(self):
         return self.getTags()[self.KEYWORDS]
     
+    ''' <summary>Checks if input is associated with module</summary>
+        <return>boolean</return> '''
+    def check(self, userInput):
+        userInput = userInput.lower()
+        kwList = self.getKeywords()
+        for kw in kwList: # tries to find at least 1 keyword
+            if kw in userInput:
+                return True
+        return False
+    
     ''' <summary>extracts time string part from input</summary>
         <return>str(time part) or in one case list of str, time type</return>'''
     def detectTime(self, text):

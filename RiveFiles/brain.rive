@@ -190,6 +190,18 @@
 
 // Reference ends
 
++ [*](math|maths|calculate)[*]
+- math
+
++ [*](weather|climate|temperature)[*]
+- weather
+
++ [*](i am bored|bored|game|games|play|hangman)[*]
+- game
+
++ [*] dog [*]
+- dog
+
 + (hello|hi|hey) [*]
 * <get name> == none => Hi, can I help you?
 - Hi <get name>, can I help you with anything?
@@ -286,18 +298,6 @@
 * <get relationship> <= 30 => I would be a lot better if you were kind to me, but you are horrible
 * <get relationship> > 65 => I feel amazing, thank you for being so kind to me
 - I'm not too bad, neither happy or sad thank you
-
-+ [*](math|maths|calculate)[*]
-- math
-
-+ [*](weather|climate|temperature)[*]
-- weather
-
-+ [*](i am bored|bored|game|games|play|hangman)[*]
-- game
-
-+ [*](shiba inu|shiba|dog|puppy)[*]
-- dog
 
 + [*](sorry|apologize|apology)[*]
 * <get name> == none => It's okay I forgive you
