@@ -36,7 +36,7 @@ def defaultChat(stringInp, rs, userID):
     
     return(rs.reply("localuser", stringInp))
     
-def keywordToModule(moduleName, stringInp, rs, userID, client, message, function=None):
+def keywordToModule(moduleName, stringInp, rs, userID, client, message, function = None):
     """Depending on what rivescript returned, the appropriate module is ran"""
     
     rmndr = Reminder()        #Reminder module checked differently so object is instantiated first
@@ -50,9 +50,10 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
     elif(moduleName == "weather"):
         return weather.checkWeather(stringInp)
     
-    elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn'trmndr.listener += function
+    elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn't
+        rmndr.listener += function
         rmndr.setReminder('This is my message', 2)
-        return(rmndr.getAnswer(stringInp),rmndr)
+        return(rmndr.getAnswer(stringInp))
     else:
         return defaultChat(stringInp,rs, userID)
     

@@ -52,7 +52,8 @@ async def on_ready():
 reminderText = ' '
     
 def onNotification(sender, text):
-    reminderText = text
+    print(text)
+    client.send_message("Direct Message with BradAngliss", "test " + text)
 
 @client.event
 async def on_message(message):
@@ -79,14 +80,12 @@ async def on_message(message):
     #Get an output for the bot to send via keywordToModule()
     moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
     output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
-    await client.send_message(message.channel, output[0])
-    
-    if output[1].check(stringInp) == True:
-        output[1].listener += onNotification
-        await client.send_message(message.channel, reminderText)
+    await client.send_message(message.channel, output)
     
 # @bot.command()
 # async def weather()
 
 client.run(TOKEN, bot=True, reconnect=True)
 asyncio.run(main())
+
+
