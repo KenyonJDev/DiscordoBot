@@ -15,10 +15,6 @@ import sys, traceback
 extensions = ['BasicCommands']
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
-class MembersCog:
-    def __init__(self, bot):
-        self.bot = bot
-
 bot = commands.Bot(command_prefix='!')
 
 client = discord.Client()
@@ -34,6 +30,22 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+
+@client.command()
+async def load(extension):
+    try:
+        client.load_extension(extension)
+        print('Loaded {}'.format(extension))
+    except Exception as error:
+        print("error loading [{}]".format(extension, error))
+
+@client.command()
+async def unload(extension):
+    try:
+        client.unload_extension(extension)
+        print('Unloaded {}'.format(extension))
+    except Exception as error:
+        print("error loading [{}]".format(extension, error))
 
 if __name__ == '__main__':
     for extension in extensions:
@@ -69,9 +81,9 @@ async def on_message(message):
             stringAction = stringAction.replace(" ", "")
     
     #Get an output for the bot to send via keywordToModule()
-    moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
+   # moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
    # output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
-    await client.send_message(message.channel, output)
+  #  await client.send_message(message.channel, output)
     
 # @bot.command()
 # async def weather()
