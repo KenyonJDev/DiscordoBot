@@ -16,7 +16,6 @@ extensions = ['BasicCommands']
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
 bot = commands.Bot(command_prefix='!')
-
 client = discord.Client()
 rs = RiveScript()
 rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
@@ -31,7 +30,7 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-@client.command()
+@bot.command()
 async def load(extension):
     try:
         client.load_extension(extension)
@@ -39,7 +38,7 @@ async def load(extension):
     except Exception as error:
         print("error loading [{}]".format(extension, error))
 
-@client.command()
+@bot.command()
 async def unload(extension):
     try:
         client.unload_extension(extension)
@@ -50,7 +49,7 @@ async def unload(extension):
 if __name__ == '__main__':
     for extension in extensions:
         try:
-            client.load_extension(extension)
+            bot.load_extension(extension)
         except Exception as error:
             print("error loading [{}]".format(extension, error))
 
