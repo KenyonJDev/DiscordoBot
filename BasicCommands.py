@@ -7,7 +7,7 @@ class commands:
 
     @commands.command()
     async def ping(self):
-        await.cient.say('Pong!')
+        await cient.say('Pong!')
 
     @commands.command()
     async def info(client, *, member: discord.Member):

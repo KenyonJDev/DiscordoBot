@@ -39,7 +39,7 @@ if __name__ == '__main__':
     for extension in extensions:
         try:
             client.load_extension(extension)
-        except extension as error:
+        except Exception as error:
             print("error loading [{}]".format(extension, error))
 
 def onNotification(sender, text):
