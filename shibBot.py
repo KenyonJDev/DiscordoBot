@@ -19,13 +19,9 @@ def checkDog(stringInp):
 # #         await client.send_file(message.channel, dogImage, :feet:, tts = False)
     else:
         if dogRequest == "help":
-            pass
-#             await client.send_message(message.channel, "To request a dog please write !dog.")
-#             await client.send_message(message.channel, "To specify a dog, add one of the following to your request using the format !dog *chosen type here*;")
-#             await client.send_message(message.channel, "shiba, samoyed, pug, cursed, other")
+            return "To request a dog please write !dog.\nTo specify a dog, add one of the following to your request using the format !dog *chosen type here*;\nshiba, samoyed, pug, cursed, other"
         else:
-            pass
-#             await client.send_message(message.channel, "Sorry, that isnt a valid dog type!")
+            return "Sorry, that isnt a valid dog type!"
 
 def dogInputValidity(dogCheck):
     if dogCheck == "shiba" or dogType == "samoyed" or dogType == "pug" or dogType == "other" or dogType == "cursed" or dogType == "":
