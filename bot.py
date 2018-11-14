@@ -13,6 +13,8 @@ import conversation
 import sys, traceback
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
+isFile = False
+
 class MembersCog:
     def __init__(self, bot):
         self.bot = bot
@@ -80,7 +82,10 @@ async def on_message(message):
     #Get an output for the bot to send via keywordToModule()
     moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
     output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
-    await client.send_message(message.channel, output)
+    if ("../ChatBot/dog" in output):
+        await client.send_file(message.channel, output)
+    else:
+        await client.send_message(message.channel, output)
     
 # @bot.command()
 # async def weather()

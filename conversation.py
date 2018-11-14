@@ -50,10 +50,11 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
     elif(moduleName == "weather"):
         return weather.checkWeather(stringInp)
     
-    elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn't
-        rmndr.listener += function
-        rmndr.setReminder('This is my message', 2)
-        return(rmndr.getAnswer(stringInp))
+#     elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn't
+#         pass
+#         rmndr.listener += function
+#         rmndr.setReminder('This is my message', 2)
+#         return(rmndr.getAnswer(stringInp))
     else:
         return defaultChat(stringInp,rs, userID)
     
