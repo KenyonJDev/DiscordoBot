@@ -116,40 +116,12 @@ def runQuiz():
             print("Answer must be a number")
 
 
-
-#  will store average of last 10 scores
+#  will store average of last 5 scores
 #  used to alter the base difficulty
 #  takes 7/10 as a pass, less decreases the difficulty, more increases it
 #
 def difficultyModifier(score):
-
-    difficulty =
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    score = 1
+    pass
 
