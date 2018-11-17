@@ -7,28 +7,23 @@ import random
 
 
 def checkDog(stringInp):
-    #passes to the shibBot.py module
-
-    splitRequest = stringInp.split('!dog ', 1) #strip the request down to the relevent content
+    splitRequest = stringInp.split('dog', 1) #trip the request down to the relevent content
+    print(splitRequest)
     dogRequest = splitRequest[1].strip(" ")
-
+    
     dogCheck = dogInputValidity(dogRequest)
 
     if dogCheck == True:
         dogImage = dogCall(dogRequest)
-# #         await client.send_file(message.channel, dogImage, :feet:, tts = False)
+        return dogImage
     else:
         if dogRequest == "help":
-            pass
-#             await client.send_message(message.channel, "To request a dog please write !dog.")
-#             await client.send_message(message.channel, "To specify a dog, add one of the following to your request using the format !dog *chosen type here*;")
-#             await client.send_message(message.channel, "shiba, samoyed, pug, cursed, other")
+            return "To request a dog please write dog.\nTo specify a dog, add one of the following to your request using the format dog *chosen type here*;\nshiba, samoyed, pug, cursed, other"
         else:
-            pass
-#             await client.send_message(message.channel, "Sorry, that isnt a valid dog type!")
+            return "Sorry, that isnt a valid dog type!"
 
 def dogInputValidity(dogCheck):
-    if dogCheck == "shiba" or dogType == "samoyed" or dogType == "pug" or dogType == "other" or dogType == "cursed" or dogType == "":
+    if dogCheck == "shiba" or dogCheck == "samoyed" or dogCheck == "pug" or dogCheck == "other" or dogCheck == "cursed" or dogCheck == "":
         return True #return whether or not the additional content is valid to the module or not
     else:
         return False
@@ -38,14 +33,14 @@ def dogCall(request):
     chosenDog = ""
     dogType = request
     if dogType == "":
-        chosenType = random.choice(os.listdir("/dogContent"))
-        chosenDog = chosenType + "/" + random.choice(os.listdir("/" + chosenType))
-        dogDir = "/dogContent/" + chosenDog + ".jpg"
-        return chosenDog
+        chosenType = random.choice(os.listdir("../ChatBot/dogContent"))
+        chosenDog = chosenType + "/" + random.choice(os.listdir("../ChatBot/dogContent/" + chosenType))
+        dogDir = "../ChatBot/dogContent/" + chosenDog 
+        return dogDir
     elif dogType == "help":
         important 
     else:
         chosenType = dogType
-        chosenDog = chosenType + "/" + random.choice(os.listdir("/" + chosenType))
-        dogDir = "/dogContent/" + chosenDog + ".jpg"
-        return chosenDog
+        chosenDog = chosenType + "/" + random.choice(os.listdir("../ChatBot/dogContent/" + chosenType))
+        dogDir = "../ChatBot/dogContent/" + chosenDog 
+        return dogDir
