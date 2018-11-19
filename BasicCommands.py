@@ -27,5 +27,5 @@ class BasicCommands:
 
 
 
-def setup(client):
-    client.add_cog(BasicCommands(client))
+def setup(bot):
+    bot.add_cog(BasicCommands(bot))
