@@ -33,7 +33,7 @@ reminderText = ' '
 @bot.command()
 async def load(extension):
     try:
-        client.load_extension(extension)
+        bot.load_extension(extension)
         print('Loaded {}'.format(extension))
     except Exception as error:
         print("error loading [{}]".format(extension, error))
@@ -41,7 +41,7 @@ async def load(extension):
 @bot.command()
 async def unload(extension):
     try:
-        client.unload_extension(extension)
+        bot.unload_extension(extension)
         print('Unloaded {}'.format(extension))
     except Exception as error:
         print("error loading [{}]".format(extension, error))
@@ -81,12 +81,12 @@ async def on_message(message):
     
     #Get an output for the bot to send via keywordToModule()
     
-    moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
-    output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
-    if ("../ChatBot/dog" in output):
-        await client.send_file(message.channel, output)
-    else:
-        await client.send_message(message.channel, output)
+   # moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
+   # output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
+   # if ("../ChatBot/dog" in output):
+   #     await client.send_file(message.channel, output)
+   # else:
+   #     await client.send_message(message.channel, output)
 
     
 # @bot.command()
