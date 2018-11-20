@@ -10,7 +10,7 @@ class BasicCommands:
     async def ping(self, ctx):
         duration = datetime.now() - discord.utils.snowflake_time(ctx.message.id)
         ms = duration.microseconds / 1000
-        content = f"Pong! took `{ms} ms`"
+        content = f"Pong! took '{ms} ms'"
         await ctx.send(content=content)
 
     @commands.command(pass_context=True)
