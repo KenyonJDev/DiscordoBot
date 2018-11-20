@@ -55,6 +55,7 @@ def data_organizer(raw_data):
 def data_output(data):
     data['m_symbol'] = '\xb0' + 'C'
     weatheroutput = '''-----------------------------------
+    :sunrise_over_mountains: 
 Current weather in {city}, {country}:
 {temp}{m_symbol} {sky}
 
