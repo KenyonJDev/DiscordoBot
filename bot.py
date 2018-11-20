@@ -9,13 +9,20 @@ import asyncio
 import dbQueries
 import re
 import conversation
-# import BasicCommands
 import sys, traceback
 extensions = ['BasicCommands']
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'
 
-clientBot = commands.Bot(command_prefix = '!')
+
 client = discord.Client()
+clientBot = commands.Bot(command_prefix = '!')
+
+if __name__ == '__main__':
+    for extension in extensions:
+        try:
+            clientBot.load_extension(extension)
+        except Exception as error:
+            print("error loading [{}]".format(extension, error))
 
 rs = RiveScript()
 rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
@@ -29,30 +36,24 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-# @client.command()
-# async def load(extension):
-#     try:
-#         clientBot.load_extension(extension)
-#         print('Loaded {}'.format(extension))
-#         await ctx.send('loaded {}'.format(extension))
-#     except Exception as error:
-#         print("error loading [{}]".format(extension, error))
+@clientBot.command()
+async def load(extension):
+    try:
+        clientBot.load_extension(extension)
+        print('Loaded {}'.format(extension))
+        await ctx.send('loaded {}'.format(extension))
+    except Exception as error:
+        print("error loading [{}]".format(extension, error))
 
-# @client.command()
-# async def unload(extension):
-#     try:
-#         clientBot.unload_extension(extension)
-#         print('Unloaded {}'.format(extension))
-#         await ctx.send('unloaded {}'.format(extension))
-#     except Exception as error:
-#         print("error loading [{}]".format(extension, error))
+@clientBot.command()
+async def unload(extension):
+    try:
+        clientBot.unload_extension(extension)
+        print('Unloaded {}'.format(extension))
+        await ctx.send('unloaded {}'.format(extension))
+    except Exception as error:
+        print("error loading [{}]".format(extension, error))
 
-# if __name__ == '__main__':
-#     for extension in extensions:
-#         try:
-#             clientBot.load_extension(extension)
-#         except Exception as error:
-#             print("error loading [{}]".format(extension, error))
 
 def onNotification(sender, text):
     print(text)

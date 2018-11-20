@@ -10,7 +10,7 @@ class BasicCommands:
     async def ping(self, ctx):
         duration = datetime.now() - discord.utils.snowflake_time(ctx.message.id)
         ms = duration.microseconds / 1000
-        content = f"Pong! took '{ms} ms'"
+        content = "Pong! took `{%s} ms`" %ms
         await ctx.send(content=content)
 
     @commands.command(pass_context=True)
@@ -24,8 +24,6 @@ class BasicCommands:
 
         player = await vc.create_ytdl_player(url)
         player.start()
-
-
 
 def setup(client):
     client.add_cog(BasicCommands(client))

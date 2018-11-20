@@ -6,6 +6,7 @@ import shibBot
 import dbQueries
 from reminder import Reminder
 import asyncio
+import BasicCommands
 
 def defaultChat(stringInp, rs, userID):
     """Determines the context of the user input as string and returns a response for the bot to output. Updates database."""

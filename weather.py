@@ -69,7 +69,7 @@ Updated: {dt}
 
 def weatherInit(userInp):
     try:
-        location = userInp.lower().strip("weather ")
+        location = userInp.lower().replace("weather ", '')
         return data_output(data_organizer(data_fetch(url_builder(location))))
     except IOError:
         print("Sorry, I don't know what you mean")

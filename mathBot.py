@@ -20,24 +20,24 @@ class isMath():
         """Manipulate user input as string to check if it follows the pattern of a math question"""
 
         #Change english to operators and overwrite the input 
-        stringInp = self.checkDict(stringInp)
+        stringInp = self.__checkDict(stringInp)
 
         #Loop through string, check if both and operator and number are included or there is a square root using mathBot
         for i in range(len(stringInp)):
-            if (self.isNum(stringInp[i])):
+            if (self.__isNum(stringInp[i])):
                 self.numCheck = True
-            elif (self.checkOperator(stringInp[i])):
+            elif (self.__checkOperator(stringInp[i])):
                 self.opCheck = True
-            elif (self.checkRoot(stringInp)):
+            elif (self.__checkRoot(stringInp)):
                 self.rootCheck = True
 
         #If both operator and number are included or there is a square root then run calculate from mathBot
         if (self.numCheck == True and self.opCheck == True) or self.rootCheck:
             self.mathQ = True
-            self.getAns(stringInp)
+            self.__getAns(stringInp)
             
         
-    def getAns(self, stringInp):
+    def __getAns(self, stringInp):
         
         """Goes through the string input and checking for open and closed brackets,
         when the bracket is open the characters are appened to a variable until a closed
@@ -48,19 +48,23 @@ class isMath():
             #Checks if the current character is a number or operator
             if current == "(":
                 self.eval = False
+                self.num = str(self.num) + str(current)
                 continue  
             elif current in "0123456789.+-/*%":
                 self.num = str(self.num) + str(current)
                 if current == "/" and stringInp[i + 1] == "0":
-                    self.currentEval = "Cannot perform that calculation!"
-                    break;
-                elif (i == len(stringInp)-1 or i != len(stringInp)-1 and stringInp[i+1] == ")"):
-                    self.eval = True            
-                    
+                    self.currentEval = "unable to be calculated!"
+                    break;     
+                elif i != len(stringInp)-1 and stringInp[i+1] == ")":
+                    self.num = str(self.num)+ ")"
+                    self.eval = True 
+                elif i == len(stringInp) - 1:
+                    self.eval = True 
+                     
             if self.eval == True:
                 if "square root" in stringInp or "sqrt" in stringInp:
                     if int(self.num) < 0:
-                        self.currentEval = "Cannot perform that calculation!"
+                        self.currentEval = "unable to be calculated!"
                         break;
                     else:
                         self.currentEval = math.sqrt(float(self.num))
@@ -70,9 +74,9 @@ class isMath():
                 self.eval = False 
                 
         
-            self.currentEval = 'The answer is {}'.format(self.currentEval)
+        self.currentEval = 'The answer is {}'.format(self.currentEval)
             
-    def isNum(self, item):
+    def __isNum(self, item):
     
         """Check if the argument passed is a number, 
         input can be of any type and output will be a boolean"""
@@ -83,7 +87,7 @@ class isMath():
         except ValueError:
             return False
 
-    def checkOperator(self, operator):
+    def __checkOperator(self, operator):
 
         """Check if the argument is an operator by comparing
         to a list of valid operators, input is a string and output is a boolean"""
@@ -94,7 +98,7 @@ class isMath():
         else:
             return False
 
-    def checkRoot(self, userInp):
+    def __checkRoot(self, userInp):
     
         """Check if any English variations of asking for 
         the square root have been entered, takes thse user input as a string 
@@ -107,7 +111,7 @@ class isMath():
             else:
                 return False
         
-    def checkDict(self, userInp):
+    def __checkDict(self, userInp):
     
         """Replace any English words for operators with the python
         symbol for that given operator using the dictionary mathDict
