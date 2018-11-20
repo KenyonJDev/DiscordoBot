@@ -22,9 +22,13 @@ class BasicCommands:
     async def play(self, ctx, *, url: str):
         vc = await ctx.author.voice.channel.connect()
 
+
         player = await vc.create_ytdl_player(url)
         player.start()
 
+    @commands.command()
+    async def stop(self, voice):
+        await voice.disconnect()
 
 
 def setup(bot):
