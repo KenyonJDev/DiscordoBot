@@ -1,7 +1,8 @@
 from textblob import TextBlob
-import mathBot
+from mathBot import isMath
 import weather
 import shibBot
+# import hangman
 import dbQueries
 from reminder import Reminder
 import asyncio
@@ -11,6 +12,7 @@ def defaultChat(stringInp, rs, userID):
     
     #get the current data of the user from RiveScript and update the database
     dbData = (rs.reply("localuser", "get database data")).split(" ")    
+    print(dbData)
     dbQueries.updateDB(userID, dbData)
 
     #Creates a TextBlob of the input using the TextBlob API
@@ -39,10 +41,11 @@ def defaultChat(stringInp, rs, userID):
 def keywordToModule(moduleName, stringInp, rs, userID, client, message, function = None):
     """Depending on what rivescript returned, the appropriate module is ran"""
     
-    rmndr = Reminder()        #Reminder module checked differently so object is instantiated first
+    rmndr = Reminder()        #Reminder and math modules checked differently so objects are instantiated first
+    math = isMath(stringInp)  
     
-    if moduleName == "math":
-        return mathBot.checkMath(stringInp)
+    if math.mathQ:
+        return math.currentEval
     
     elif(moduleName == "dog"):
         return shibBot.checkDog(stringInp)
@@ -50,14 +53,13 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
     elif(moduleName == "weather"):
         return weather.checkWeather(stringInp)
     
-#     elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn't
-#         pass
-#         rmndr.listener += function
-#         rmndr.setReminder('This is my message', 2)
-#         return(rmndr.getAnswer(stringInp))
-    else:
-        return defaultChat(stringInp,rs, userID)
+    elif(moduleName == "game"):
+        return hangman.init()
     
-# rmndr.listener += function
-#         rmndr.setReminder('This is my message', 6, client, message)
-#         return rmndr.getAnswer(stringInp)
+    elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn't     
+        rmndr.listener += function
+        rmndr.setReminder('This is my message', 2)
+        return(rmndr.getAnswer(stringInp))
+    
+    else:
+        return defaultChat(stringInp, rs, userID)

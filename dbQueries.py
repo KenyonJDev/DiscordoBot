@@ -9,6 +9,7 @@ chatbotDB = mysql.connector.connect(
 
 cursor = chatbotDB.cursor(buffered=True)
 def initialise(userID,rs):
+    
     if checkUser(userID) == 0:
         reply = (rs.reply("localuser", "get database data")).split(" ")
         insertDB(userID,reply)
@@ -36,7 +37,7 @@ def insertDB(userID,details):
     cursor.executemany("UPDATE users SET name=%s, age=%s, favcolour=%s, gender=%s, city=%s, relationship=%s WHERE userID="+str(userID),(details,))
     chatbotDB.commit()
     
-def updateDB(userID,details):
+def updateDB(userID, details):
     details = checkUndefined(details)
     cursor.executemany("UPDATE users SET name=%s, age=%s, favcolour=%s, gender=%s, city=%s, relationship=%s WHERE userID="+str(userID),(details,))
     chatbotDB.commit()
