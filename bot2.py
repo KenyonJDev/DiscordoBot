@@ -5,6 +5,8 @@ import asyncio
 extensions = ['BasicCommands']
 TOKEN = 'NTE0MjE4MjA1MzUxNTEwMDE3.DtTWng.P51Ms3PD131pmZ00QjclA5XOeqE'
 client = commands.Bot(command_prefix = '!')
+
+@client.event
 async def on_ready():
     """Runs when the bot is ready, prints to terminal"""
     print('Logged in as')
@@ -12,10 +14,12 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
+@client.command()
 async def load(extension):
     try:
         client.load_extension(extension)
         print('Loaded {}'.format(extension))
+        await ctx.send('loaded {}'.format(extension))
     except Exception as error:
         print("error loading [{}]".format(extension, error))
 
@@ -24,6 +28,7 @@ async def unload(extension):
     try:
         client.unload_extension(extension)
         print('Unloaded {}'.format(extension))
+        await ctx.send('unloaded {}'.format(extension))
     except Exception as error:
         print("error loading [{}]".format(extension, error))
 
