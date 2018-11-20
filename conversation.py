@@ -51,7 +51,7 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
         return shibBot.checkDog(stringInp)
     
     elif(moduleName == "weather"):
-        return weather.checkWeather(stringInp)
+        return weather.weatherInit(stringInp)
     
     elif(moduleName == "game"):
         return hangman.init()
