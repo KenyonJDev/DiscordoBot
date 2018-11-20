@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 import asyncio
-extensions = ['BasicCommands']
+extensions = ['BasicCommands','weather']
 TOKEN = 'NTE0MjE4MjA1MzUxNTEwMDE3.DtTWng.P51Ms3PD131pmZ00QjclA5XOeqE'
 client = commands.Bot(command_prefix = '!')
 
@@ -30,7 +30,7 @@ async def unload(extension):
         print('Unloaded {}'.format(extension))
         await ctx.send('unloaded {}'.format(extension))
     except Exception as error:
-        print("error loading [{}]".format(extension, error))
+        print("error unloading [{}]".format(extension, error))
 
 if __name__ == '__main__':
     for extension in extensions:
