@@ -15,8 +15,14 @@ class BasicCommands:
 
     @commands.command(pass_context=True)
     async def info(self, ctx, *, member: discord.Member):
-        fmt = '{0} joined on {0.joined_at} and has {1} roles.'
-        await ctx.send(fmt.format(member, len(member.roles)))
+        fmt = '{0} joined on {0.joined_at} and has {1} role/s.'
+        await ctx.send(fmt.format(member, len(member.roles)-1))
+
+    @info.error
+    async def info_error(ctx, error):
+        if isinstance(error, commands.BadArgument):
+            await ctx.send('I could not find that member...')
+
 
     @commands.command(pass_context=True)
     async def play(self, ctx, *, url: str):
@@ -27,9 +33,12 @@ class BasicCommands:
         player.start()
 
     @commands.command()
-    async def stop(self, voice):
-        await voice.disconnect()
+    async def repeat(self, ctx, *, arg):
+        await ctx.send(arg)
 
+    @commands.command()
+    async def wordcount(self, ctx, *args):
+        await ctx.send('{} words'.format(len(args), ', '.join(args)))
 
 def setup(bot):
     bot.add_cog(BasicCommands(bot))

@@ -2,10 +2,9 @@
 import discord
 from discord.ext import commands
 import asyncio
-extensions = ['BasicCommands','weather']
+extensions = ['BasicCommands','weather','Moderation']
 TOKEN = 'NTE0MjE4MjA1MzUxNTEwMDE3.DtTWng.P51Ms3PD131pmZ00QjclA5XOeqE'
 client = commands.Bot(command_prefix = '!')
-
 @client.event
 async def on_ready():
     """Runs when the bot is ready, prints to terminal"""
