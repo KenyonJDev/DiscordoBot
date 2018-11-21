@@ -1,10 +1,13 @@
 from textblob import TextBlob
-import mathBot
+from mathBot import isMath
 import weather
 import shibBot
 # import dbQueries
+# import hangman
+import dbQueries
 from reminder import Reminder
 import asyncio
+import BasicCommands
 
 def defaultChat(stringInp, rs, userID):
     """Determines the context of the user input as string and returns a response for the bot to output. Updates database."""
@@ -39,25 +42,25 @@ def defaultChat(stringInp, rs, userID):
 def keywordToModule(moduleName, stringInp, rs, userID, client, message, function = None):
     """Depending on what rivescript returned, the appropriate module is ran"""
     
-    rmndr = Reminder()        #Reminder module checked differently so object is instantiated first
+    rmndr = Reminder()        #Reminder and math modules checked differently so objects are instantiated first
+    math = isMath(stringInp)  
     
-    if moduleName == "math":
-        return mathBot.checkMath(stringInp)
+    if math.mathQ:
+        return math.currentEval
     
     elif(moduleName == "dog"):
         return shibBot.checkDog(stringInp)
     
     elif(moduleName == "weather"):
-        return weather.checkWeather(stringInp)
+        return weather.weatherInit(stringInp)
     
-    elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn't
-        pass
+    elif(moduleName == "game"):
+        return hangman.init()
+    
+    elif(rmndr.check(stringInp)):         #Boolean is returned, if True then it is a reminder else it isn't     
         rmndr.listener += function
         rmndr.setReminder('This is my message', 2)
         return(rmndr.getAnswer(stringInp))
-    else:
-        return defaultChat(stringInp,rs, userID)
     
-# rmndr.listener += function
-#         rmndr.setReminder('This is my message', 6, client, message)
-#         return rmndr.getAnswer(stringInp)
+    else:
+        return defaultChat(stringInp, rs, userID)

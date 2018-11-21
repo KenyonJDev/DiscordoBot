@@ -20,7 +20,9 @@ def url_builder(city_id):
     user_api = '7a82ee6f4ab290329464c1a55194b4ab'
     unit = 'metric'
     api = 'http://api.openweathermap.org/data/2.5/weather?q='
-
+    
+    
+    
     full_api_url = api + str(city_id) + '&mode=json&units=' + unit + '&APPID=' + user_api
     return full_api_url
     
@@ -53,6 +55,7 @@ def data_organizer(raw_data):
 def data_output(data):
     data['m_symbol'] = '\xb0' + 'C'
     weatheroutput = '''-----------------------------------
+    :sunrise_over_mountains: 
 Current weather in {city}, {country}:
 {temp}{m_symbol} {sky}
 
@@ -65,8 +68,9 @@ Updated: {dt}
     return weatheroutput.format(**data)
 
 
-if __name__ == '__main__':
+def weatherInit(userInp):
     try:
-        data_output(data_organizer(data_fetch(url_builder(2172797))))
+        location = userInp.lower().replace("weather ", '')
+        return data_output(data_organizer(data_fetch(url_builder(location))))
     except IOError:
         print("Sorry, I don't know what you mean")
