@@ -22,7 +22,7 @@ a) ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started
 b) ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress
 c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 
-| Status | Task | file name | Developer |
+| Progress Status | Task | file name | Developer |
 | --- | --- | --- | --- |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Main code part which connects DISCORD client and modules | bot.py | Brad |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | User input simulator | inputTests.py | Armandas |
