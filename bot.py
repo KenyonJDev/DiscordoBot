@@ -9,7 +9,7 @@ import asyncio
 #import hangBot
 #import dbQueries
 import re
-#import conversation
+import conversation
 import BasicCommands
 import sys, traceback
 extensions = ['BasicCommands']

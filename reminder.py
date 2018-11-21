@@ -18,7 +18,7 @@ import event
 import _thread
 import re
 import traceback
-# from pyfcm import FCMNotification
+from pyfcm import FCMNotification
 
 class Reminder():
     listener = event.Event() # functions list to invoke
@@ -219,49 +219,6 @@ class Reminder():
         except:
             traceback.print_exc()
             return self.pickRandom(self.DEFAULT_STRINGS)
-#     ''' <summary>Analyze and add reminder</summary>
-#         <return>str(feedback to user)</return> '''
-#     def actionAdd2(self, userInput):
-#         # example: Make a reminder to call my mom after 10 seconds
-#         # time recognition: at, after
-#         # message recognition: to, :
-#         try:
-#             # determine time string
-#             timeIdentificator = ""
-#             timeIdentificators = self.getTags()[self.TIME_IDENT] # identification word list
-#             for identificator in timeIdentificators:
-#                 if identificator in userInput:
-#                     timeIdentificator = identificator
-#                     break
-#             if timeIdentificator == "":
-#                 return "Bro... Repeat one more time with specified time ;)"
-#             else:
-#                 timeStartId = userInput.find(timeIdentificator) + len(timeIdentificator)
-#             # determine note message
-#             msgIdentificator = ""
-#             msgIdentificators = self.getTags()[self.MESSAGE_IDENT] # identification word list
-#             for identificator in msgIdentificators:
-#                 if identificator in userInput:
-#                     msgIdentificator = identificator
-#                     break
-#             msgStartId = userInput.find(msgIdentificator) + len(msgIdentificator)
-#             if msgStartId == -1: # a reminder without text
-#                 message = "empty"
-#                 time = userInput[timeStartId:]
-# #                 self.setReminder(message, self.timeStrToMillis(time))
-#             else:
-#                 if msgStartId > timeStartId: # user input: time is before text
-#                     timeTuple = self.findTimeString(userInput)
-#                     message = userInput[msgStartId:]
-#                 elif timeStartId > msgStartId: # user input: time is after message
-#                     timeTuple = self.findTimeString(userInput)
-#                     croppedInput = userInput[:int(timeStartId - len(timeIdentificator))]
-#                     message = croppedInput[msgStartId:]
-#             return "I set a reminder{}{} with a message: {}".format(timeIdentificator, timeTuple[0], message)
-#         except:
-#             traceback.print_exc()
-#             return self.pickRandom(self.DEFAULT_STRINGS)
-        
     ''' <summary>Analyze user input, sets reminder and Returns note for user</summary>
         <return>str</return> '''
     def getAnswer(self, userInput):
