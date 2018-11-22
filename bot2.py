@@ -14,29 +14,37 @@ async def on_ready():
     print('------')
 
 @client.command()
-async def load(extension):
+async def load(ctx, extension):
+    """Loads an extension"""
     try:
         client.load_extension(extension)
-        print('Loaded {}'.format(extension))
-        await ctx.send('loaded {}'.format(extension))
+        message = ('Loaded {}'.format(extension))
+        print(message)
+        await ctx.send(message=message)
     except Exception as error:
-        print("error loading [{}]".format(extension, error))
+        error_loading = ("error loading [{}]".format(extension, error))
+        print(error_loading)
+        await ctx.send(error_loading=error_loading)
 
 @client.command()
-async def unload(extension):
+async def unload(ctx, extension):
+    """Unloads an extension"""
     try:
         client.unload_extension(extension)
-        print('Unloaded {}'.format(extension))
-        await ctx.send('unloaded {}'.format(extension))
+        message = ('Unloaded {}'.format(extension))
+        print(message)
+        await ctx.send(message=message)
     except Exception as error:
-        print("error unloading [{}]".format(extension, error))
+        error_loading = ("error unloading [{}]".format(extension, error))
+        print(error_loading)
+        await ctx.send(error_loading=error_loading)
 
-if __name__ == '__main__':
+if __name__ == '__main__': #Fetches our cogs from the main file
     for extension in extensions:
         try:
-            client.load_extension(extension)
+         client.load_extension(extension)
         except Exception as error:
-            print("error loading [{}]".format(extension, error))
+         print("error loading [{}]".format(extension, error))
 
 client.run(TOKEN, bot=True, reconnect=True)
 asyncio.run(main())

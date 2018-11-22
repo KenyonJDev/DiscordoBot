@@ -6,20 +6,31 @@ class BasicCommands:
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name="ping")
+    @commands.command(aliases =["p","P"])
+    @commands.guild_only()
     async def ping(self, ctx):
+        """gives response time"""
         duration = datetime.now() - discord.utils.snowflake_time(ctx.message.id)
         ms = duration.microseconds / 1000
-        content = "Pong! took `{%s} ms`" %ms
-        await ctx.send(content=content)
+        embed = discord.Embed(colour = 0x00ff00, title = "Pong! took `%s ms`" %ms, description = ctx.guild.name)
+        embed.set_author(icon_url=ctx.author.avatar_url, name= str(ctx.author))
+        embed.set_footer(text="KenyonJ")
+        await ctx.send(content = None, embed = embed)
 
-    @commands.command(pass_context=True)
+    @commands.command(aliases = ["i","I"])
+    @commands.guild_only()
     async def info(self, ctx, *, member: discord.Member):
-        fmt = '{0} joined on {0.joined_at} and has {1} role/s.'
-        await ctx.send(fmt.format(member, len(member.roles)-1))
+        """Gives information on user"""
+        embed = discord.Embed(colour = 0x00ff00,
+                              title = '{0} joined on {0.joined_at} and has {1} role/s.'.format(member, len(member.roles)-1),
+                              description = ctx.guild.name
+                              )
+        embed.set_author(icon_url=member.avatar_url, name=str(member))
+        embed.set_footer(text="KenyonJ")
+        await ctx.send(content = None, embed = embed)
 
     @info.error
-    async def info_error(ctx, error):
+    async def info_error(self, ctx, error):
         if isinstance(error, commands.BadArgument):
             await ctx.send('I could not find that member...')
 
@@ -34,10 +45,12 @@ class BasicCommands:
 
     @commands.command()
     async def repeat(self, ctx, *, arg):
+        """repeats what you type"""
         await ctx.send(arg)
 
     @commands.command()
     async def wordcount(self, ctx, *args):
+        """Counts words in string"""
         await ctx.send('{} words'.format(len(args), ', '.join(args)))
 
 def setup(bot):

@@ -6,7 +6,7 @@ class Moderation:
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+
 
 
 def setup(bot):
