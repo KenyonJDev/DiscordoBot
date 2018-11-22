@@ -12,7 +12,10 @@ class BasicCommands:
         """gives response time"""
         duration = datetime.now() - discord.utils.snowflake_time(ctx.message.id)
         ms = duration.microseconds / 1000
-        embed = discord.Embed(colour = 0x00ff00, title = "Pong! took `%s ms`" %ms, description = ctx.guild.name)
+        embed = discord.Embed(colour = 0x00ff00,
+                              title = "Pong! took `%s ms`" %ms,
+                              description = ctx.guild.name
+                              )
         embed.set_author(icon_url=ctx.author.avatar_url, name= str(ctx.author))
         embed.set_footer(text="KenyonJ")
         await ctx.send(content = None, embed = embed)
