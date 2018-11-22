@@ -16,8 +16,8 @@ class BasicCommands:
                               title = "Pong! took `%s ms`" %ms,
                               description = ctx.guild.name
                               )
-        embed.set_author(icon_url=ctx.author.avatar_url, name= str(ctx.author))
-        embed.set_footer(text="KenyonJ")
+        embed.set_author(icon_url = ctx.author.avatar_url, name= str(ctx.author))
+        embed.set_footer(text = "KenyonJ")
         await ctx.send(content = None, embed = embed)
 
     @commands.command(aliases = ["i","I"])
@@ -28,8 +28,8 @@ class BasicCommands:
                               title = '{0} joined on {0.joined_at} and has {1} role/s.'.format(member, len(member.roles)-1),
                               description = ctx.guild.name
                               )
-        embed.set_author(icon_url=member.avatar_url, name=str(member))
-        embed.set_footer(text="KenyonJ")
+        embed.set_author(icon_url = member.avatar_url, name=str(member))
+        embed.set_footer(text = "KenyonJ")
         await ctx.send(content = None, embed = embed)
 
     @info.error
