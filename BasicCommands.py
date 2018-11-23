@@ -17,7 +17,7 @@ class BasicCommands:
                               description = ctx.guild.name
                               )
         embed.set_author(icon_url = ctx.author.avatar_url, name= str(ctx.author))
-        embed.set_footer(text = "KenyonJ")
+        embed.set_footer(text = "kenyonJ")
         await ctx.send(content = None, embed = embed)
 
     @commands.command(aliases = ["i","I"])
@@ -32,14 +32,9 @@ class BasicCommands:
         embed.set_footer(text = "KenyonJ")
         await ctx.send(content = None, embed = embed)
 
-    @info.error
-    async def info_error(self, ctx, error):
-        if isinstance(error, commands.BadArgument):
-            await ctx.send('I could not find that member...')
-
-
     @commands.command(pass_context=True)
     async def play(self, ctx, *, url: str):
+        """plays music to a voice channel"""
         vc = await ctx.author.voice.channel.connect()
 
 
