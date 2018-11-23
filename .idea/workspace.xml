@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12c9954b-bd6b-4f63-a2b0-f6fcd8c436ae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/music.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BasicCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/BasicCommands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moderation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Moderation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot2.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +55,7 @@
     <session id="723043093">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
@@ -78,7 +74,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="520" />
+          <entry key="PLAIN_TEXT" value="570" />
           <entry key="Python" value="5295" />
         </counts>
       </usages-collector>
@@ -87,7 +83,7 @@
           <entry key="Python Console" value="26" />
           <entry key="dummy" value="5" />
           <entry key="py" value="5269" />
-          <entry key="txt" value="515" />
+          <entry key="txt" value="565" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -179,7 +175,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/music.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="-84">
               <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -587,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1542935007766</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Half assed attempt at music, will update tomorrow">
+      <created>1542941276239</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1542941276239</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -607,7 +610,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49894625" visible="true" weight="0.35377875" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49894625" weight="0.35377875" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -667,7 +670,8 @@
     <MESSAGE value="Made more readable" />
     <MESSAGE value="Added welcome command" />
     <MESSAGE value="moved errors to separate cog" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved errors to separate cog" />
+    <MESSAGE value="Half assed attempt at music, will update tomorrow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Half assed attempt at music, will update tomorrow" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/oldCode.py">
@@ -805,7 +809,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/music.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
+        <state relative-caret-position="-84">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
