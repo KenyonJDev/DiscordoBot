@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 import asyncio
-extensions = ['BasicCommands','debug','Moderation']
+extensions = ['BasicCommands','debug','Moderation','music']
 TOKEN = 'NTE0MjE4MjA1MzUxNTEwMDE3.DtTWng.P51Ms3PD131pmZ00QjclA5XOeqE'
 client = commands.Bot(command_prefix = '!')
 @client.event

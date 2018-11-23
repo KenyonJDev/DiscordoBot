@@ -21,3 +21,4 @@ class Moderation:
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
+    print("moderation loaded")
