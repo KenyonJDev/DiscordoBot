@@ -1,12 +1,13 @@
 import discord
 from discord.ext import commands
+import asyncio
 
-class errors:
+class debug:
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
-    async def debug(ctx, *, code):
+    @commands.command(aliases=["d","D"])
+    async def debug(self, ctx, *, code):
         """Evaluates code"""
         if ctx.message.author.id == 143092204741722112:
             author = ctx.message.author
@@ -14,7 +15,7 @@ class errors:
             code = code.strip('` ')
             result = None
             global_vars = globals().copy()
-            global_vars['bot'] = "test bot"
+            global_vars['bot'] = commands
             global_vars['ctx'] = ctx
             global_vars['message'] = ctx.message
             global_vars['author'] = ctx.message.author
@@ -29,20 +30,5 @@ class errors:
                 result = await result
             await channel.send("``py\n{}``".format(str(result)))
 
-    @info.error
-    async def info_error(self, ctx, error):
-        if isinstance(error, commands.BadArgument):
-            await ctx.send('I could not find that member...')
-
-    @info.error
-    async def play_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("You aren't in a channel!")
-
-    @info.error
-    async def play_error(self, ctx, error):
-        if isinstance(error, commands.CommandInvokeError):
-            await ctx.send("You aren't in a channel!")
-
 def setup(bot):
-    bot.add_cog(errors(bot))
+    bot.add_cog(debug(bot))

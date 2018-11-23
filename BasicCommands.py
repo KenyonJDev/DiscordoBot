@@ -51,5 +51,21 @@ class BasicCommands:
         """Counts words in string"""
         await ctx.send('{} words'.format(len(args), ', '.join(args)))
 
+    @info.error
+    async def info_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            await ctx.send('I could not find that member...')
+
+    @info.error
+    async def play_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send("You aren't in a channel!")
+
+    @info.error
+    async def play_error(self, ctx, error):
+        if isinstance(error, commands.CommandInvokeError):
+            await ctx.send("You aren't in a channel!")
+
+
 def setup(bot):
     bot.add_cog(BasicCommands(bot))
