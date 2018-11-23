@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import lavalink
 
 time_rx = re.compile('[0-9]+')
 url_rx = re.compile('https?:\/\/(?:www\.)?.+')
