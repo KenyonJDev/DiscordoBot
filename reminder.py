@@ -1,41 +1,47 @@
-''' ----- USAGE -----
-from reminder import Reminder
-def onNotification(sender, message):
-    print(message)    
-# create reminder object
-rmndr = Reminder()
-# add function to execute
-rmndr.listener += onNotification
-# analyse user string and set reminder with this function
-rmndr.getAnswer('User string')
-# manually set reminder args(text, secondsToWait)
-rmndr.setReminder('This is my message', 8)
+''' ----- USAGE explanation -----
+    from reminder import Reminder
+    def onNotification(sender, message):
+        print(message)    
+
+    # create reminder object
+    rmndr = Reminder()
+    # add function to execute
+    rmndr.listener += onNotification
+    # analyse user string and set reminder with this function
+    rmndr.getAnswer('User string')
+
+    # manually set reminder {args(text, secondsToWait)}
+    rmndr.setReminder('This is my message', 8)
 '''
 
-import datetime
-import sched, time
-import event
+# event-driven programming. Read wikipedia to know how it works
+import event # copyright explained in event.py file
+# ------------------------
+import datetime # system date
+import sched, time # delay commands AND system time
 import _thread
-import re
-import traceback
-from pyfcm import FCMNotification
+import re # regular expressions standart library
+import traceback # used for debugging exeptions
+from pyfcm import FCMNotification # google firebase cloud messaging library
 
 class Reminder():
     listener = event.Event() # functions list to invoke
-    # enum for dictionary in getTags() function
+    listenerEnabled = False # if false then use android app notification
+    
+    # ENUM used as dictionary key in getTags() function:
     ACTION_NONE = -1
-    ACTION_ADD = 0 # requires: time stamp, message
+    ACTION_ADD = 0
     ACTION_DEL = 1 
     ACTION_SHOW = 2
     KEYWORDS = 3
     MESSAGE_IDENT = 4 # message identificators
-    TIME_IDENT = 5 # message identificators
+    TIME_IDENT = 5 # time identificators
     
-    # time formats enum:
-    AFTER = 0
-    OCLOCK = 1
-    DEFAULT_TIME = 2
-    AMPM_TIME = 3
+    # ENUM used as dictionary key to get time regexes:
+    AFTER = 0 # i.e. 'after 1hour 5 minutes'
+    OCLOCK = 1 # i.e. 5 o`clock or 5 oclock
+    DEFAULT_TIME = 2 # i.e. 15.25 or 15:25
+    AMPM_TIME = 3 # i.e. 5am 11pm
     
     REGEXES = {AFTER: '(\d{1,2} *((seconds?)|(minutes?)|(hours?)))',
                OCLOCK: '(\d{1,2} *[oO]?(clock))',
@@ -46,8 +52,9 @@ class Reminder():
                        'Sorry, I cannot set you a reminder! Can you be more precise?', 
                        'I missunderstand :(. Can you explain in a different way?']
     
-    def __init__(self):
+    def __init__(self, enableListener=False):
         self.sched = sched.scheduler(time.time, time.sleep)
+        self.listenerEnabled = enableListener
     
     ''' <summary>Gives tags which are used to detect user action</summary>
         <return>dict of {'str': list}</return>'''
@@ -63,6 +70,7 @@ class Reminder():
              self.TIME_IDENT: [' at ', ' after ', ' in '] }
         return d
     
+    ''' <summary>Picks random value in a list</summary>'''
     def pickRandom(self, _list):
         import random
         return _list[random.randint(0, len(_list)) - 1]
@@ -74,17 +82,20 @@ class Reminder():
     
     ''' <summary>Sets a timer for invokation</summary>'''
     def setReminder(self, text, delayInSec):
+        # threads are used because 'sched' library delay main program flow
         _thread.start_new_thread(self.reminderThread, (text, delayInSec) )
     
     ''' <summary>Notifies caller class to pull reminder</summary> '''
     def invokeListener(self, text):
         device_token = "fQg_YPhiS-c:APA91bGgxjJJvwwSR8r5zFdN-qyerR5gP5aa1g-E0yqLumV56ZOuubAcNyJCIOeF_0rEvk9BCAN2WqgNkB23kxACP6AFD1c5ON0jMaJanV1JXzvgR7gNA0sn3rlW1WQPUmO_cqv7xT76"
         key = "AAAA-PO7Lds:APA91bEkn-rmOegVXChsx0MAxKy0N9JCy6-S7NtSa3cp6uiPFz150zRMijet-3VrWjw_GKxxHnKuBvJ6D5-j7Krjhb6aWTq9avgaSS-SldbdrNT4WyAMh6AoXWqfg5L-3IV1le8IkMM_"
-        notificationService = FCMNotification(api_key=key)
-        notificationService.notify_single_device(registration_id=device_token, message_title=text, message_body='Discord Reminder')
-        self.listener(text)
+        if self.listenerEnabled:
+            self.listener(text)
+        else: # send android notification through google firebase
+            notificationService = FCMNotification(api_key=key)
+            notificationService.notify_single_device(registration_id=device_token, message_title=text, message_body='Discord Reminder')
     
-    ''' <summary>Keywords for finding the right module</summary>
+    ''' <summary>Gives keywords used to identify if it's associated with reminder</summary>
         <return>list of strings</return> '''
     def getKeywords(self):
         return self.getTags()[self.KEYWORDS]
@@ -99,8 +110,8 @@ class Reminder():
                 return True
         return False
     
-    ''' <summary>extracts time string part from input</summary>
-        <return>str(time part) or in one case list of str, time type</return>'''
+    ''' <summary>extracts time str part from input</summary>
+        <return>str(time part) or list of strings, and (ENUM)time type</return>'''
     def detectTime(self, text):
         for i in range(4):
             regex = re.findall(self.REGEXES[i], text)
@@ -115,7 +126,7 @@ class Reminder():
                     return regex[0][0], i
         return None
     
-    ''' <summary>extracts note string part from input</summary>
+    ''' <summary>extracts reminder text from input</summary>
         <return>str(user note)</return>'''
     def detectMessage(self, text):
         regexTime = re.findall('( (at|after|in) )', text)
@@ -133,7 +144,8 @@ class Reminder():
         else:
             return None
                 
-    
+    ''' <summary>Finds first number in string</summary>
+        <return>int</return>'''
     def findIntInString(self, string):
         regex = re.search(r'\d+', string)
         if regex != None:
@@ -141,17 +153,14 @@ class Reminder():
         else:
             return None
     
-    ''' <summary>convert time string to seconds left for that event to occur</summary>
-        <return>int(delay seconds)</return>'''
+    ''' <summary>convert time string to seconds left for event to fire</summary>
+        <note>recursive calls are used to reduce redundancy</note>
+        <param name="timeTuple">[0]: contains time string, [1]: (ENUM-int)time format</param>
+        <return>int(delay in seconds)</return>'''
     def calculateDelay(self, timeTuple):
-        # after = constant numer of timeStr
-        # european way: 15.25 or 15:25
-        # UK way: 5am or 5.25pm or 5:25pm
-        # 5 o`clock or 5 oclock
-        # ADVANCED: word typed case: half past two or half <past> ten
         totalSeconds = 0
         if timeTuple[1] == self.AFTER:
-            for timePiece in timeTuple[0]:
+            for timePiece in timeTuple[0]: # iterates hour, min, sec
                 num = self.findIntInString(timePiece)
                 if num == None:
                     return None
@@ -167,47 +176,50 @@ class Reminder():
             if not(num >= 1 and num <= 12): # if non sence time, return Error
                 return None
             if num == 12:
-                return self.calculateDelay(("12:00", 2)) # recursion. Calls for 24 format time
+                return self.calculateDelay(("12:00", self.DEFAULT_TIME)) # recursive call for 24 format time
             else:
                 now = datetime.datetime.now() # current system time
-                if num > now.hour: # ie. hour: now = 9:00, given = 11:00 then counts as morning 
-                    return self.calculateDelay((str(num) + ':00', 2)) # ie 1oclock - 13:00
+                if num > now.hour: # ie. hour: now = 9:00, given = 11oclock then counts as morning 
+                    return self.calculateDelay((str(num) + ':00', self.DEFAULT_TIME)) # recursional call for 24 format time
                 else:
-                    return self.calculateDelay((str(num + 12) + ':00', 2)) # ie 1oclock - 13:00
+                    return self.calculateDelay((str(num + 12) + ':00', 2)) # recursive call for 24 format time
         elif timeTuple[1] == self.DEFAULT_TIME:
-            nums = list(map(int, re.findall(r'\d+', timeTuple[0])))
-            if len(nums) != 2:
-                return None
+            # i.e. time str "12:34" becomes list ['12', '34']
+            nums = list(map(int, re.findall(r'\d+', timeTuple[0]))) 
+            if len(nums) != 2: 
+                return None # something went wrong
             now = datetime.datetime.now() # current system time
-            nowSeconds = now.hour * 3600 + now.minute * 60
+            nowSeconds = now.hour * 3600 + now.minute * 60 # realtime day seconds count
             givenSeconds = nums[0] * 3600 + nums[1] * 60
-            nowSysSec = int(round(time.time()))
+            nowSysSec = int(round(time.time())) # seconds past after 1 January 1970
             day = now.day
-            if nowSeconds >= givenSeconds: # ie. now 16:56, given time 13:12. Warps to next day
+            if nowSeconds >= givenSeconds: # ie. now 16:56, given time 13:12. Shifts reminder to next day
                 day = now.day + 1
             givenInSysSec = int(time.mktime(datetime.datetime(now.year, now.month, day, nums[0], nums[1]).timetuple()))
             return givenInSysSec - nowSysSec
         elif timeTuple[1] == self.AMPM_TIME:
+            # time string is trusted of am pm because regex already filtered it
+            # until this point. So i check for 'a' rather than 'AM'
             isAM = 'a' in timeTuple[0].lower()
-            num = self.findIntInString(timeTuple[0])
+            num = self.findIntInString(timeTuple[0]) # find number(hour)
             if not(num >= 1 and num <= 12):
                 return None
             if isAM and num == 12:
-                num = 0 # in other am cases num is the same
-            if not isAM and num != 12: # isPM
-                # if num = 12 then it is right so it dont need to be changed
+                num = 0 # in other am cases num is the same so I dont change it
+            # if num = 12 then it is right so I dont need to change it
+            if not isAM and num != 12: # means isPM
                 num += 12
-            return self.calculateDelay((str(num) + ":00", 2)) # uses default time (2)
-        return None # error
+            return self.calculateDelay((str(num) + ":00", self.DEFAULT_TIME)) # recursive call for 24 format time
+        return None # it case of error
     
     def actionAdd(self, userInput):
         try:
-            time = self.detectTime(userInput) # extracts string type time from input
-            message = self.detectMessage(userInput) # extracts reminder message
+            time = self.detectTime(userInput) # finds str part of time from input
+            message = self.detectMessage(userInput) # finds reminder message
             delaySec = self.calculateDelay(time) # calculates DELAY in seconds after which raises reminder
-            if message == None or delaySec == None:
+            if message == None or delaySec == None: # on failure-escape case
                 return self.pickRandom(self.DEFAULT_STRINGS) 
-            if delaySec != None: # error code
+            if delaySec != None: # if successful
                 self.setReminder('Reminder: ' + str(message), int(delaySec))
                 prefixStrs = ['Ofcourse', 'No worries', 'Yup buddy', 'Sure mate']
                 if time[1] == self.AFTER:
@@ -217,23 +229,22 @@ class Reminder():
             else:
                 raise Exception('Time string was not converted!')
         except:
-            traceback.print_exc()
+            traceback.print_exc() # console debugging
             return self.pickRandom(self.DEFAULT_STRINGS)
+        
     ''' <summary>Analyze user input, sets reminder and Returns note for user</summary>
         <return>str</return> '''
     def getAnswer(self, userInput):
         #self.setReminder(userInput, 6)
-        userInput = filterUserInput(userInput)
-        userAction = self.determineAction(userInput)
+        userInput = filterUserInput(userInput) # deletes unnecessarily punctuation, lower case all letters
         
-        if userAction == self.ACTION_NONE: # no action was detected, exiting...
-            return self.pickRandom(self.DEFAULT_STRINGS)
-        if userAction == self.ACTION_ADD:
+        # at this moment only ADD function is enable/developed
+        userAction = self.determineAction(userInput) # what user wants to do. Add, remove, get list of reminders
+        
+        if userAction == self.ACTION_ADD: # setting reminder
             return self.actionAdd(userInput)
-        elif userAction == self.ACTION_DEL:
-            return self.pickRandom(self.DEFAULT_STRINGS)
-        elif userAction == self.ACTION_SHOW:
-            return self.pickRandom(self.DEFAULT_STRINGS)
+        else: # unable to do user requested action
+            return self.pickRandom(self.DEFAULT_STRINGS) 
     
     ''' <summary>chooses action to perform(add,del or show)</summary>
         <return>int</return>'''
@@ -243,22 +254,24 @@ class Reminder():
             return self.ACTION_ADD
         # other cases
         actionDict = self.getTags()
+        # searh for matches in dictionary of lists
+        # return i - which is ENUM action(defined above)
         for i in range(4): # i = 0, 1, 2
             for value in actionDict[i]:
                 if value in userInput:
                     return i                                                                   
-        return self.ACTION_NONE
+        return self.ACTION_NONE # default case
 
 ''' <summary>preparing a string for analyses</summary>
     <return>str</return>'''
 def filterUserInput(text):
-    text = text.replace(',', ' ')
+    text = text.replace(',', ' ') # removes commas
     text = " ".join(text.split()) # replace(with space) multiple spaces, tabs and new lines
     text = text.lower()
-    text = text.replace('!', '.')
+    text = text.replace('!', '.') # ! becomes .
     import string
     allowedChars = string.ascii_lowercase + string.digits + ' :.?'
-    for letter in text: # removes not allower chars
+    for letter in text: # removes not allowed chars
         if not letter in allowedChars:
             text = text.replace(letter, '')
     # exeption with 'I have' -> replaces to 'that I have'
@@ -274,3 +287,4 @@ if __name__ == '__main__':
     while True:
         userInput = input("\nEnter reminder text: ")
         print(r.getAnswer(userInput), '\n')
+        

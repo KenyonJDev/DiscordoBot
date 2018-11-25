@@ -1,36 +1,36 @@
 <?xml version="1.0" ?>
 <root>
-   <!--Test time: 2018-11-12 10:14:54.445379-->
+   <!--Test time: 2018-11-13 10:08:11.412296-->
    <test>
       <input>Make me a message after 8 minutes and 5 seconds with text of hello</input>
-      <answer>No worries ;)! I set you a reminder after 485 secons with note:hello</answer>
+      <answer>Yup buddy ;)! I set you a reminder after ['8 minutes', '5 seconds'] with note: Hello</answer>
    </test>
    <test>
       <input>Make me a message with text of hello after 8 minutes and 5 seconds</input>
-      <answer>No worries ;)! I set you a reminder after 485 secons with note:hello</answer>
+      <answer>Ofcourse ;)! I set you a reminder after ['8 minutes', '5 seconds'] with note: Hello</answer>
    </test>
    <test>
       <input>Remind me at 6o'clock to make homework</input>
-      <answer>No worries ;)! I set you a reminder after 27906 secons with note:make homework</answer>
+      <answer>Sure mate ;)! I set you a reminder at 6oclock with note: Make homework</answer>
    </test>
    <test>
       <input>Set a reminder at 6 o'clock to make homework</input>
-      <answer>No worries ;)! I set you a reminder after 27906 secons with note:make homework</answer>
+      <answer>Ofcourse ;)! I set you a reminder at 6 oclock with note: Make homework</answer>
    </test>
    <test>
       <input>Make a note to call dad at 12:52</input>
-      <answer>No worries ;)! I set you a reminder after 9426 secons with note:call dad</answer>
+      <answer>No worries ;)! I set you a reminder at 12:52 with note: Call dad</answer>
    </test>
    <test>
       <input>Make a note at 12:52 to call dad</input>
-      <answer>No worries ;)! I set you a reminder after 9426 secons with note:call dad</answer>
+      <answer>Sure mate ;)! I set you a reminder at 12:52 with note: Call dad</answer>
    </test>
    <test>
       <input>Send a notification at 11a.m with the message of go shoping</input>
-      <answer>No worries ;)! I set you a reminder after 2706 secons with note:go shoping</answer>
+      <answer>No worries ;)! I set you a reminder at 11a.m with note: Go shoping</answer>
    </test>
    <test>
       <input>Set me a reminder with a message of hello at 2:12PM</input>
-      <answer>No worries ;)! I set you a reminder after 57426 secons with note:hello</answer>
+      <answer>Sure mate ;)! I set you a reminder at 14:12 with note: Hello</answer>
    </test>
 </root>
