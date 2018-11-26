@@ -6,19 +6,19 @@ import random
 #    https://docs.python.org/3/library/asyncio-task.html#coroutine
 
 
-def checkDog(stringInp):
-    splitRequest = stringInp.split('dog', 1) #trip the request down to the relevent content
+def checkDog(stringInp):    #input the user request. uses this to check the validity of any additional specifications provided (such as 'pug') and then proceeds with the appropriate steps
+    splitRequest = stringInp.split('dog', 1)    #strip the request down to the relevent content to be checked.
     print(splitRequest)
     dogRequest = splitRequest[1].strip(" ")
     
-    dogCheck = dogInputValidity(dogRequest)
+    dogCheck = dogInputValidity(dogRequest)    #calls the validity check function
 
     if dogCheck == True:
-        dogImage = dogCall(dogRequest)
+        dogImage = dogCall(dogRequest)    #calls the funciton to output the image
         return dogImage
     else:
         if dogRequest == "help":
-            return "To request a dog please write dog.\nTo specify a dog, add one of the following to your request using the format dog *chosen type here*;\nshiba, samoyed, pug, cursed, other"
+            return "To request a dog please write dog.\nTo specify a dog, add one of the following to your request using the format 'dog *chosen type here*;\nshiba, samoyed, pug, cursed, other'"
         else:
             return "Sorry, that isnt a valid dog type!"
 
@@ -28,19 +28,17 @@ def dogInputValidity(dogCheck):
     else:
         return False
     
-def dogCall(request):
+def dogCall(request):    #outputs the image the user has requested, taking into account any specifications
     chosenType = ""
     chosenDog = ""
     dogType = request
-    if dogType == "":
-        chosenType = random.choice(os.listdir("../ChatBot/dogContent"))
-        chosenDog = chosenType + "/" + random.choice(os.listdir("../ChatBot/dogContent/" + chosenType))
+    if dogType == "":    #if the user has no aditional specifications, this code is run to output a completely random image
+        chosenType = random.choice(os.listdir("../ChatBot/dogContent"))    #this randomises a selection of the folders within 'dogContent'
+        chosenDog = chosenType + "/" + random.choice(os.listdir("../ChatBot/dogContent/" + chosenType))    #this randomises a selection from the images within the selected folder
         dogDir = "../ChatBot/dogContent/" + chosenDog 
         return dogDir
-    elif dogType == "help":
-        important 
-    else:
+    else:    #if this code has been run and there was a specification added on to the end which was not 'help'; this code is run
         chosenType = dogType
-        chosenDog = chosenType + "/" + random.choice(os.listdir("../ChatBot/dogContent/" + chosenType))
+        chosenDog = chosenType + "/" + random.choice(os.listdir("../ChatBot/dogContent/" + chosenType))    #this randomises a selection from the images within the selected folder
         dogDir = "../ChatBot/dogContent/" + chosenDog 
         return dogDir
