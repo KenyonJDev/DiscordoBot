@@ -12,7 +12,7 @@ class debug:
         if ctx.message.author.id == 143092204741722112:
             author = ctx.message.author
             channel = ctx.message.channel
-            code = code.strip('` ')
+            code = code.strip('` !')
             result = None
             global_vars = globals().copy()
             global_vars['bot'] = commands

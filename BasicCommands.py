@@ -32,12 +32,12 @@ class BasicCommands:
         embed.set_footer(text = "KenyonJ")
         await ctx.send(content = None, embed = embed)
 
-    @commands.command()
+    @commands.command(aliases =["r","R"])
     async def repeat(self, ctx, *, arg):
         """repeats what you type"""
         await ctx.send(arg)
 
-    @commands.command()
+    @commands.command(aliases =["w","W"])
     async def wordcount(self, ctx, *args):
         """Counts words in string"""
         await ctx.send('{} words'.format(len(args), ', '.join(args)))

@@ -8,7 +8,6 @@ class music:
     def __init__(self, client):
         self.client = client
 
-
     @commands.command(aliases=['p','P'])
     @commands.guild_only()
     async def play(self, ctx, *, query: str):

@@ -20,11 +20,11 @@ async def load(ctx, extension):
         client.load_extension(extension)
         message = ('Loaded {}'.format(extension))
         print(message)
-        await ctx.send(message=message)
+        await ctx.send(message)
     except Exception as error:
         error_loading = ("error loading [{}]".format(extension, error))
         print(error_loading)
-        await ctx.send(error_loading=error_loading)
+        await ctx.send(error_loading)
 
 @client.command()
 async def unload(ctx, extension):
@@ -33,11 +33,11 @@ async def unload(ctx, extension):
         client.unload_extension(extension)
         message = ('Unloaded {}'.format(extension))
         print(message)
-        await ctx.send(message=message)
+        await ctx.send(message)
     except Exception as error:
         error_loading = ("error unloading [{}]".format(extension, error))
         print(error_loading)
-        await ctx.send(error_loading=error_loading)
+        await ctx.send(error_loading)
 
 if __name__ == '__main__': #Fetches our cogs from the main file
     for extension in extensions:
