@@ -48,6 +48,9 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
     if math.mathQ:
         return math.currentEval
     
+    elif(moduleName == "google")
+        return googleSearch.userSearch(stringInp)
+    
     elif(moduleName == "dog"):
         return shibBot.checkDog(stringInp)
     

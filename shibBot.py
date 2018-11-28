@@ -6,7 +6,10 @@ import random
 #    https://docs.python.org/3/library/asyncio-task.html#coroutine
 
 
-def checkDog(stringInp):    #input the user request. uses this to check the validity of any additional specifications provided (such as 'pug') and then proceeds with the appropriate steps
+def checkDog(stringInp):
+    """Input the user request. 
+       Uses this to check the validity of any additional specifications provided 
+       (such as 'pug') and then proceeds with the appropriate steps."""
     splitRequest = stringInp.split('dog', 1)    #strip the request down to the relevent content to be checked.
     print(splitRequest)
     dogRequest = splitRequest[1].strip(" ")
@@ -23,12 +26,14 @@ def checkDog(stringInp):    #input the user request. uses this to check the vali
             return "Sorry, that isnt a valid dog type!"
 
 def dogInputValidity(dogCheck):
+    """The validity check used by checkDog()."""
     if dogCheck == "shiba" or dogCheck == "samoyed" or dogCheck == "pug" or dogCheck == "other" or dogCheck == "cursed" or dogCheck == "":
         return True #return whether or not the additional content is valid to the module or not
     else:
         return False
     
-def dogCall(request):    #outputs the image the user has requested, taking into account any specifications
+def dogCall(request):    
+    """Outputs the image the user has requested, taking into account any specifications."""
     chosenType = ""
     chosenDog = ""
     dogType = request
