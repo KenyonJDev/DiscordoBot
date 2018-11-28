@@ -10,14 +10,14 @@ def checkDog(stringInp):
     """Input the user request. 
        Uses this to check the validity of any additional specifications provided 
        (such as 'pug') and then proceeds with the appropriate steps."""
-    splitRequest = stringInp.split('dog', 1)    #strip the request down to the relevent content to be checked.
+    splitRequest = stringInp.split('dog', 1)    #strip the request down to the relevant content to be checked.
     print(splitRequest)
     dogRequest = splitRequest[1].strip(" ")
     
     dogCheck = dogInputValidity(dogRequest)    #calls the validity check function
 
     if dogCheck == True:
-        dogImage = dogCall(dogRequest)    #calls the funciton to output the image
+        dogImage = dogCall(dogRequest)    #calls the function to output the image
         return dogImage
     else:
         if dogRequest == "help":
@@ -37,7 +37,7 @@ def dogCall(request):
     chosenType = ""
     chosenDog = ""
     dogType = request
-    if dogType == "":    #if the user has no aditional specifications, this code is run to output a completely random image
+    if dogType == "":    #if the user has no additional specifications, this code is run to output a completely random image
         chosenType = random.choice(os.listdir("../ChatBot/dogContent"))    #this randomises a selection of the folders within 'dogContent'
         chosenDog = chosenType + "/" + random.choice(os.listdir("../ChatBot/dogContent/" + chosenType))    #this randomises a selection from the images within the selected folder
         dogDir = "../ChatBot/dogContent/" + chosenDog 
