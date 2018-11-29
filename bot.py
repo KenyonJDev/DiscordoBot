@@ -4,8 +4,6 @@ from rivescript import RiveScript
 import discord
 from discord.ext import commands
 import asyncio
-#import hangman
-#import hangBot
 import dbQueries
 import re
 import conversation
