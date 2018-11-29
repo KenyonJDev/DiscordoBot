@@ -23,7 +23,7 @@ class CurrencyConverter:
 			return initial_amount, from_currency, '=', amount * self.rates[to_currency], to_currency
 
 
-converter = CurrencyConverter("http://data.fixer.io/api/latest?access_key=0930e8e17d8bbe942a4bec2cc9feab58")
+converter = CurrencyConverter("http://data.fixer.io/api/latest?access_key=0930e8e17d8bbe942a4bec2cc9feab58") #api key from fixer.io
 
 
 
