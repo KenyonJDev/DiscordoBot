@@ -1,29 +1,29 @@
 import random
 from colorama import Fore  #Colors
 
-def isWordGuessed(secretWord, lettersGuessed):
+def wordg(word, lettersGuessed):
     count=0
-    for letters in secretWord:
+    for letters in word:
         if letters in lettersGuessed:
             count+=1
-    if count==len(secretWord):
+    if count==len(word):
         return True
     else:
         return False
 
 
-def getGuessedWord(secretWord, lettersGuessed):
+def findwordg(word, lettersGuessed):
     temp=[]
     string=""
-    for key in secretWord:
-        if key in lettersGuessed:
-            string+=key
+    for i in word:
+        if i in lettersGuessed:
+            string+=i
         else:
             string+="_ "
     return string
 
 
-def getAvailableLetters(lettersGuessed):
+def lettersAvail(lettersGuessed):
     string=""
     count=0
     s='abcdefghijklmnopqrstuvwxyz'
@@ -35,44 +35,43 @@ def getAvailableLetters(lettersGuessed):
     return string
     
 
-def hangman(secretWord):
-    length=len(secretWord)
-    print("Welcome to Hangman!")
+def game(word):
+    length=len(word)
     print("The word has",length, "letters.")
-    chances=2*len(secretWord)
+    guesses=2*len(word)
     i=0
     lettersGuessed=[]
-    while (chances!=0):
-        print("-----------")
-        if secretWord!=getGuessedWord(secretWord, lettersGuessed):
-            print("You have", chances, "guesses left.")
-            print("Available letters: ",getAvailableLetters(lettersGuessed))
+    while (guesses!=0):
+        print("----------")
+        if word!=findwordg(word, lettersGuessed):
+            print("You have", guesses, "guesses left.")
+            print("Available letters: ",lettersAvail(lettersGuessed))
             guess=input("Please guess a letter: ")
             guessInLowerCase = guess.lower()
             
             if guessInLowerCase  in lettersGuessed:
-                print("Oops! You've already guessed that letter: ",getGuessedWord(secretWord, lettersGuessed))
+                print("Sory, letter already guessed: ",findwordg(word, lettersGuessed))
             
-            elif guessInLowerCase not in secretWord: 
-                print(Fore.RED + "Oops! That letter is not in my word:",getGuessedWord(secretWord, lettersGuessed))
-                chances-=1
+            elif guessInLowerCase not in word: 
+                print(Fore.RED + "Letter not in this word:",findwordg(word, lettersGuessed))
+                guesses-=1
             else:
                 lettersGuessed.append(guessInLowerCase)
-                print(Fore.GREEN + "Good guess: ",getGuessedWord(secretWord, lettersGuessed))
-                #chances+=1
+                print(Fore.GREEN + "Good guess: ",findwordg(word, lettersGuessed))
             lettersGuessed.append(guessInLowerCase)
-        elif secretWord==getGuessedWord(secretWord, lettersGuessed):
-            print("Congratulations, you won!")
+            
+        elif word==findwordg(word, lettersGuessed):
+            print("Amazing, you've guessed the word!")
             break
     else:
-        print("-----------")
-        print("Sorry, you ran out of guesses. The word was "+secretWord+".")
+        print("----------")
+        print("You have no more guesses available. The word was "+word+".")
         
 
 
-list=['computer', 'science', 'laptop', 'desktop', 'school', 'screen', 'python', 'coventry university']
+words=['computer', 'science', 'laptop', 'desktop', 'school', 'screen', 'python', 'coventry university']
 r=random.randint(0,7)
 
         
-secretWord=(list[r])
-hangman(secretWord)
+word=(words[r])
+game(word)
