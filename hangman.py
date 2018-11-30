@@ -14,25 +14,25 @@ def wordg(word, lettersGuessed):
 
 def findwordg(word, lettersGuessed):
     temp=[]
-    string=""
+    str=""
     for i in word:
         if i in lettersGuessed:
-            string+=i
+            str+=i
         else:
-            string+="_ "
-    return string
+            str+="_ "
+    return str
 
 
 def lettersAvail(lettersGuessed):
-    string=""
+    str=""
     count=0
-    s='abcdefghijklmnopqrstuvwxyz'
-    for letter in s:
+    alphabet='abcdefghijklmnopqrstuvwxyz'
+    for letter in alphabet:
         if letter in lettersGuessed:
             count+=1
         else:
-            string+=letter
-    return string
+            str+=letter
+    return str
     
 
 def game(word):
@@ -44,13 +44,13 @@ def game(word):
     while (guesses!=0):
         print("----------")
         if word!=findwordg(word, lettersGuessed):
-            print("You have", guesses, "guesses left.")
-            print("Available letters: ",lettersAvail(lettersGuessed))
-            guess=input("Please guess a letter: ")
+            print("Only", guesses, "guesses remaining.")
+            print("Letters: ",lettersAvail(lettersGuessed))
+            guess=input("Guess a letter: ")
             guessInLowerCase = guess.lower()
             
             if guessInLowerCase  in lettersGuessed:
-                print("Sory, letter already guessed: ",findwordg(word, lettersGuessed))
+                print("Sorry, letter already guessed: ",findwordg(word, lettersGuessed))
             
             elif guessInLowerCase not in word: 
                 print(Fore.RED + "Letter not in this word:",findwordg(word, lettersGuessed))
@@ -65,7 +65,7 @@ def game(word):
             break
     else:
         print("----------")
-        print("You have no more guesses available. The word was "+word+".")
+        print("No more guesses available. The word was "+word+".")
         
 
 
