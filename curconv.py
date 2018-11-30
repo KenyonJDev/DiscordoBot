@@ -1,7 +1,10 @@
 import urllib.request
 import json
 
-
+amount = input("amount? ")
+from_currency = input("from? ")
+to_currency = input("to? ")
+print(amount + '' + from_currency + '' + to_currency)
 
 class CurrencyConverter:
 
@@ -22,13 +25,18 @@ class CurrencyConverter:
 		else:
 			return initial_amount, from_currency, '=', amount * self.rates[to_currency], to_currency
 
+    def getAnswer(userInput):
+        amount = userInput.lower().replace("convert ", '')
 
-converter = CurrencyConverter("http://data.fixer.io/api/latest?access_key=0930e8e17d8bbe942a4bec2cc9feab58") #api key from fixer.io
 
 
 
-print(converter.convert(1.0, "EUR", "USD"))
-print(converter.convert(1.0, "GBP", "USD"))
-print(converter.convert(1.0, "CAD", "GBP"))
-print(converter.convert(1.0, "CAD", "EUR"))
-print(converter.convert(1.0, "GBP", "USD"))
+converter = CurrencyConverter("http://data.fixer.io/api/latest?access_key=0930e8e17d8bbe942a4bec2cc9feab58") #api key from fixer
+
+
+#Testing cases
+#print(converter.convert(1.0, "EUR", "USD"))
+#print(converter.convert(1.0, "GBP", "USD"))
+#print(converter.convert(1.0, "CAD", "GBP"))
+#print(converter.convert(1.0, "CAD", "EUR"))
+#print(converter.convert(1.0, "GBP", "USD"))
