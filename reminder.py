@@ -1,13 +1,16 @@
 ''' ----- USAGE -----
 from reminder import Reminder
+
 def onNotification(sender, message):
     print(message)    
+
 # create reminder object
 rmndr = Reminder()
 # add function to execute
 rmndr.listener += onNotification
 # analyse user string and set reminder with this function
 rmndr.getAnswer('User string')
+
 # manually set reminder args(text, secondsToWait)
 rmndr.setReminder('This is my message', 8)
 '''
@@ -17,11 +20,11 @@ import sched, time
 import event
 import _thread
 import re
+
 import traceback
-# from pyfcm import FCMNotification
 
 class Reminder():
-    listener = event.Event() # functions list to invoke
+    listener = event.Event()
     # enum for dictionary in getTags() function
     ACTION_NONE = -1
     ACTION_ADD = 0 # requires: time stamp, message
@@ -78,26 +81,12 @@ class Reminder():
     
     ''' <summary>Notifies caller class to pull reminder</summary> '''
     def invokeListener(self, text):
-        device_token = "fQg_YPhiS-c:APA91bGgxjJJvwwSR8r5zFdN-qyerR5gP5aa1g-E0yqLumV56ZOuubAcNyJCIOeF_0rEvk9BCAN2WqgNkB23kxACP6AFD1c5ON0jMaJanV1JXzvgR7gNA0sn3rlW1WQPUmO_cqv7xT76"
-        key = "AAAA-PO7Lds:APA91bEkn-rmOegVXChsx0MAxKy0N9JCy6-S7NtSa3cp6uiPFz150zRMijet-3VrWjw_GKxxHnKuBvJ6D5-j7Krjhb6aWTq9avgaSS-SldbdrNT4WyAMh6AoXWqfg5L-3IV1le8IkMM_"
-        notificationService = FCMNotification(api_key=key)
-        notificationService.notify_single_device(registration_id=device_token, message_title=text, message_body='Discord Reminder')
         self.listener(text)
     
     ''' <summary>Keywords for finding the right module</summary>
         <return>list of strings</return> '''
     def getKeywords(self):
         return self.getTags()[self.KEYWORDS]
-    
-    ''' <summary>Checks if input is associated with module</summary>
-        <return>boolean</return> '''
-    def check(self, userInput):
-        userInput = userInput.lower()
-        kwList = self.getKeywords()
-        for kw in kwList: # tries to find at least 1 keyword
-            if kw in userInput:
-                return True
-        return False
     
     ''' <summary>extracts time string part from input</summary>
         <return>str(time part) or in one case list of str, time type</return>'''
@@ -124,15 +113,13 @@ class Reminder():
         if regexMsg and regexTime: # match found
             ident_msg = regexMsg[0][0] # message identicative string
             ident_time = regexTime[0][0] # time identicative string
+#             return ident_time + ':' + ident_msg
             if text.find(ident_time) > text.find(ident_msg): # message is typed first then time
-                _returnText = text[text.find(ident_msg) + len(ident_msg) : text.find(ident_time)]
-                return _returnText[0].upper() + _returnText[1:] # capitalize first letter
+                return text[text.find(ident_msg) + len(ident_msg) : text.find(ident_time)]
             else:
-                _returnText = text[text.find(ident_msg) + len(ident_msg) :]
-                return _returnText[0].upper() + _returnText[1:] # capitalize first letter
+                return text[text.find(ident_msg) + len(ident_msg) :]
         else:
             return None
-                
     
     def findIntInString(self, string):
         regex = re.search(r'\d+', string)
@@ -208,12 +195,8 @@ class Reminder():
             if message == None or delaySec == None:
                 return self.pickRandom(self.DEFAULT_STRINGS) 
             if delaySec != None: # error code
-                self.setReminder('Reminder: ' + str(message), int(delaySec))
-                prefixStrs = ['Ofcourse', 'No worries', 'Yup buddy', 'Sure mate']
-                if time[1] == self.AFTER:
-                    return '{} ;)! I set you a reminder after {} with note: {}'.format(self.pickRandom(prefixStrs), time[0], message)
-                else:
-                    return '{} ;)! I set you a reminder at {} with note: {}'.format(self.pickRandom(prefixStrs), time[0], message)
+                self.setReminder(str(message), int(delaySec))
+                return 'No worries ;)! I set you a reminder after {} seconds with note:{}'.format(delaySec, message)
             else:
                 raise Exception('Time string was not converted!')
         except:
@@ -304,11 +287,6 @@ def filterUserInput(text):
     for letter in text: # removes not allower chars
         if not letter in allowedChars:
             text = text.replace(letter, '')
-    # exeption with 'I have' -> replaces to 'that I have'
-    iHavePos = text.find('i have')
-    if iHavePos != -1:
-        text = text[:iHavePos] + 'that ' + text[iHavePos:]
-    # ______________________________________
     return text
 
 # Console chat version
@@ -316,4 +294,6 @@ if __name__ == '__main__':
     r = Reminder()
     while True:
         userInput = input("\nEnter reminder text: ")
-        print(r.getAnswer(userInput), '\n')
+#         print(r.getAnswer(userInput), '\n')
+        mInt = r.calculateDelay(("11a.m", 3))
+        print(mInt)

@@ -2,8 +2,7 @@ import math
 
 def isNum(item):
     
-    """Check if the argument passed is a number, 
-    input can be of any type and output will be a boolean"""
+    """Check if the argument passed is a number"""
     
     try:
         int(item)
@@ -14,7 +13,7 @@ def isNum(item):
 def checkOperator(operator):
     
     """Check if the argument is an operator by comparing
-    to a list of valid operators, input is a string and output is a boolean"""
+    to a list of valid operators"""
     
     validOperators = ["+","-","*","/","%","**","//"]
     if operator in validOperators:
@@ -25,8 +24,7 @@ def checkOperator(operator):
 def checkRoot(userInp):
     
     """Check if any English variations of asking for 
-    the square root have been entered, takes thse user input as a string 
-    and returns a boolean"""
+    the square root have been entered"""
     
     validArgs = ["square root","squareroot","sqrt"]
     for x in validArgs:
@@ -38,8 +36,7 @@ def checkRoot(userInp):
 def checkDict(userInp):
     
         """Replace any English words for operators with the python
-        symbol for that given operator using the dictionary mathDict
-        user input is a string and the output is a string of the new userInp variable"""
+        symbol for that given operator using the dictionary mathDict"""
         
         mathDict = {
             "to the power of":"**",
@@ -58,38 +55,12 @@ def checkDict(userInp):
             "modulo":"%"            
         }
         
-        #Checks every key in the dictionary to see if it is in the user input
-        #and replaces any found with python equivalent
         for key in mathDict:
             if key in userInp:
                 userInp = userInp.replace(key,mathDict[key])  
         return userInp
             
-
-def checkMath(stringInp):
-    """Manipulate user input as string to check if it follows the pattern of a math question"""
-    
-    #Change english to operators and overwrite the input 
-    stringInp = checkDict(stringInp)
-    #Flags to decide if the question is a math one
-    numCheck = False
-    opCheck = False
-    rootCheck = False
-
-    #Loop through string, check if both and operator and number are included or there is a square root using mathBot
-    for i in range(len(stringInp)):
-        if (isNum(stringInp[i])):
-            numCheck = True
-        elif (checkOperator(stringInp[i])):
-            opCheck = True
-        elif (checkRoot(stringInp)):
-            rootCheck = True
-
-    #If both operator and number are included or there is a square root then run calculate from mathBot
-    if (numCheck == True and opCheck == True) or rootCheck:
-        strToAns = isMath(stringInp)
-        ans = strToAns.currentEval
-        return ans
+        
     
 class isMath():
     
@@ -135,5 +106,31 @@ class isMath():
         
             self.currentEval = 'The answer is {}'.format(self.currentEval)
 
+def checkMath(stringInp):
+    """Manipulate user input as string to check if it follows the pattern of a math question"""
+    #Change english to operators and overwrite the input 
+    stringInp = checkDict(stringInp)
+    #Flags to decide if the question is a math one
+    numCheck = False
+    opCheck = False
+    rootCheck = False
 
+    #Loop through string, check if both and operator and number are included or there is a square root using mathBot
+    for i in range(len(stringInp)):
+        if (isNum(stringInp[i])):
+            numCheck = True
+        elif (checkOperator(stringInp[i])):
+            opCheck = True
+        elif (checkRoot(stringInp)):
+            rootCheck = True
+
+    #If both operator and number are included or there is a square root then run calculate from mathBot
+    if (numCheck == True and opCheck == True) or rootCheck:
+        strToAns = isMath(stringInp)
+        ans = strToAns.currentEval
+        return ans
+    else:
+        #Set the reply to what is returned by the RiveScript file
+        reply = rs.reply("localuser", stringInp)
+        return reply
     
