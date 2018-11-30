@@ -10,45 +10,8 @@ import random
 
 
 
-#
-#  Code taken from: https://www.pythoncentral.io/use-queue-beginners-guide/
-#
-#
-class Queue:
-
-  #Constructor creates a list
-  def __init__(self):
-      self.queue = list()
-
-  #Adding elements to queue
-  def enqueue(self,data):
-      #Checking to avoid duplicate entry (not mandatory)
-      if data not in self.queue:
-          self.queue.insert(0,data)
-          return True
-      return False
-
-  #Removing the last element from the queue
-  def dequeue(self):
-      if len(self.queue)>0:
-          return self.queue.pop()
-      return ("Queue Empty!")
-
-  #Getting the size of the queue
-  def size(self):
-      return len(self.queue)
-
-  #printing the elements of the queue
-  def printQueue(self):
-      return self.queue
-
-
-#
-#  /\
-#
-
 difficulty = int()
-difficultyQueue = Queue(5)
+difficultyQueue = []
 
 
 
@@ -102,26 +65,25 @@ def getQuestion():
 
 def runQuiz():
     difficulty = (0)
+    correctCount = int(0)
     for questionNo in range(1, 11):
-        correctCount = int(0)
-        print("Question", questionNo)
-        Question, answer = getQuestion(difficulty)
-        print(Question)
-        userInput = input(">")
 
-        if userInput.isnumeric() == True:
+        genAnswer("Question", questionNo)
+        (Question, answer) = getQuestion(difficulty)
+        genAnswer(Question)
+        userInput = getAnswer()
+
+        if userInput.isnumeric():
             if userInput == answer:
                 correctCount = (correctCount + 1)
         else:
-            print("Answer must be a number")
+            genAnswer("Answer must be a number")
 
 
-#  will store average of last 5 scores
-#  used to alter the base difficulty
-#  takes 7/10 as a pass, less decreases the difficulty, more increases it
-#
-def difficultyModifier(score):
-    
-    score = 1
-    pass
 
+
+
+
+class Quiz:
+    __init__()
+        runQuiz()
