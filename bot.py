@@ -4,11 +4,10 @@ from rivescript import RiveScript
 import discord
 from discord.ext import commands
 import asyncio
-#import hangman
-#import hangBot
 import dbQueries
 import re
 import conversation
+import BasicCommands
 import sys, traceback
 extensions = ['BasicCommands']
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'

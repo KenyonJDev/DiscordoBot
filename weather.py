@@ -9,7 +9,7 @@ def checkWeather(stringInp):
     weatherOut = url_builder(stringInp)
     return weatherOut
 
-def time_converter(time):
+def time_converter(time): #This converts the time that openweathermap provides us
     converted_time = datetime.datetime.fromtimestamp(
         int(time)
     ).strftime('%I:%M %p')
@@ -17,8 +17,8 @@ def time_converter(time):
 
 
 def url_builder(city_id):
-    user_api = '7a82ee6f4ab290329464c1a55194b4ab'
-    unit = 'metric'
+    user_api = '7a82ee6f4ab290329464c1a55194b4ab' #the key I generated from openweathermaps
+    unit = 'metric' #leave this blank for fahrenheit
     api = 'http://api.openweathermap.org/data/2.5/weather?q='
     
     
@@ -37,7 +37,7 @@ def data_fetch(full_api_url):
     return raw_api_dict
 
 
-def data_organizer(raw_data):
+def data_organiser(raw_data):
     main = raw_data.get('main')
     sys = raw_data.get('sys')
     data = dict(
@@ -71,6 +71,6 @@ Updated: {dt}
 def weatherInit(userInp):
     try:
         location = userInp.lower().replace("weather ", '')
-        return data_output(data_organizer(data_fetch(url_builder(location))))
+        return data_output(data_organiser(data_fetch(url_builder(location))))
     except IOError:
         print("Sorry, I don't know what you mean")

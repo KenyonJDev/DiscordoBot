@@ -2,6 +2,7 @@ from textblob import TextBlob
 from mathBot import isMath
 import weather
 import shibBot
+# import dbQueries
 # import hangman
 import dbQueries
 from reminder import Reminder
@@ -13,7 +14,6 @@ def defaultChat(stringInp, rs, userID):
     
     #get the current data of the user from RiveScript and update the database
     dbData = (rs.reply("localuser", "get database data")).split(" ")    
-    print(dbData)
     dbQueries.updateDB(userID, dbData)
 
     #Creates a TextBlob of the input using the TextBlob API
@@ -49,6 +49,9 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
     
     if math.mathQ:             #Check the value of the attrabut in the math object wwhich tell whethere it is a math question or not
         return math.currentEval
+    
+    elif(moduleName == "google")
+        return googleSearch.userSearch(stringInp)
     
     elif(moduleName == "dog"):
         return shibBot.checkDog(stringInp)
