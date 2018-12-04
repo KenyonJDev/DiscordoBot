@@ -1,4 +1,4 @@
-# module imports
+#module imports
 from textblob import TextBlob
 from rivescript import RiveScript
 import discord
@@ -7,7 +7,7 @@ import asyncio
 import dbQueries
 import re
 import conversation
-import BasicCommands
+# import BasicCommands
 import sys, traceback
 extensions = ['BasicCommands']
 TOKEN = 'NTA0NjYwOTQ5OTcwNzE0NjQ1.DrJuWA.qYYoCL_xGOI_FB8UQBb1YyeBSCk'

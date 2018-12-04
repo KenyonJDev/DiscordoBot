@@ -24,18 +24,17 @@ c) ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done
 
 | Status | Task | file name | Developer |
 | --- | --- | --- | --- |
-| ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Main code part which connects DISCORD client and modules | bot.py | Brad |
+| ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Main code part which connects DISCORD client and modules | bot.py | Brad |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | User input simulator | inputTests.py | Armandas |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Basic chat(Personal questions) and greetings | conversation.py dbQueries.py brain.py | Brad |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Reminder function | reminder.py | Armandas |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Math - number operations | mathBot.py | Brad |
 | ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Weather | weather.py | Josh |
+| ![#378c32](https://placehold.it/15/378c32/000000?text=+) Done | Dog | shibBot.py dogContent| Jake |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Basic game-(s) | hangBot.py hangman.py | Phillip |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Maths Quiz | MathsQuiz.py | Sam |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Bus timetables at Coventry | timetable.py | Josh |
 | ![#b5ab65](https://placehold.it/15/b5ab65/000000?text=+) In progress | Music module | bot.py | Josh |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Recipes | recipeBot.py | Jake |
-| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Not started | Currency conversion | - | Jake |
 
 
 **If a module cannot answer the question, as default, answer eg. "Sorry ..."**

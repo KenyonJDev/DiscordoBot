@@ -7,7 +7,7 @@ import shibBot
 import dbQueries
 from reminder import Reminder
 import asyncio
-import BasicCommands
+# import BasicCommands
 
 def defaultChat(stringInp, rs, userID):
     """Determines the context of the user input as string and returns a response for the bot to output. Updates database."""
@@ -50,9 +50,8 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
     if math.mathQ:             #Check the value of the attrabut in the math object wwhich tell whethere it is a math question or not
         return math.currentEval
     
-    elif(moduleName == "google")
-        return googleSearch.userSearch(stringInp)
-    
+    elif(moduleName == "google"):
+        pass
     elif(moduleName == "dog"):
         return shibBot.checkDog(stringInp)
     
