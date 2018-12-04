@@ -21,10 +21,11 @@ def defaultChat(stringInp, rs, userID):
     polarity = blob.sentiment.polarity    #Determines the sentiment of the input i.e. nice or nasty 
 
     #Passes the polarity to rivescript to update current 'happiness', floats cannot be passed 
-    #to rivescript so pre and post decimal are passed individually
+    #to rivescript so pre and post decimal valyes are passed individually
     pre = int(polarity)
     post = abs(polarity - pre)
 
+    #Determine if the value is positive or negative
     if polarity >= 0:
         negative = False
     elif polarity < 0:
@@ -32,8 +33,9 @@ def defaultChat(stringInp, rs, userID):
 
     polarityToPass = str(negative) + " " + str(post)[2:]
     newPolarity = rs.reply("localuser", "setting polarity " + polarityToPass)
-    dbQueries.updatePol(userID, newPolarity)
     
+    #Update the database with the new values
+    dbQueries.updatePol(userID, newPolarity)
     dbData = (rs.reply("localuser", "get database data")).split(" ")
     dbQueries.updateDB(userID, dbData)
     
@@ -45,7 +47,7 @@ def keywordToModule(moduleName, stringInp, rs, userID, client, message, function
     rmndr = Reminder()        #Reminder and math modules checked differently so objects are instantiated first
     math = isMath(stringInp)  
     
-    if math.mathQ:
+    if math.mathQ:             #Check the value of the attrabut in the math object wwhich tell whethere it is a math question or not
         return math.currentEval
     
     elif(moduleName == "dog"):

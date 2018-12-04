@@ -27,7 +27,12 @@ if __name__ == '__main__':
 rs = RiveScript()
 rs.load_directory("../ChatBot/RiveFiles", ext=".rive")
 rs.sort_replies()
-    
+
+#The following code is influenced by the example in the README 
+#from the official Discord.py Github page - 
+#https://github.com/Rapptz/discord.py
+#It has been altered a lot to fit this project
+
 @client.event
 async def on_ready():
     """Runs when the bot is ready, prints to terminal"""
@@ -58,27 +63,24 @@ async def unload(extension):
 def onNotification(sender, text):
     print(text)
 
+#The following async function was initially taken from https://github.com/Rapptz/discord.py
+#It has pretty much been completely re-written and adapted to suit this project.
 @client.event
 async def on_message(message):
     """Runs everytime a user sends a message to the server with the bot"""
     
-    # Make sure the bot doesn't reply to itself
+    # Prevents the bot being able to reply to itself
     if message.author == client.user:
         return
     
     userID = message.author.id
-    dbQueries.initialise(userID, rs)   #Initialises the database and retrieves user information
-    stringInp = message.content       
+    stringInp = message.content  
+    dbQueries.initialise(userID, rs)   #Initialises the database and retrieves user information if it exists
+             
+    moduleName = rs.reply("localuser", stringInp)    #Determines which module should be ran by passing to rivescript
+    output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification) #Gets an output for the bot to send via keywordToModule()
     
-    #Get an output for the bot to send via keywordToModule()
-    moduleName = rs.reply("localuser", stringInp)    #Determines module by passing to rivescript
-    
-#     if moduleName == "game":
-#         await client.send_file(message.channel, "Welcome to Hangman!")
-#         await client.send_file(message.channel, "The word has",length, "letters.")
-    
-    output = conversation.keywordToModule(moduleName, stringInp,rs, userID, client, message, onNotification)
-    
+    #Attempt to output the message as a file, if this isn't possible then output as message
     try:
         await client.send_file(message.channel, output)
     except:

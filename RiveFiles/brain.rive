@@ -5,6 +5,8 @@
 	- {ok}    // An {ok} in the response means it's okay to get a real reply
 < begin
 
+//Gets the current users details from their conversation and returns them as a concatenated string
+
 > object getdetails python
     
     uid  = rs.current_user()
@@ -19,6 +21,11 @@
     return detailsArr
     
 < object 
+
+//Sets the polarity,happiness for the user. It takes in whether or not it is a positive or negative
+//number and based on this the current polarity is multiplied by a percentage of this
+
+//There are checks to ensure it does not ever go over the maximum of 100 or under 0 
 
 > object setpolarity python
     
@@ -47,6 +54,7 @@
     
 < object
 
+//Below variables adapted from https://www.rivescript.com/try but with my own values instead
 // Bot Variables
 ! var name      = Bonny
 ! var fullname  = Bonny
@@ -188,7 +196,7 @@
 ! sub color = colour
 ! sub favorite = favourite
 
-// Reference ends
+// Reference ends the following code is y own until stated otherwise
 
 + [*](weather|climate|temperature)[*]
 - weather
@@ -241,7 +249,7 @@
 - My favourite colour is <bot color>
 - I love the colour <bot color>
 
-+ * my favourite colour *
++ * my favourite colour [*]
 * <get favcolour> == none => i don't know what your favourite colour is, tell me
 * <get favcolour> == <bot color> => you like <get favcolour> i love that colour too
 - <get favcolour> is okay but i prefer <bot color>
@@ -269,12 +277,6 @@
 - I come from <bot city>
 - I am from <bot city>
 - I was born in <bot city>
-
-+ do you like *
-- I dont mind <star>, what about you
-- I really like <star>, do you like <star>
-- I dont think I've heard of <star> before
-- What is <star>?
 
 + do you [*](love|like|admire|appreciate|adore|cherish|fancy)[*] me
 * <get relationship> <= 30 => As if I could ever <star> you
@@ -320,7 +322,8 @@
 
 
 
-// Below code taken from https://www.rivescript.com/try
+// Below code taken exactly from https://www.rivescript.com/try
+
 // Learn stuff about our users.
 
 + i am a (@malenoun)
@@ -598,12 +601,6 @@
 - Do you wish to believe I <star> you?
 - Suppose I did <star> you -- what would that mean?
 - Does someone else believe I <star> you?
-
-+ [*] you *
-- We were discussing you -- not me.
-- Oh, I <star>?
-- You're not really talking about me -- are you?
-- What are your feelings now?
 
 + [*] (yes|yeah|yep|yup) [*]
 - Please go on.

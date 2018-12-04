@@ -105,8 +105,8 @@ class isMath():
         and returns a boolean"""
 
         validArgs = ["square root","squareroot","sqrt"]
-        for x in validArgs:
-            if x in userInp:
+        for arg in validArgs:
+            if arg in userInp:
                 return True
             else:
                 return False
