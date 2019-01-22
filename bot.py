@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 import asyncio
 extensions = ['BasicCommands','debug','Moderation','music']
-TOKEN = ''
+TOKEN = 'not today mr'
 client = commands.Bot(command_prefix = '!')
 @client.event
 async def on_ready():
