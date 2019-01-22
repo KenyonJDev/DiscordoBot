@@ -1,5 +1,3 @@
-# https://discord.gg/GA6bG2g
-Link for discord server
 # Chatbot
 version 1.0
 # Discord
