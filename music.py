@@ -13,6 +13,7 @@ class music:
     async def play(self, ctx, *, query: str):
 
 
-def setup(bot):
-    bot.add_cog(music(bot))
-    print("music loaded")
+
+    def setup(bot):
+        bot.add_cog(music(bot))
+        print("music loaded")
